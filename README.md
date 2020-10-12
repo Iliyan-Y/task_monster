@@ -1,5 +1,11 @@
 # Task Manager
 
+## Description
+
+A task manager app for people who want keep track of what they need to do, be rewarded when they complete tasks, and punished when they don't.
+
+Completing tasks will grow and evolve your pet, failing to do so will shrink and eventually kill it. Laziness and procrastination now has consequences!
+
 ## Technologies Used
 
 * React Native - Front End
@@ -13,6 +19,7 @@
 * Detox - React Native feature tests
 
 ## User Stories
+
 
 ### MVP
 
