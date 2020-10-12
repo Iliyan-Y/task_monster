@@ -11,3 +11,7 @@
 * Rspec - Ruby on Rails
 * Jest - React Native unit tests
 * Detox - React Native feature tests
+
+## Diagrams
+
+![Sequence Diagram](./assets/Interaction_Diagram.png)
