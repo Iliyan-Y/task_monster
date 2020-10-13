@@ -34,6 +34,10 @@ module Backend
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    config.generators do |g|
+      g.orm :mongoid
+    end
+
     # allows cross-origin ajax requests (frontend and backend can talk over different ports)
     config.middleware.insert_before 0, Rack::Cors do
       allow do

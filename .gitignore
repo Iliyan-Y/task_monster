@@ -22,3 +22,6 @@
 
 # Ignore master key for decrypting credentials and more.
 /backend/config/master.key
+
+# Ignore node_modules
+/backend/node_modules
