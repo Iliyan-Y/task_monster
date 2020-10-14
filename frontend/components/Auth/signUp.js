@@ -15,7 +15,7 @@ const SignUp = () => {
       },
     };
     axios
-      .post('http://localhost:3000/users', body)
+      .post('http://10.0.2.2:3000/users', body)
       .then((res) => console.log(res.status))
       .catch((err) => console.log(err.message));
   };
