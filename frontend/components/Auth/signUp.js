@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, TextInput, Text, Button } from 'react-native';
 import axios from 'axios';
+import { railsServer } from '../../serverAddress';
 const SignUp = () => {
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('');
@@ -14,8 +15,9 @@ const SignUp = () => {
         password_confirmation,
       },
     };
+    console.log(railsServer)
     axios
-      .post('http://10.0.2.2:3000/users', body)
+      .post(railsServer + '/users', body)
       .then((res) => console.log(res.status))
       .catch((err) => console.log(err.message));
   };
