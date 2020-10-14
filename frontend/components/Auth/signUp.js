@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { StyleSheet, View, TextInput, Text, Button } from 'react-native';
 import axios from 'axios';
 import { railsServer } from '../../serverAddress';
-const SignUp = () => {
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+function SignUp({
+  navigation
+}) {
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('');
   let [password_confirmation, setConfirmPassword] = useState('');
@@ -15,11 +20,14 @@ const SignUp = () => {
         password_confirmation,
       },
     };
-    console.log(railsServer)
+
     axios
       .post(railsServer + '/users', body)
-      .then((res) => console.log(res.status))
+      .then((res) => {
+        console.log(res.status)
+      navigation.navigate('Add Task')})
       .catch((err) => console.log(err.message));
+
   };
 
   return (
