@@ -23,6 +23,7 @@ gem 'rack-cors'
 
 #For connecting to MongoDB
 gem 'mongoid'
+gem 'simple_token_authentication'
 
 gem 'webpacker'
 
