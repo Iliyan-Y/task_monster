@@ -16,16 +16,16 @@ function addTask(){
 }
 useEffect(()=>{
     setDisplayTask(taskList)
-})
+}, [taskList])
     return ( 
         <View>
         <Text>Task list</Text>
-            {displayTask.map(task => {
-            <View>
+            {displayTask.map(task => 
+            <View key={task.name}>
                 <Text>{task.title}</Text> 
             <Text>{task.description}</Text>
             </View>
-            })}
+            )}
          <Button onPress={() => addTask()} title="Add a new task" /> 
         
         </View>
