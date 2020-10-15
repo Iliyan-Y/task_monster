@@ -1,10 +1,12 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :update, :destroy]
+  before_action :authenticate_user_from_token!
+
 
   # GET /tasks
   def index
     @tasks = Task.all
-
+ 
     render json: @tasks
   end
 
@@ -15,8 +17,8 @@ class TasksController < ApplicationController
 
   # POST /tasks
   def create
-    p current_user
-    @task = Task.new(task_params)
+    #p current_user
+    @task = current_user.tasks.new(task_params)
 
     if @task.save
       render json: @task, status: :created, location: @task
@@ -47,6 +49,6 @@ class TasksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:title, :description, :completed, :user_id)
+      params.require(:task).permit(:title, :description, :completed)
     end
 end
