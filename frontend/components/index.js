@@ -18,7 +18,7 @@ const Index = () => {
     <TasksProvider>
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen name="Sign Up" component={SignUp} /> */}
+        <Stack.Screen name="Sign Up" component={SignUp} />
         <Stack.Screen name="Add Task" component={AddingTask} /> 
         <Stack.Screen name="Task List" component={TaskList} />
       </Stack.Navigator>
