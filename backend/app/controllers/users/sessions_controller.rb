@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
+
+  acts_as_token_authentication_handler_for User
   # before_action :configure_sign_in_params, only: [:create]
   before_action :sign_in_params, only: :create
   before_action :load_user, only: :create
+  respond_to :json
 
   # GET /resource/sign_in
   # def new
@@ -35,7 +38,7 @@ class Users::SessionsController < Devise::SessionsController
 
   private
   def sign_in_params
-    params.require(:sign_in).permit :email, :password
+    params.require(:user).permit :email, :password
   end
 
   def load_user
@@ -47,9 +50,11 @@ class Users::SessionsController < Devise::SessionsController
         messages: "Cannot get User",
         is_success: false,
         data: {}
-      }, status: :failure
+      }, status: :not_found
     end
   end
+
+  
 
   # protected
 

@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
- # before_action :authenticate_user!
   before_action :set_task, only: [:show, :update, :destroy]
+  before_action :authenticate_user_from_token!
 
 
   # GET /tasks
@@ -18,7 +18,7 @@ class TasksController < ApplicationController
   # POST /tasks
   def create
     #p current_user
-    @task = Task.new(task_params)
+    @task = current_user.tasks.new(task_params)
 
     if @task.save
       render json: @task, status: :created, location: @task

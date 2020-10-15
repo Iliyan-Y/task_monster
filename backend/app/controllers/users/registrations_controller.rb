@@ -24,7 +24,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         }, status: :ok
       else
         render json: {
-          messages: "Sign Up Failded",
+          messages: "Sign Up Failed",
           is_success: false,
           data: {}
         }, status: :unprocessable_entity
