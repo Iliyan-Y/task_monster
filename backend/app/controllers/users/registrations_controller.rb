@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+  #before_action :configure_sign_up_params, only: [:create]
+  #before_action :configure_account_update_params, only: [:update]
   before_action :ensure_params_exist, only: :create
+  before_action :authenticate_user_from_token!, except: [:create]
+  #before_action :authenticate_user!, only: [:create]
   #protect_from_forgery with: :null_session
   #or
   #skip_before_action :verify_authenticity_token, :only => :create

@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, View, TextInput, Text, Button } from 'react-native';
 import axios from 'axios';
 import { railsServer } from '../../serverAddress';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { TasksContext } from '../../context';
 
 function SignUp({
   navigation
 }) {
+  let { user, setUser } = useContext(TasksContext);
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('');
   let [password_confirmation, setConfirmPassword] = useState('');
@@ -25,9 +27,9 @@ function SignUp({
       .post(railsServer + '/users', body)
       .then((res) => {
         console.log(res.status)
+        setUser({ email: res.data.data.user.email, authentication_token: res.data.data.user.authentication_token })
       navigation.navigate('Add Task')})
       .catch((err) => console.log(err.message));
-
   };
 
   return (

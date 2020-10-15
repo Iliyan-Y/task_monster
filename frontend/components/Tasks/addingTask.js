@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useReducer } from 'react';
 import { StyleSheet, View, TextInput, Text, Button } from 'react-native';
 import axios from 'axios';
 import { railsServer } from '../../serverAddress';
@@ -9,14 +9,13 @@ function AddingTask({
     navigation
 }
 ){
-  let {taskList, setTaskList} = useContext(TasksContext);
+  let {taskList, setTaskList, user} = useContext(TasksContext);
   let [title, setTitle] = useState('');
   let [description, setDescription] = useState('');
   let [completed, setCompleted] = useState(false);
 
   let submit = () => {
       setTaskList([...taskList, {title, description, completed}])
-      navigation.navigate('Task List')
     let body = {
       task: {
         title,
@@ -24,11 +23,19 @@ function AddingTask({
         completed,
       },
     };
+    let headers = {
+      headers: {
+        email: user.email,
+        authentication_token: user.authentication_token,
+      },
+    };
 
-//     axios
-//       .post(railsServer + '/tasks', body)
-//       .then((res) => console.log(res.status))
-//       .catch((err) => console.log(err.message));
+     axios
+       .post(railsServer + '/tasks', body, headers)
+       .then((res) => {
+         console.log(res.status)
+       navigation.navigate('Task List');})
+       .catch((err) => console.log(err.message));
   };
 
     return ( 
