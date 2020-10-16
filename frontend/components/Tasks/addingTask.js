@@ -15,7 +15,7 @@ function AddingTask({
   let [completed, setCompleted] = useState(false);
 
   let submit = () => {
-      setTaskList([...taskList, {title, description, completed}])
+      
     let body = {
       task: {
         title,
@@ -34,7 +34,15 @@ function AddingTask({
        .post(railsServer + '/tasks', body, headers)
        .then((res) => {
          console.log(res.status)
-       navigation.navigate('Task List');})
+       })
+       .then(() => {
+         axios
+           .get(railsServer + '/tasks', headers)
+           .then((res) => {
+             setTaskList(res.data)
+             navigation.navigate('Task List');
+         })
+       })
        .catch((err) => console.log(err.message));
   };
 
