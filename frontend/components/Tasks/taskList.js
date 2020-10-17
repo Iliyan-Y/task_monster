@@ -7,30 +7,32 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 import CompletedButton from './completeTaskButton';
 import DeleteButton from './deleteTaskButton';
 
+
 function TaskList({ navigation }) {
-  let { taskList, setTaskList, user } = useContext(TasksContext);
-  let [displayTask, setDisplayTask] = useState([]);
-  let [taskListView, setTaskListView] = useState([]);
-    
+  let { taskList, setTaskList, user } = useContext(TasksContext)
+  let [displayTask, setDisplayTask] = useState([])
+  let [taskListView, setTaskListView] = useState([])
+
   function addTask() {
-    navigation.navigate('Add Task');
+    navigation.navigate('Add Task')
   }
+
   function completedTaskList() {
     navigation.navigate('Completed Task List')
   }
-    
+
   useEffect(() => {
-      setDisplayTask(taskList)
-      setTaskListView(
-        taskList.map((task) => ({
-          key: task.title,
-          id: task._id.$oid,
-          title: task.title,
-          description: task.description,
-          completed: task.completed,
-        }))
-      );
-  }, [taskList]);
+    setDisplayTask(taskList)
+    setTaskListView(
+      taskList.map((task) => ({
+        key: task.title,
+        id: task._id.$oid,
+        title: task.title,
+        description: task.description,
+        completed: task.completed,
+      })),
+    )
+  }, [taskList])
   return (
     <View>
       <Text>Task list</Text>
@@ -88,7 +90,7 @@ function TaskList({ navigation }) {
       <Button onPress={() => addTask()} title="Add a new task" />
       <Button onPress={() => completedTaskList()} title="Completed Tasks" />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -135,6 +137,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     right: 0,
   },
-});
+})
 
-export default TaskList;
+export default TaskList

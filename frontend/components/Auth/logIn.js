@@ -1,5 +1,13 @@
 import React, { useState, useContext } from 'react'
-import { StyleSheet, View, TextInput, Text, Button } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Text,
+  Button,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from 'react-native'
 import axios from 'axios'
 import { railsServer } from '../../serverAddress'
 import { TasksContext } from '../../context'
@@ -32,25 +40,45 @@ function LogIn({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text>Log In</Text>
-      <View>
-        <TextInput
-          onChangeText={(email) => setEmail(email)}
-          placeholder="email"
-          name="email"
-        />
-        <TextInput
-          onChangeText={(password) => setPassword(password)}
-          placeholder="password"
-          name="password"
-        />
+      <Text style={styles.logo}>Task Monster</Text>
 
-        <Button onPress={() => submit()} title="Log In" />
-        <Button
-          onPress={() => navigation.navigate('Sign Up')}
-          title="Sign Up"
+      <View style={styles.inputView}>
+        <TextInput
+          style={styles.inputText}
+          onChangeText={(email) => setEmail(email)}
+          placeholder="Email..."
+          name="email"
+          placeholderTextColor="#003f5c"
         />
       </View>
+
+      <View style={styles.inputView}>
+        <TextInput
+          style={styles.inputText}
+          onChangeText={(password) => setPassword(password)}
+          placeholder="Password..."
+          name="password"
+          placeholderTextColor="#003f5c"
+        />
+      </View>
+
+      <TouchableOpacity style={styles.loginText} onPress={() => submit()}>
+        <Text style={styles.inputText}>Forgot Password?</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.loginBtn}
+        onPress={() => submit('Log In')}
+      >
+        <Text style={styles.inputText}>LOGIN</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.loginText}
+        onPress={() => navigation.navigate('Sign Up')}
+      >
+        <Text style={styles.inputText}>Sign up</Text>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -58,9 +86,48 @@ function LogIn({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#003f5c',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  inputView: {
+    width: '80%',
+    backgroundColor: '#465881',
+    borderRadius: 25,
+    height: 50,
+    marginBottom: 20,
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  inputText: {
+    height: 50,
+    color: 'white',
+    padding: 17,
+  },
+
+  forgot: {
+    color: 'white',
+    fontSize: 11,
+  },
+
+  loginBtn: {
+    width: '80%',
+    backgroundColor: '#fb5b5a',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+    marginBottom: 10,
+  },
+
+  logo: {
+    fontWeight: 'bold',
+    fontSize: 50,
+    color: '#fb5b5a',
+    marginBottom: 40,
   },
 })
 
