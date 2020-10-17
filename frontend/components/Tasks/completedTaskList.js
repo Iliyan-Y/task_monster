@@ -4,7 +4,7 @@ import axios from 'axios';
 import { railsServer } from '../../serverAddress';
 import { TasksContext } from '../../context';
 import { SwipeListView } from 'react-native-swipe-list-view';
-import CompletedButton from './completeTaskButton';
+import UncompletedButton from './uncompleteTaskButton';
 import DeleteButton from './deleteTaskButton';
 
 function CompletedTaskList({ navigation }) {
@@ -38,7 +38,7 @@ function CompletedTaskList({ navigation }) {
         renderHiddenItem={(data, rowMap) => (
           <View style={styles.rowBack}>
             <View style={[styles.backRightBtn, styles.backLeftBtn]}>
-              <CompletedButton
+              <UncompletedButton
                 user={user}
                 taskId={data.item.id}
                 setTaskList={setTaskList}
