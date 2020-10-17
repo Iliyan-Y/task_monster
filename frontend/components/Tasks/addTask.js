@@ -77,10 +77,5 @@ function AddTask({
     </View>
   )
 }
-<<<<<<< HEAD:frontend/components/Tasks/addingTask.js
-
-export default AddingTask
-=======
  
 export default AddTask;
->>>>>>> 9c6c85bef11cd1cf3735b68c89a298a77204e209:frontend/components/Tasks/addTask.js
