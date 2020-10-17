@@ -4,25 +4,17 @@ import axios from 'axios';
 import { railsServer } from '../../serverAddress';
 import { TasksContext } from '../../context';
 import { SwipeListView } from 'react-native-swipe-list-view';
-import CompletedButton from './completeTaskButton';
+import UncompletedButton from './uncompleteTaskButton';
 import DeleteButton from './deleteTaskButton';
 
+function CompletedTaskList({ navigation }) {
+  let { taskList, setTaskList, user } = useContext(TasksContext);
+  let [displayTask, setDisplayTask] = useState([]);
+  let [taskListView, setTaskListView] = useState([]);
 
-function TaskList({ navigation }) {
-  let { taskList, setTaskList, user } = useContext(TasksContext)
-  let [displayTask, setDisplayTask] = useState([])
-  let [taskListView, setTaskListView] = useState([])
-
-  function addTask() {
-    navigation.navigate('Add Task')
-  }
-
-  function completedTaskList() {
-    navigation.navigate('Completed Task List')
-  }
 
   useEffect(() => {
-    setDisplayTask(taskList)
+    setDisplayTask(taskList);
     setTaskListView(
       taskList.map((task) => ({
         key: task.title,
@@ -30,14 +22,14 @@ function TaskList({ navigation }) {
         title: task.title,
         description: task.description,
         completed: task.completed,
-      })),
-    )
-  }, [taskList])
+      }))
+    );
+  }, [taskList]);
   return (
     <View>
       <Text>Task list</Text>
       <SwipeListView
-        data={taskListView.filter((task) => task.completed == false)}
+        data={taskListView.filter((task) => task.completed == true)}
         renderItem={(data, rowMap) => (
           <View style={styles.rowFront}>
             <Text>{data.item.title}</Text>
@@ -46,7 +38,7 @@ function TaskList({ navigation }) {
         renderHiddenItem={(data, rowMap) => (
           <View style={styles.rowBack}>
             <View style={[styles.backRightBtn, styles.backLeftBtn]}>
-              <CompletedButton
+              <UncompletedButton
                 user={user}
                 taskId={data.item.id}
                 setTaskList={setTaskList}
@@ -87,10 +79,9 @@ function TaskList({ navigation }) {
         leftOpenValue={75}
         rightOpenValue={-150}
       />
-      <Button onPress={() => addTask()} title="Add a new task" />
-      <Button onPress={() => completedTaskList()} title="Completed Tasks" />
+      <Button onPress={() => navigation.navigate('Task List')} title="Uncompleted Tasks" />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -137,6 +128,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     right: 0,
   },
-})
+});
 
-export default TaskList
+export default CompletedTaskList;

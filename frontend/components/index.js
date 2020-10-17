@@ -10,6 +10,7 @@ import { TasksProvider } from '../context'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import TaskList from './Tasks/taskList'
+import CompletedTaskList from './Tasks/completedTaskList';
 
 const Stack = createStackNavigator()
 const Index = () => {
@@ -22,6 +23,7 @@ const Index = () => {
           <Stack.Screen name="Add Task" component={AddTask} />
           <Stack.Screen name="Task List" component={TaskList} />
           <Stack.Screen name="Edit Task" component={EditTask} />
+          <Stack.Screen name="Completed Task List" component={CompletedTaskList} />
         </Stack.Navigator>
       </NavigationContainer>
     </TasksProvider>
