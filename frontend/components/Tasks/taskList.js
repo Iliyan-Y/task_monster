@@ -1,32 +1,32 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, View, TextInput, Text, Button } from 'react-native';
-import axios from 'axios';
-import { railsServer } from '../../serverAddress';
-import { TasksContext } from '../../context';
-import { SwipeListView } from 'react-native-swipe-list-view';
-import CompletedButton from './completeTask';
+import React, { useState, useContext, useEffect } from 'react'
+import { StyleSheet, View, TextInput, Text, Button } from 'react-native'
+import axios from 'axios'
+import { railsServer } from '../../serverAddress'
+import { TasksContext } from '../../context'
+import { SwipeListView } from 'react-native-swipe-list-view'
+import CompletedButton from './completeTask'
 
 function TaskList({ navigation }) {
-  let { taskList, setTaskList, user } = useContext(TasksContext);
-  let [displayTask, setDisplayTask] = useState([]);
-  let [taskListView, setTaskListView] = useState([]);
-    
+  let { taskList, setTaskList, user } = useContext(TasksContext)
+  let [displayTask, setDisplayTask] = useState([])
+  let [taskListView, setTaskListView] = useState([])
+
   function addTask() {
-    navigation.navigate('Add Task');
+    navigation.navigate('Add Task')
   }
-    
+
   useEffect(() => {
-      setDisplayTask(taskList)
-      setTaskListView(
-        taskList.map((task) => ({
-          key: task.title,
-          id: task._id.$oid,
-          title: task.title,
-          description: task.description,
-          completed: task.completed,
-        }))
-      );
-  }, [taskList]);
+    setDisplayTask(taskList)
+    setTaskListView(
+      taskList.map((task) => ({
+        key: task.title,
+        id: task._id.$oid,
+        title: task.title,
+        description: task.description,
+        completed: task.completed,
+      })),
+    )
+  }, [taskList])
   return (
     <View>
       <Text>Task list</Text>
@@ -40,7 +40,11 @@ function TaskList({ navigation }) {
         renderHiddenItem={(data, rowMap) => (
           <View style={styles.rowBack}>
             <View style={[styles.backRightBtn, styles.backLeftBtn]}>
-                    < CompletedButton user={user} taskId={data.item.id} setTaskList={setTaskList}/>
+              <CompletedButton
+                user={user}
+                taskId={data.item.id}
+                setTaskList={setTaskList}
+              />
             </View>
             <View style={[styles.backRightBtn, styles.backRightBtnLeft]}>
               <Text style={styles.backTextWhite}>Edit</Text>
@@ -62,7 +66,7 @@ function TaskList({ navigation }) {
 
       <Button onPress={() => addTask()} title="Add a new task" />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -109,6 +113,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     right: 0,
   },
-});
+})
 
-export default TaskList;
+export default TaskList

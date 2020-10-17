@@ -29,7 +29,7 @@ const Index = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fb5b5a',
     alignItems: 'center',
     justifyContent: 'center',
   },
