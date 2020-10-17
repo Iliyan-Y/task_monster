@@ -1,28 +1,44 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, View, TextInput, Text, Button } from 'react-native';
-import axios from 'axios';
-import { railsServer } from '../../serverAddress';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import { TasksContext } from '../../context';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import CompletedButton from './completeTaskButton';
 import DeleteButton from './deleteTaskButton';
-
+import CountDown from 'react-native-countdown-component';
+import moment from 'moment';
 
 function TaskList({ navigation }) {
-  let { taskList, setTaskList, user } = useContext(TasksContext)
-  let [displayTask, setDisplayTask] = useState([])
-  let [taskListView, setTaskListView] = useState([])
+  let { taskList, setTaskList, user } = useContext(TasksContext);
+  let [taskListView, setTaskListView] = useState([]);
+  const [totalDuration, setTotalDuration] = useState(0);
 
   function addTask() {
-    navigation.navigate('Add Task')
+    navigation.navigate('Add Task');
   }
 
   function completedTaskList() {
-    navigation.navigate('Completed Task List')
+    navigation.navigate('Completed Task List');
   }
 
+  let timerTime = (userTime) => {
+    let year = new Date().getFullYear();
+    var date = moment().utcOffset('+01:00').format('YYYY-MM-DD hh:mm:ss');
+    //Getting the current date-time with required formate and UTC
+    var expirydate = `${year}-${userTime.month}-${userTime.day} 11:59:59`;
+    //difference of the expiry date-time given and current date-time
+    var difference = moment.duration(moment(expirydate).diff(moment(date)));
+    var hours = parseInt(difference.asHours());
+    var minutes = parseInt(difference.minutes());
+    var seconds = parseInt(difference.seconds());
+    var finalTime = hours * 60 * 60 + minutes * 60 + seconds;
+
+    setTotalDuration(finalTime);
+  };
+  // Store
+  useEffect(() => timerTime({ day: 17, month: 10 }), []);
+
+  //add time param in the db
   useEffect(() => {
-    setDisplayTask(taskList)
     setTaskListView(
       taskList.map((task) => ({
         key: task.title,
@@ -30,9 +46,9 @@ function TaskList({ navigation }) {
         title: task.title,
         description: task.description,
         completed: task.completed,
-      })),
-    )
-  }, [taskList])
+      }))
+    );
+  }, [taskList]);
   return (
     <View>
       <Text>Task list</Text>
@@ -41,6 +57,17 @@ function TaskList({ navigation }) {
         renderItem={(data, rowMap) => (
           <View style={styles.rowFront}>
             <Text>{data.item.title}</Text>
+            <CountDown
+              until={totalDuration}
+              //duration of countdown in seconds
+              timetoShow={('H', 'M', 'S')}
+              //formate to show
+              onFinish={() => alert('finished')}
+              //on Finish call
+              onPress={() => alert('hello')}
+              //on Press call
+              size={15}
+            />
           </View>
         )}
         renderHiddenItem={(data, rowMap) => (
@@ -90,7 +117,7 @@ function TaskList({ navigation }) {
       <Button onPress={() => addTask()} title="Add a new task" />
       <Button onPress={() => completedTaskList()} title="Completed Tasks" />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -137,6 +164,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     right: 0,
   },
-})
+});
 
-export default TaskList
+export default TaskList;
