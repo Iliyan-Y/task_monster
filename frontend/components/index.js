@@ -21,7 +21,7 @@ const Index = () => {
           <Stack.Screen name="Sign Up" component={SignUp} />
           <Stack.Screen name="Add Task" component={AddTask} />
           <Stack.Screen name="Task List" component={TaskList} />
-          <Stack.Screen name="Edit List" component={EditTask} />
+          <Stack.Screen name="Edit Task" component={EditTask} />
         </Stack.Navigator>
       </NavigationContainer>
     </TasksProvider>

@@ -47,8 +47,22 @@ function TaskList({ navigation }) {
                 setTaskList={setTaskList}
               />
             </View>
-            <View style={[styles.backRightBtn, styles.backRightBtnLeft]}>
-              <Button style={styles.backTextWhite} onPress={() => editTask()} title="Edit" />
+            <View
+              style={[
+                styles.backTextWhite,
+                styles.backRightBtn,
+                styles.backRightBtnLeft,
+              ]}
+            >
+              <Button
+                style={
+                  (styles.backTextWhite,
+                  styles.backRightBtn,
+                  styles.backRightBtnLeft)
+                }
+                onPress={() => navigation.navigate('Edit Task', {taskTitle: data.item.title, taskDescription: data.item.description, taskId: data.item.id})}
+                title="Edit"
+              />
             </View>
             <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
               <DeleteButton

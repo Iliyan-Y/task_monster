@@ -4,18 +4,17 @@ import axios from 'axios';
 import { railsServer } from '../../serverAddress';
 import { TasksContext } from '../../context';
 
-function EditTask({ navigation, taskId }) {
-  let { setTaskList, user } = useContext(TasksContext);
-  let [title, setTitle] = useState('');
-  let [description, setDescription] = useState('');
-  let [completed, setCompleted] = useState(false);
+function EditTask({ route, navigation }) {
+  const { taskTitle, taskDescription, taskId } = route.params;
+  let { taskList, setTaskList, user } = useContext(TasksContext);
+  let [title, setTitle] = useState(taskTitle);
+  let [description, setDescription] = useState(taskDescription);
 
   let submit = () => {
     let body = {
       task: {
         title,
         description,
-        completed,
       },
     };
     let headers = {
@@ -26,7 +25,7 @@ function EditTask({ navigation, taskId }) {
     };
 
     axios
-      .patch(railsServer + '/tasks' + taskId, body, headers)
+      .patch(railsServer + '/tasks/' + taskId, body, headers)
       .then((res) => {
         console.log(res.status);
       })
@@ -41,19 +40,19 @@ function EditTask({ navigation, taskId }) {
 
   return (
     <View>
-      <Text>Add a new Task!</Text>
+      <Text>Edit Task!</Text>
       <View>
         <TextInput
           onChangeText={(title) => setTitle(title)}
-          placeholder="title"
+          defaultValue={taskTitle}
           name="title"
         />
         <TextInput
           onChangeText={(description) => setDescription(description)}
-          placeholder="description"
+          defaultValue={taskDescription}
           name="description"
         />
-        <Button onPress={() => submit()} title="Add" />
+        <Button onPress={() => submit()} title="Save Changes" />
       </View>
     </View>
   );
