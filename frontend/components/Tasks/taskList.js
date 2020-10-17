@@ -4,7 +4,8 @@ import axios from 'axios';
 import { railsServer } from '../../serverAddress';
 import { TasksContext } from '../../context';
 import { SwipeListView } from 'react-native-swipe-list-view';
-import CompletedButton from './completeTask';
+import CompletedButton from './completeTaskButton';
+import DeleteButton from './deleteTaskButton';
 
 function TaskList({ navigation }) {
   let { taskList, setTaskList, user } = useContext(TasksContext);
@@ -40,26 +41,41 @@ function TaskList({ navigation }) {
         renderHiddenItem={(data, rowMap) => (
           <View style={styles.rowBack}>
             <View style={[styles.backRightBtn, styles.backLeftBtn]}>
-                    < CompletedButton user={user} taskId={data.item.id} setTaskList={setTaskList}/>
+              <CompletedButton
+                user={user}
+                taskId={data.item.id}
+                setTaskList={setTaskList}
+              />
             </View>
-            <View style={[styles.backRightBtn, styles.backRightBtnLeft]}>
-              <Text style={styles.backTextWhite}>Edit</Text>
+            <View
+              style={[
+                styles.backTextWhite,
+                styles.backRightBtn,
+                styles.backRightBtnLeft,
+              ]}
+            >
+              <Button
+                style={
+                  (styles.backTextWhite,
+                  styles.backRightBtn,
+                  styles.backRightBtnLeft)
+                }
+                onPress={() => navigation.navigate('Edit Task', {taskTitle: data.item.title, taskDescription: data.item.description, taskId: data.item.id})}
+                title="Edit"
+              />
             </View>
             <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
-              <Text style={styles.backTextWhite}>Delete</Text>
+              <DeleteButton
+                user={user}
+                taskId={data.item.id}
+                setTaskList={setTaskList}
+              />
             </View>
           </View>
         )}
         leftOpenValue={75}
-        rightOpenValue={75}
+        rightOpenValue={-150}
       />
-      {/* {displayTask.map((task) => (
-        <View key={task.title}>
-          <Text>{task.title}</Text>
-          <Text>{task.description}</Text>
-        </View>
-      ))} */}
-
       <Button onPress={() => addTask()} title="Add a new task" />
     </View>
   );

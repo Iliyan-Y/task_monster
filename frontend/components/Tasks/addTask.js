@@ -5,7 +5,7 @@ import { railsServer } from '../../serverAddress';
 import { TasksContext } from '../../context';
 
 
-function AddingTask({
+function AddTask({
     navigation
 }
 ){
@@ -66,4 +66,4 @@ function AddingTask({
      );
 }
  
-export default AddingTask;
+export default AddTask;
