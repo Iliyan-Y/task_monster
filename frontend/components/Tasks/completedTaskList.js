@@ -7,35 +7,29 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 import CompletedButton from './completeTaskButton';
 import DeleteButton from './deleteTaskButton';
 
-function TaskList({ navigation }) {
+function CompletedTaskList({ navigation }) {
   let { taskList, setTaskList, user } = useContext(TasksContext);
   let [displayTask, setDisplayTask] = useState([]);
   let [taskListView, setTaskListView] = useState([]);
-    
-  function addTask() {
-    navigation.navigate('Add Task');
-  }
-  function completedTaskList() {
-    navigation.navigate('Completed Task List')
-  }
-    
+
+
   useEffect(() => {
-      setDisplayTask(taskList)
-      setTaskListView(
-        taskList.map((task) => ({
-          key: task.title,
-          id: task._id.$oid,
-          title: task.title,
-          description: task.description,
-          completed: task.completed,
-        }))
-      );
+    setDisplayTask(taskList);
+    setTaskListView(
+      taskList.map((task) => ({
+        key: task.title,
+        id: task._id.$oid,
+        title: task.title,
+        description: task.description,
+        completed: task.completed,
+      }))
+    );
   }, [taskList]);
   return (
     <View>
       <Text>Task list</Text>
       <SwipeListView
-        data={taskListView.filter((task) => task.completed == false)}
+        data={taskListView.filter((task) => task.completed == true)}
         renderItem={(data, rowMap) => (
           <View style={styles.rowFront}>
             <Text>{data.item.title}</Text>
@@ -85,8 +79,7 @@ function TaskList({ navigation }) {
         leftOpenValue={75}
         rightOpenValue={-150}
       />
-      <Button onPress={() => addTask()} title="Add a new task" />
-      <Button onPress={() => completedTaskList()} title="Completed Tasks" />
+      <Button onPress={() => navigation.navigate('Task List')} title="Uncompleted Tasks" />
     </View>
   );
 }
@@ -137,4 +130,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TaskList;
+export default CompletedTaskList;
