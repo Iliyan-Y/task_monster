@@ -5,11 +5,7 @@ development:
     default:
       # Mongoid can connect to a URI accepted by the driver:
       uri: <%= ENV["MONGODB"] %>
-    production:
-      uri: <%= ENV["MONGODB"] %>
-      options:
-        skip_version_check: true
-        safe: true
+
       # Otherwise define the parameters separately.
       # This defines the name of the default database that Mongoid can connect to.
       # (required).
@@ -170,6 +166,13 @@ development:
     # further information. Most applications should not use this option.
     # (default: false)
     # use_utc: false
+production:
+  clients:
+    default:
+      uri: <%= ENV["MONGODB"] %>
+      options:
+        skip_version_check: true
+        safe: true
 
 test:
   clients:
