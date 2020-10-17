@@ -11,11 +11,23 @@ import axios from 'axios'
 import { railsServer } from '../../serverAddress'
 import { TasksContext } from '../../context'
 
+<<<<<<< HEAD:frontend/components/Tasks/addingTask.js
 function AddingTask({ navigation }) {
   let { taskList, setTaskList, user } = useContext(TasksContext)
   let [title, setTitle] = useState('')
   let [description, setDescription] = useState('')
   let [completed, setCompleted] = useState(false)
+=======
+
+function AddTask({
+    navigation
+}
+){
+  let {taskList, setTaskList, user} = useContext(TasksContext);
+  let [title, setTitle] = useState('');
+  let [description, setDescription] = useState('');
+  let [completed, setCompleted] = useState(false);
+>>>>>>> 9c6c85bef11cd1cf3735b68c89a298a77204e209:frontend/components/Tasks/addTask.js
 
   let submit = () => {
     let body = {
@@ -65,5 +77,10 @@ function AddingTask({ navigation }) {
     </View>
   )
 }
+<<<<<<< HEAD:frontend/components/Tasks/addingTask.js
 
 export default AddingTask
+=======
+ 
+export default AddTask;
+>>>>>>> 9c6c85bef11cd1cf3735b68c89a298a77204e209:frontend/components/Tasks/addTask.js
