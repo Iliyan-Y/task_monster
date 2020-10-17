@@ -1,46 +1,51 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, View, TextInput, Text, Button } from 'react-native';
-import axios from 'axios';
-import { railsServer } from '../../serverAddress';
 import { TasksContext } from '../../context';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import CompletedButton from './completeTask';
 
 function TaskList({ navigation }) {
   let { taskList, setTaskList, user } = useContext(TasksContext);
-  let [displayTask, setDisplayTask] = useState([]);
   let [taskListView, setTaskListView] = useState([]);
-    
-  function addTask() {
+
+  function addTaskBtn() {
     navigation.navigate('Add Task');
   }
-    
+
   useEffect(() => {
-      setDisplayTask(taskList)
-      setTaskListView(
-        taskList.map((task) => ({
-          key: task.title,
-          id: task._id.$oid,
-          title: task.title,
-          description: task.description,
-          completed: task.completed,
-        }))
-      );
+    setTaskListView(
+      taskList.map((task) => ({
+        key: task.title,
+        id: task._id.$oid,
+        title: task.title,
+        description: task.description,
+        completed: task.completed,
+      }))
+    );
   }, [taskList]);
+
   return (
     <View>
       <Text>Task list</Text>
       <SwipeListView
         data={taskListView}
-        renderItem={(data, rowMap) => (
-          <View style={styles.rowFront}>
-            <Text>{data.item.title}</Text>
-          </View>
-        )}
+        renderItem={(data, rowMap) =>
+          !data.item.completed ? (
+            <View style={styles.rowFront}>
+              <Text>{data.item.title}</Text>
+            </View>
+          ) : (
+            <View />
+          )
+        }
         renderHiddenItem={(data, rowMap) => (
           <View style={styles.rowBack}>
             <View style={[styles.backRightBtn, styles.backLeftBtn]}>
-                    < CompletedButton user={user} taskId={data.item.id} setTaskList={setTaskList}/>
+              <CompletedButton
+                user={user}
+                taskId={data.item.id}
+                setTaskList={setTaskList}
+              />
             </View>
             <View style={[styles.backRightBtn, styles.backRightBtnLeft]}>
               <Text style={styles.backTextWhite}>Edit</Text>
@@ -53,14 +58,7 @@ function TaskList({ navigation }) {
         leftOpenValue={75}
         rightOpenValue={75}
       />
-      {/* {displayTask.map((task) => (
-        <View key={task.title}>
-          <Text>{task.title}</Text>
-          <Text>{task.description}</Text>
-        </View>
-      ))} */}
-
-      <Button onPress={() => addTask()} title="Add a new task" />
+      <Button onPress={() => addTaskBtn()} title="Add a new task" />
     </View>
   );
 }
