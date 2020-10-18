@@ -54,7 +54,7 @@ export let calculateExpTime = (userTime) => {
   console.log(hours);
   let minutes = parseInt(difference.minutes());
   let seconds = parseInt(difference.seconds());
-  finalTime = parseInt(hours + 1) * 60 * 60 + minutes * 60 + seconds;
+  finalTime = parseInt(hours + 2) * 60 * 60 + minutes * 60 + seconds;
 
   return finalTime;
 };

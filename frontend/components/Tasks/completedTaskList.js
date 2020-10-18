@@ -1,7 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, View, TextInput, Text, Button } from 'react-native';
-import axios from 'axios';
-import { railsServer } from '../../serverAddress';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import { TasksContext } from '../../context';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import UncompletedButton from './uncompleteTaskButton';
@@ -11,7 +9,6 @@ function CompletedTaskList({ navigation }) {
   let { taskList, setTaskList, user } = useContext(TasksContext);
   let [displayTask, setDisplayTask] = useState([]);
   let [taskListView, setTaskListView] = useState([]);
-
 
   useEffect(() => {
     setDisplayTask(taskList);
@@ -79,7 +76,10 @@ function CompletedTaskList({ navigation }) {
         leftOpenValue={75}
         rightOpenValue={-150}
       />
-      <Button onPress={() => navigation.navigate('Task List')} title="Uncompleted Tasks" />
+      <Button
+        onPress={() => navigation.navigate('Task List')}
+        title="Uncompleted Tasks"
+      />
     </View>
   );
 }
