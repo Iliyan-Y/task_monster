@@ -5,7 +5,8 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 import CompletedButton from './completeTaskButton';
 import DeleteButton from './deleteTaskButton';
 import CountDown from 'react-native-countdown-component';
-import moment from 'moment';
+
+import { completeTask, calculateExpTime } from './taskHelpers';
 
 function TaskList({ navigation }) {
   let { taskList, setTaskList, user } = useContext(TasksContext);
@@ -18,35 +19,6 @@ function TaskList({ navigation }) {
   function completedTaskList() {
     navigation.navigate('Completed Task List');
   }
-
-  let calculateExpTime = (userTime) => {
-    let finalTime;
-    let hour = userTime.hour;
-    if (userTime.month == 0 && userTime.day == 0) {
-      return 0;
-    }
-    if (hour == 0) {
-      let currentHour = new Date().getHours();
-      hour = 24 - currentHour;
-
-      hour < 10 ? (hour = '0' + hour) : null;
-    }
-
-    let year = new Date().getFullYear();
-    let date = moment().utcOffset(-120).format('YYYY-MM-DD hh:mm:ss');
-    //Getting the current date-time with required formate and UTC
-    let expirydate = `${year}-${userTime.month}-${userTime.day} ${hour}:00:00`;
-    //difference of the expiry date-time given and current date-time
-    let difference = moment.duration(moment(expirydate).diff(moment(date)));
-    console.log(difference);
-    let hours = parseInt(difference.asHours());
-    console.log(hours);
-    let minutes = parseInt(difference.minutes());
-    let seconds = parseInt(difference.seconds());
-    finalTime = parseInt(hours + 1) * 60 * 60 + minutes * 60 + seconds;
-
-    return finalTime;
-  };
 
   //add time param in the db
   useEffect(() => {
@@ -80,7 +52,7 @@ function TaskList({ navigation }) {
                   until={data.item.expiryTime}
                   //formate to show
                   timetoShow={('H', 'M', 'S')}
-                  onFinish={() => alert('finished')}
+                  onFinish={() => completeTask(user, data.item.id, setTaskList)}
                   size={12}
                 />
               </Text>
