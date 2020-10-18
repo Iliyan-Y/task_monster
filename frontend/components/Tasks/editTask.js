@@ -11,6 +11,7 @@ function EditTask({ route, navigation }) {
   let [description, setDescription] = useState(taskDescription);
   let [expiryDay, setExpiryDay] = useState(0);
   let [expiryMonth, setExpiryMonth] = useState(0);
+  let [expiryHour, setExpiryHour] = useState(0);
 
   let submit = () => {
     let body = {
@@ -20,6 +21,7 @@ function EditTask({ route, navigation }) {
         expiryTime: {
           day: expiryDay,
           month: expiryMonth,
+          hour: expiryHour,
         },
       },
     };
@@ -67,6 +69,11 @@ function EditTask({ route, navigation }) {
           onChangeText={(e) => setExpiryMonth(e)}
           placeholder="Month"
           name="month"
+        />
+        <TextInput
+          onChangeText={(e) => setExpiryHour(e)}
+          placeholder="Hour"
+          name="Hour"
         />
         <Button onPress={() => submit()} title="Save Changes" />
       </View>
