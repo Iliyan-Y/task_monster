@@ -6,4 +6,5 @@ cache:
   - yarn
 services:
   - mongodb
-  
+before_install:
+  - cd backend
