@@ -28,18 +28,22 @@ function TaskList({ navigation }) {
     if (hour == 0) {
       let currentHour = new Date().getHours();
       hour = 24 - currentHour;
+
+      hour < 10 ? (hour = '0' + hour) : null;
     }
-    console.log(hour);
+
     let year = new Date().getFullYear();
-    let date = moment().utcOffset('+01:00').format('YYYY-MM-DD hh:mm:ss');
+    let date = moment().utcOffset(-120).format('YYYY-MM-DD hh:mm:ss');
     //Getting the current date-time with required formate and UTC
-    let expirydate = `${year}-${userTime.month}-${userTime.day} ${hour}:59:59`;
+    let expirydate = `${year}-${userTime.month}-${userTime.day} ${hour}:00:00`;
     //difference of the expiry date-time given and current date-time
     let difference = moment.duration(moment(expirydate).diff(moment(date)));
+    console.log(difference);
     let hours = parseInt(difference.asHours());
+    console.log(hours);
     let minutes = parseInt(difference.minutes());
     let seconds = parseInt(difference.seconds());
-    finalTime = hours * 60 * 60 + minutes * 60 + seconds;
+    finalTime = parseInt(hours + 1) * 60 * 60 + minutes * 60 + seconds;
 
     return finalTime;
   };
