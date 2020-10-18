@@ -10,7 +10,6 @@ import moment from 'moment';
 function TaskList({ navigation }) {
   let { taskList, setTaskList, user } = useContext(TasksContext);
   let [taskListView, setTaskListView] = useState([]);
-  const [totalDuration, setTotalDuration] = useState(0);
 
   function addTask() {
     navigation.navigate('Add Task');
@@ -20,22 +19,30 @@ function TaskList({ navigation }) {
     navigation.navigate('Completed Task List');
   }
 
-  let timerTime = (userTime) => {
+  let calculateExpTime = (userTime) => {
+    let finalTime;
+    let hour = userTime.hour;
+    if (userTime.month == 0 && userTime.day == 0) {
+      return 0;
+    }
+    if (hour == 0) {
+      let currentHour = new Date().getHours();
+      hour = 24 - currentHour;
+    }
+    console.log(hour);
     let year = new Date().getFullYear();
-    var date = moment().utcOffset('+01:00').format('YYYY-MM-DD hh:mm:ss');
+    let date = moment().utcOffset('+01:00').format('YYYY-MM-DD hh:mm:ss');
     //Getting the current date-time with required formate and UTC
-    var expirydate = `${year}-${userTime.month}-${userTime.day} 11:59:59`;
+    let expirydate = `${year}-${userTime.month}-${userTime.day} ${hour}:59:59`;
     //difference of the expiry date-time given and current date-time
-    var difference = moment.duration(moment(expirydate).diff(moment(date)));
-    var hours = parseInt(difference.asHours());
-    var minutes = parseInt(difference.minutes());
-    var seconds = parseInt(difference.seconds());
-    var finalTime = hours * 60 * 60 + minutes * 60 + seconds;
+    let difference = moment.duration(moment(expirydate).diff(moment(date)));
+    let hours = parseInt(difference.asHours());
+    let minutes = parseInt(difference.minutes());
+    let seconds = parseInt(difference.seconds());
+    finalTime = hours * 60 * 60 + minutes * 60 + seconds;
 
-    setTotalDuration(finalTime);
+    return finalTime;
   };
-  // Store
-  useEffect(() => timerTime({ day: 17, month: 10 }), []);
 
   //add time param in the db
   useEffect(() => {
@@ -46,6 +53,7 @@ function TaskList({ navigation }) {
         title: task.title,
         description: task.description,
         completed: task.completed,
+        expiryTime: calculateExpTime(task.expiryTime),
       }))
     );
   }, [taskList]);
@@ -54,22 +62,27 @@ function TaskList({ navigation }) {
       <Text>Task list</Text>
       <SwipeListView
         data={taskListView.filter((task) => task.completed == false)}
-        renderItem={(data, rowMap) => (
-          <View style={styles.rowFront}>
-            <Text>{data.item.title}</Text>
-            <CountDown
-              until={totalDuration}
-              //duration of countdown in seconds
-              timetoShow={('H', 'M', 'S')}
-              //formate to show
-              onFinish={() => alert('finished')}
-              //on Finish call
-              onPress={() => alert('hello')}
-              //on Press call
-              size={15}
-            />
-          </View>
-        )}
+        renderItem={(data, rowMap) =>
+          data.item.expiryTime == 0 ? (
+            <View style={styles.rowFront}>
+              <Text>{data.item.title}</Text>
+            </View>
+          ) : (
+            <View style={styles.rowFront}>
+              <Text>
+                {data.item.title}
+                <CountDown
+                  //duration of countdown in seconds
+                  until={data.item.expiryTime}
+                  //formate to show
+                  timetoShow={('H', 'M', 'S')}
+                  onFinish={() => alert('finished')}
+                  size={12}
+                />
+              </Text>
+            </View>
+          )
+        }
         renderHiddenItem={(data, rowMap) => (
           <View style={styles.rowBack}>
             <View style={[styles.backRightBtn, styles.backLeftBtn]}>

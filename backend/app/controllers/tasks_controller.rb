@@ -17,7 +17,10 @@ class TasksController < ApplicationController
 
   # POST /tasks
   def create
-    #p current_user
+    p "task Params"
+    p task_params
+    p "params"
+    p params
     @task = current_user.tasks.new(task_params)
 
     if @task.save
@@ -49,6 +52,6 @@ class TasksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:title, :description, :completed)
+      params.require(:task).permit(:title, :description, :completed, expiryTime:[:day, :month, :hour])
     end
 end

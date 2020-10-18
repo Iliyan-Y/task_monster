@@ -1,20 +1,26 @@
-import React, { useState, useContext, useReducer } from 'react';
-import { StyleSheet, View, TextInput, Text, Button } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { View, TextInput, Text, Button } from 'react-native';
 import axios from 'axios';
 import { railsServer } from '../../serverAddress';
 import { TasksContext } from '../../context';
 
 function EditTask({ route, navigation }) {
   const { taskTitle, taskDescription, taskId } = route.params;
-  let { taskList, setTaskList, user } = useContext(TasksContext);
+  let { setTaskList, user } = useContext(TasksContext);
   let [title, setTitle] = useState(taskTitle);
   let [description, setDescription] = useState(taskDescription);
+  let [expiryDay, setExpiryDay] = useState(0);
+  let [expiryMonth, setExpiryMonth] = useState(0);
 
   let submit = () => {
     let body = {
       task: {
         title,
         description,
+        expiryTime: {
+          day: expiryDay,
+          month: expiryMonth,
+        },
       },
     };
     let headers = {
@@ -51,6 +57,16 @@ function EditTask({ route, navigation }) {
           onChangeText={(description) => setDescription(description)}
           defaultValue={taskDescription}
           name="description"
+        />
+        <TextInput
+          onChangeText={(e) => setExpiryDay(e)}
+          placeholder="Day"
+          name="Day"
+        />
+        <TextInput
+          onChangeText={(e) => setExpiryMonth(e)}
+          placeholder="Month"
+          name="month"
         />
         <Button onPress={() => submit()} title="Save Changes" />
       </View>
