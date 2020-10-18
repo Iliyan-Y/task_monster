@@ -4,7 +4,6 @@ rvm:
 branches:
   only:
   - main
-  - rspec_travis
 cache:
 - bundler
 - yarn
