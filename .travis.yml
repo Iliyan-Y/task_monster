@@ -9,6 +9,8 @@ cache:
 - yarn
 services:
 - mongodb
+env:
+- MONGODB="mongodb://localhost:27017/mydb"
 before_install:
 - cd backend
 - bundle install --jobs=3 --retry=3
