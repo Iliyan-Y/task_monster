@@ -1,50 +1,49 @@
-import React, { useState, useContext, useReducer } from 'react'
-import {
-  StyleSheet,
-  View,
-  TextInput,
-  Text,
-  Button,
-  TouchableOpacity,
-} from 'react-native'
-import axios from 'axios'
-import { railsServer } from '../../serverAddress'
-import { TasksContext } from '../../context'
+import React, { useState, useContext } from 'react';
+import { View, TextInput, Text, Button } from 'react-native';
+import axios from 'axios';
+import { railsServer } from '../../serverAddress';
+import { TasksContext } from '../../context';
 
 function AddTask({ navigation }) {
-  let { taskList, setTaskList, user } = useContext(TasksContext)
-  let [title, setTitle] = useState('')
-  let [description, setDescription] = useState('')
-  let [completed, setCompleted] = useState(false)
+
+  let { setTaskList, user } = useContext(TasksContext);
+  let [title, setTitle] = useState('');
+  let [description, setDescription] = useState('');
+  let [expiryDay, setExpiryDay] = useState(0);
+  let [expiryMonth, setExpiryMonth] = useState(0);
+  let [expiryHour, setExpiryHour] = useState(0);
+
 
   let submit = () => {
     let body = {
       task: {
         title,
         description,
-        completed,
+        completed: false,
+        expiryTime: {
+          day: expiryDay,
+          month: expiryMonth,
+          hour: expiryHour,
+        },
       },
-    }
+    };
     let headers = {
       headers: {
         email: user.email,
         authentication_token: user.authentication_token,
       },
-    }
+    };
 
     axios
       .post(railsServer + '/tasks', body, headers)
-      .then((res) => {
-        console.log(res.status)
-      })
       .then(() => {
         axios.get(railsServer + '/tasks', headers).then((res) => {
-          setTaskList(res.data)
-          navigation.navigate('Task List')
-        })
+          setTaskList(res.data);
+          navigation.navigate('Task List');
+        });
       })
-      .catch((err) => console.log(err.message))
-  }
+      .catch((err) => console.log(err.message));
+  };
 
   return (
     <View style={styles.container}>
@@ -68,13 +67,32 @@ function AddTask({ navigation }) {
           name="description"
           placeholderTextColor="#003f5c"
         />
+
+        <Text>Set Target Time in numbers</Text>
+        <TextInput
+          onChangeText={(e) => setExpiryDay(e)}
+          placeholder="Day"
+          name="Day"
+        />
+        <TextInput
+          onChangeText={(e) => setExpiryMonth(e)}
+          placeholder="Month"
+          name="month"
+        />
+        <TextInput
+          onChangeText={(e) => setExpiryHour(e)}
+          placeholder="Hour"
+          name="Hour"
+        />
+        <Button onPress={() => submit()} title="Add" />
+
       </View>
 
       <TouchableOpacity style={styles.addBtn} onPress={() => submit('Add')}>
         <Text style={styles.inputText}>ADD</Text>
       </TouchableOpacity>
     </View>
-  )
+  );
 }
 const styles = StyleSheet.create({
   container: {
@@ -119,3 +137,4 @@ const styles = StyleSheet.create({
   },
 })
 export default AddTask
+

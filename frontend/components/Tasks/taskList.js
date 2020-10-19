@@ -14,21 +14,21 @@ import { SwipeListView } from 'react-native-swipe-list-view'
 import CompletedButton from './completeTaskButton'
 import DeleteButton from './deleteTaskButton'
 
+
 function TaskList({ navigation }) {
-  let { taskList, setTaskList, user } = useContext(TasksContext)
-  let [displayTask, setDisplayTask] = useState([])
-  let [taskListView, setTaskListView] = useState([])
+  let { taskList, setTaskList, user } = useContext(TasksContext);
+  let [taskListView, setTaskListView] = useState([]);
 
   function addTask() {
-    navigation.navigate('Add Task')
+    navigation.navigate('Add Task');
   }
 
   function completedTaskList() {
-    navigation.navigate('Completed Task List')
+    navigation.navigate('Completed Task List');
   }
 
+  //add time param in the db
   useEffect(() => {
-    setDisplayTask(taskList)
     setTaskListView(
       taskList.map((task) => ({
         key: task.title,
@@ -36,17 +36,45 @@ function TaskList({ navigation }) {
         title: task.title,
         description: task.description,
         completed: task.completed,
-      })),
-    )
-  }, [taskList])
+        expiryTime: calculateExpTime(task.expiryTime),
+      }))
+    );
+  }, [taskList]);
   return (
-    <View style={styles.container}>
-      <View>
-        <SwipeListView
-          data={taskListView.filter((task) => task.completed == false)}
-          renderItem={(data, rowMap) => (
+    <View>
+      <Text>Task list</Text>
+      <SwipeListView
+        data={taskListView.filter((task) => task.completed == false)}
+        renderItem={(data, rowMap) =>
+          data.item.expiryTime == 0 ? (
             <View style={styles.rowFront}>
               <Text>{data.item.title}</Text>
+            </View>
+          ) : (
+            <View style={styles.rowFront}>
+              <Text>
+                {data.item.title}
+                <CountDown
+                  //duration of countdown in seconds
+                  until={data.item.expiryTime}
+                  //formate to show
+                  timetoShow={('H', 'M', 'S')}
+                  onFinish={() => completeTask(user, data.item.id, setTaskList)}
+                  size={12}
+                />
+              </Text>
+            </View>
+          )
+        }
+        renderHiddenItem={(data, rowMap) => (
+          <View style={styles.rowBack}>
+            <View style={[styles.backRightBtn, styles.backLeftBtn]}>
+              <CompletedButton
+                user={user}
+                taskId={data.item.id}
+                setTaskList={setTaskList}
+              />
+
             </View>
           )}
           renderHiddenItem={(data, rowMap) => (
@@ -111,8 +139,7 @@ function TaskList({ navigation }) {
         <Text style={styles.inputText}>Completed Tasks</Text>
       </TouchableOpacity>
     </View>
-    // </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -159,7 +186,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     right: 0,
   },
-
   inputText: {
     height: 50,
     color: 'white',
@@ -178,4 +204,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default TaskList
+export default TaskList;

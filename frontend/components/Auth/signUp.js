@@ -17,7 +17,7 @@ function SignUp({ navigation }) {
   let { user, setUser } = useContext(TasksContext)
   let [email, setEmail] = useState('')
   let [password, setPassword] = useState('')
-  let [password_confirmation, setConfirmPassword] = useState('')
+  let [password_confirmation, setPasswordConfirmation] = useState('')
 
   let submit = () => {
     let body = {
