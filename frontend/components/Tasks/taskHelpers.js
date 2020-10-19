@@ -27,32 +27,36 @@ export function completeTask(user, taskId, setTaskList) {
     .catch((err) => console.log(err.message));
 }
 
-export let calculateExpTime = (userTime) => {
+export let calculateExpTime = (userInput) => {
   let finalTime;
-  let hour = userTime.hour;
-  let year = new Date().getFullYear();
+  let userDate = userInput.split('T')[0];
+  let userTime = userInput.split('T')[1].split('.')[0];
+  let userHour = userTime.split(':')[0];
+  let expiryTime;
 
-  if (userTime.month == 0 && userTime.day == 0) {
+  if (userInput.month == 0 && userInput.day == 0) {
     return 0;
   }
 
-  if (hour == 0) {
-    let currentHour = new Date().getHours();
-    hour = 24 - currentHour;
-    hour < 10 ? (hour = '0' + hour) : null;
-  } else if (hour != 0 && hour.length < 2) {
-    hour = '0' + hour;
+  if (userHour == new Date().getHours()) {
+    expiryTime = '23:59:59';
+  } else {
+    expiryTime = userTime;
   }
 
-  let date = moment().format('YYYY-MM-DD hh:mm:ss');
+  let mo = moment('18:49:59', 'HH:mm:ss').fromNow();
+
+  let date = moment().format('YYYY-MM-DD HH:mm:ss');
+
   //Getting the current date-time with required formate and UTC
-  let expirydate = `${year}-${userTime.month}-${userTime.day} ${hour}:00:00`;
+  let expirydate = `${userDate} ${expiryTime}`;
   //difference of the expiry date-time given and current date-time
   let difference = moment.duration(moment(expirydate).diff(moment(date)));
+  console.log(difference);
   let hours = parseInt(difference.asHours());
   let minutes = parseInt(difference.minutes());
   let seconds = parseInt(difference.seconds());
-  finalTime = parseInt(hours + 11) * 60 * 60 + minutes * 60 + seconds;
+  finalTime = hours * 60 * 60 + minutes * 60 + seconds;
 
   return finalTime;
 };
