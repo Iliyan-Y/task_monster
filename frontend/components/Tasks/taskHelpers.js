@@ -28,6 +28,9 @@ export function completeTask(user, taskId, setTaskList) {
 }
 
 export let calculateExpTime = (userInput) => {
+  if (userInput == 0) {
+    return 0;
+  }
   let finalTime;
   let userDate = userInput.split('T')[0];
   let userTime = userInput.split('T')[1].split('.')[0];
@@ -38,21 +41,24 @@ export let calculateExpTime = (userInput) => {
 
   let expiryTime;
 
-  if (userInput.month == 0 && userInput.day == 0) {
-    return 0;
-  }
-
-  if (userHour == new Date().getHours() && localMin - userMins > 3) {
-    expiryTime = '23:59:59';
-  } else {
+  if (userHour == new Date().getHours() && userMins - localMin > 3) {
+    console.log('IF');
     expiryTime = userTime;
     timeOffset = 1;
+  } else if (userHour != new Date().getHours()) {
+    console.log(' els IF');
+    expiryTime = userTime;
+    timeOffset = 1;
+  } else {
+    console.log('Else');
+    expiryTime = '23:59:59';
   }
+  console.log(expiryTime);
 
   let date = moment().format('YYYY-MM-DD HH:mm:ss');
 
   //Getting the current date-time with required formate and UTC
-  let expirydate = `${userDate} ${expiryTime}`;
+  let expirydate = `${userDate} 23:59:59`;
   //difference of the expiry date-time given and current date-time
   let difference = moment.duration(moment(expirydate).diff(moment(date)));
 

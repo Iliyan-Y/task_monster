@@ -42,7 +42,6 @@ const DatePicker = ({ setExpiryTime }) => {
           mode={mode}
           is24Hour={true}
           display="default"
-          date={new Date()}
           onChange={onChange}
           minimumDate={new Date()}
         />
