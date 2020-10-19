@@ -2,10 +2,11 @@ import axios from 'axios';
 import { railsServer } from '../../serverAddress';
 import moment from 'moment';
 
-export function completeTask(user, taskId, setTaskList) {
+export function completeTask(user, taskId, setTaskList, completed = true, score = 1) {
   let body = {
     task: {
-      completed: true,
+      completed: completed,
+      score: score
     },
   };
   let headers = {

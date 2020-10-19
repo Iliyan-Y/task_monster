@@ -28,6 +28,7 @@ function CompletedTaskList({ navigation }) {
         title: task.title,
         description: task.description,
         completed: task.completed,
+        score: task.score
       })),
     )
   }, [taskList])
@@ -85,10 +86,6 @@ function CompletedTaskList({ navigation }) {
           leftOpenValue={75}
           rightOpenValue={-150}
         />
-        {/* <Button
-          onPress={() => navigation.navigate('Task List')}
-          title="Uncompleted Tasks"
-        /> */}
 
         <TouchableOpacity
           style={styles.uncomBtn}

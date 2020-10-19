@@ -24,7 +24,9 @@ function AddTask({ navigation }) {
         title,
         description,
         completed: false,
+        score: 0,
         expiryTime,
+
       },
     };
     let headers = {
