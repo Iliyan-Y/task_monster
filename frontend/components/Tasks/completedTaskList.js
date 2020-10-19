@@ -1,20 +1,26 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, View, TextInput, Text, Button } from 'react-native';
-import axios from 'axios';
-import { railsServer } from '../../serverAddress';
-import { TasksContext } from '../../context';
-import { SwipeListView } from 'react-native-swipe-list-view';
-import UncompletedButton from './uncompleteTaskButton';
-import DeleteButton from './deleteTaskButton';
+import React, { useState, useContext, useEffect } from 'react'
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Text,
+  Button,
+  TouchableOpacity,
+} from 'react-native'
+import axios from 'axios'
+import { railsServer } from '../../serverAddress'
+import { TasksContext } from '../../context'
+import { SwipeListView } from 'react-native-swipe-list-view'
+import UncompletedButton from './uncompleteTaskButton'
+import DeleteButton from './deleteTaskButton'
 
 function CompletedTaskList({ navigation }) {
-  let { taskList, setTaskList, user } = useContext(TasksContext);
-  let [displayTask, setDisplayTask] = useState([]);
-  let [taskListView, setTaskListView] = useState([]);
-
+  let { taskList, setTaskList, user } = useContext(TasksContext)
+  let [displayTask, setDisplayTask] = useState([])
+  let [taskListView, setTaskListView] = useState([])
 
   useEffect(() => {
-    setDisplayTask(taskList);
+    setDisplayTask(taskList)
     setTaskListView(
       taskList.map((task) => ({
         key: task.title,
@@ -22,71 +28,82 @@ function CompletedTaskList({ navigation }) {
         title: task.title,
         description: task.description,
         completed: task.completed,
-      }))
-    );
-  }, [taskList]);
+      })),
+    )
+  }, [taskList])
   return (
-    <View>
-      <Text>Task list</Text>
-      <SwipeListView
-        data={taskListView.filter((task) => task.completed == true)}
-        renderItem={(data, rowMap) => (
-          <View style={styles.rowFront}>
-            <Text>{data.item.title}</Text>
-          </View>
-        )}
-        renderHiddenItem={(data, rowMap) => (
-          <View style={styles.rowBack}>
-            <View style={[styles.backRightBtn, styles.backLeftBtn]}>
-              <UncompletedButton
-                user={user}
-                taskId={data.item.id}
-                setTaskList={setTaskList}
-              />
+    <View style={styles.container}>
+      <View>
+        <SwipeListView
+          data={taskListView.filter((task) => task.completed == true)}
+          renderItem={(data, rowMap) => (
+            <View style={styles.rowFront}>
+              <Text>{data.item.title}</Text>
             </View>
-            <View
-              style={[
-                styles.backTextWhite,
-                styles.backRightBtn,
-                styles.backRightBtnLeft,
-              ]}
-            >
-              <Button
-                style={
-                  (styles.backTextWhite,
+          )}
+          renderHiddenItem={(data, rowMap) => (
+            <View style={styles.rowBack}>
+              <View style={[styles.backRightBtn, styles.backLeftBtn]}>
+                <UncompletedButton
+                  user={user}
+                  taskId={data.item.id}
+                  setTaskList={setTaskList}
+                />
+              </View>
+              <View
+                style={[
+                  styles.backTextWhite,
                   styles.backRightBtn,
-                  styles.backRightBtnLeft)
-                }
-                onPress={() =>
-                  navigation.navigate('Edit Task', {
-                    taskTitle: data.item.title,
-                    taskDescription: data.item.description,
-                    taskId: data.item.id,
-                  })
-                }
-                title="Edit"
-              />
+                  styles.backRightBtnLeft,
+                ]}
+              >
+                <Button
+                  style={
+                    (styles.backTextWhite,
+                    styles.backRightBtn,
+                    styles.backRightBtnLeft)
+                  }
+                  onPress={() =>
+                    navigation.navigate('Edit Task', {
+                      taskTitle: data.item.title,
+                      taskDescription: data.item.description,
+                      taskId: data.item.id,
+                    })
+                  }
+                  title="Edit"
+                />
+              </View>
+              <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
+                <DeleteButton
+                  user={user}
+                  taskId={data.item.id}
+                  setTaskList={setTaskList}
+                />
+              </View>
             </View>
-            <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
-              <DeleteButton
-                user={user}
-                taskId={data.item.id}
-                setTaskList={setTaskList}
-              />
-            </View>
-          </View>
-        )}
-        leftOpenValue={75}
-        rightOpenValue={-150}
-      />
-      <Button onPress={() => navigation.navigate('Task List')} title="Uncompleted Tasks" />
+          )}
+          leftOpenValue={75}
+          rightOpenValue={-150}
+        />
+        {/* <Button
+          onPress={() => navigation.navigate('Task List')}
+          title="Uncompleted Tasks"
+        /> */}
+
+        <TouchableOpacity
+          style={styles.uncomBtn}
+          onPress={() => navigation.navigate('Task List')}
+        >
+          <Text style={styles.inputText}>Uncompleted Tasks</Text>
+        </TouchableOpacity>
+      </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: '#003f5c',
     flex: 1,
   },
   backTextWhite: {
@@ -94,7 +111,7 @@ const styles = StyleSheet.create({
   },
   rowFront: {
     alignItems: 'center',
-    backgroundColor: '#CCC',
+    backgroundColor: '#465881',
     borderBottomColor: 'black',
     borderBottomWidth: 1,
     justifyContent: 'center',
@@ -128,6 +145,22 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     right: 0,
   },
-});
+  inputText: {
+    height: 50,
+    color: 'white',
+    padding: 17,
+  },
 
-export default CompletedTaskList;
+  uncomBtn: {
+    width: '80%',
+    backgroundColor: '#fb5b5a',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+    marginBottom: 10,
+  },
+})
+
+export default CompletedTaskList

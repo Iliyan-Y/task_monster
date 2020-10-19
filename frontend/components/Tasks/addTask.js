@@ -11,15 +11,11 @@ import axios from 'axios'
 import { railsServer } from '../../serverAddress'
 import { TasksContext } from '../../context'
 
-
-function AddTask({
-    navigation
-}
-){
-  let {taskList, setTaskList, user} = useContext(TasksContext);
-  let [title, setTitle] = useState('');
-  let [description, setDescription] = useState('');
-  let [completed, setCompleted] = useState(false);
+function AddTask({ navigation }) {
+  let { taskList, setTaskList, user } = useContext(TasksContext)
+  let [title, setTitle] = useState('')
+  let [description, setDescription] = useState('')
+  let [completed, setCompleted] = useState(false)
 
   let submit = () => {
     let body = {
@@ -51,23 +47,75 @@ function AddTask({
   }
 
   return (
-    <View>
-      <Text>Add a new Task!</Text>
-      <View>
+    <View style={styles.container}>
+      <Text style={styles.logo}>What is your task for today?</Text>
+
+      <View style={styles.inputView}>
         <TextInput
+          style={styles.inputText}
           onChangeText={(title) => setTitle(title)}
-          placeholder="title"
+          placeholder="Title..."
           name="title"
+          placeholderTextColor="#003f5c"
         />
-        <TextInput
-          onChangeText={(description) => setDescription(description)}
-          placeholder="description"
-          name="description"
-        />
-        <Button onPress={() => submit()} title="Add" />
       </View>
+
+      <View style={styles.inputView}>
+        <TextInput
+          style={styles.inputText}
+          onChangeText={(description) => setDescription(title)}
+          placeholder="Description..."
+          name="description"
+          placeholderTextColor="#003f5c"
+        />
+      </View>
+
+      <TouchableOpacity style={styles.addBtn} onPress={() => submit('Add')}>
+        <Text style={styles.inputText}>ADD</Text>
+      </TouchableOpacity>
     </View>
   )
 }
- 
-export default AddTask;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#003f5c',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  inputView: {
+    width: '80%',
+    backgroundColor: '#465881',
+    borderRadius: 25,
+    height: 50,
+    marginBottom: 20,
+    justifyContent: 'center',
+    padding: 20,
+  },
+
+  inputText: {
+    height: 50,
+    color: 'white',
+    padding: 17,
+  },
+
+  addBtn: {
+    width: '80%',
+    backgroundColor: '#fb5b5a',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+    marginBottom: 10,
+  },
+
+  logo: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: '#fb5b5a',
+    marginBottom: 40,
+  },
+})
+export default AddTask

@@ -1,12 +1,18 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, View, TextInput, Text, Button } from 'react-native';
-import axios from 'axios';
-import { railsServer } from '../../serverAddress';
-import { TasksContext } from '../../context';
-import { SwipeListView } from 'react-native-swipe-list-view';
-import CompletedButton from './completeTaskButton';
-import DeleteButton from './deleteTaskButton';
-
+import React, { useState, useContext, useEffect } from 'react'
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Text,
+  Button,
+  TouchableOpacity,
+} from 'react-native'
+import axios from 'axios'
+import { railsServer } from '../../serverAddress'
+import { TasksContext } from '../../context'
+import { SwipeListView } from 'react-native-swipe-list-view'
+import CompletedButton from './completeTaskButton'
+import DeleteButton from './deleteTaskButton'
 
 function TaskList({ navigation }) {
   let { taskList, setTaskList, user } = useContext(TasksContext)
@@ -34,68 +40,84 @@ function TaskList({ navigation }) {
     )
   }, [taskList])
   return (
-    <View>
-      <Text>Task list</Text>
-      <SwipeListView
-        data={taskListView.filter((task) => task.completed == false)}
-        renderItem={(data, rowMap) => (
-          <View style={styles.rowFront}>
-            <Text>{data.item.title}</Text>
-          </View>
-        )}
-        renderHiddenItem={(data, rowMap) => (
-          <View style={styles.rowBack}>
-            <View style={[styles.backRightBtn, styles.backLeftBtn]}>
-              <CompletedButton
-                user={user}
-                taskId={data.item.id}
-                setTaskList={setTaskList}
-              />
+    <View style={styles.container}>
+      <View>
+        <SwipeListView
+          data={taskListView.filter((task) => task.completed == false)}
+          renderItem={(data, rowMap) => (
+            <View style={styles.rowFront}>
+              <Text>{data.item.title}</Text>
             </View>
-            <View
-              style={[
-                styles.backTextWhite,
-                styles.backRightBtn,
-                styles.backRightBtnLeft,
-              ]}
-            >
-              <Button
-                style={
-                  (styles.backTextWhite,
+          )}
+          renderHiddenItem={(data, rowMap) => (
+            <View style={styles.rowBack}>
+              <View style={[styles.backRightBtn, styles.backLeftBtn]}>
+                <CompletedButton
+                  user={user}
+                  taskId={data.item.id}
+                  setTaskList={setTaskList}
+                />
+              </View>
+              <View
+                style={[
+                  styles.backTextWhite,
                   styles.backRightBtn,
-                  styles.backRightBtnLeft)
-                }
-                onPress={() =>
-                  navigation.navigate('Edit Task', {
-                    taskTitle: data.item.title,
-                    taskDescription: data.item.description,
-                    taskId: data.item.id,
-                  })
-                }
-                title="Edit"
-              />
+                  styles.backRightBtnLeft,
+                ]}
+              >
+                <Button
+                  style={
+                    (styles.backTextWhite,
+                    styles.backRightBtn,
+                    styles.backRightBtnLeft)
+                  }
+                  onPress={() =>
+                    navigation.navigate('Edit Task', {
+                      taskTitle: data.item.title,
+                      taskDescription: data.item.description,
+                      taskId: data.item.id,
+                    })
+                  }
+                  title="Edit"
+                />
+              </View>
+              <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
+                <DeleteButton
+                  user={user}
+                  taskId={data.item.id}
+                  setTaskList={setTaskList}
+                />
+              </View>
             </View>
-            <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
-              <DeleteButton
-                user={user}
-                taskId={data.item.id}
-                setTaskList={setTaskList}
-              />
-            </View>
-          </View>
-        )}
-        leftOpenValue={75}
-        rightOpenValue={-150}
-      />
-      <Button onPress={() => addTask()} title="Add a new task" />
-      <Button onPress={() => completedTaskList()} title="Completed Tasks" />
+          )}
+          leftOpenValue={75}
+          rightOpenValue={-150}
+        />
+
+        {/* <Button onPress={() => addTask()} title="Add a new task" /> */}
+        <TouchableOpacity
+          style={styles.addBtn}
+          onPress={() => navigation.navigate('Add Task')}
+        >
+          <Text style={styles.inputText}>Add a new task</Text>
+        </TouchableOpacity>
+      </View>
+      {/* <Button onPress={() => completedTaskList()} title="Completed Tasks" /> */}
+
+      <TouchableOpacity
+        style={styles.addBtn}
+        onPress={() => navigation.navigate('Completed Task List')}
+      >
+        <Text style={styles.inputText}>Completed Tasks</Text>
+      </TouchableOpacity>
     </View>
+    // </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: '#003f5c',
     flex: 1,
   },
   backTextWhite: {
@@ -103,7 +125,7 @@ const styles = StyleSheet.create({
   },
   rowFront: {
     alignItems: 'center',
-    backgroundColor: '#CCC',
+    backgroundColor: '#465881',
     borderBottomColor: 'black',
     borderBottomWidth: 1,
     justifyContent: 'center',
@@ -136,6 +158,23 @@ const styles = StyleSheet.create({
   backRightBtnRight: {
     backgroundColor: 'red',
     right: 0,
+  },
+
+  inputText: {
+    height: 50,
+    color: 'white',
+    padding: 17,
+  },
+
+  addBtn: {
+    width: '80%',
+    backgroundColor: '#fb5b5a',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+    marginBottom: 10,
   },
 })
 
