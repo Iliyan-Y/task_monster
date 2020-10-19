@@ -1,0 +1,23 @@
+language: ruby
+rvm:
+- 2.7.1
+branches:
+  only:
+  - main
+cache:
+- bundler
+- yarn
+services:
+- mongodb
+env:
+- MONGODB="mongodb://localhost:27017/mydb"
+before_install:
+- cd backend
+- bundle install --jobs=3 --retry=3
+script:
+- bundle exec rspec
+deploy:
+  provider: heroku
+  app: task-monster-backend
+  api_key:
+    secure: YE8+CHpo/Ix+fnDnjAUgq3XStykE8bXsI/I572U/XhoTUK7DtupdSatCXYDOlrEhUtl4FtFAnwq2sFaN0gNsYSlHBPywNoNWlxJi4Q96BpOAOW4KJhR13cekeqnvpwTk3/LBX/4UVYir5sEv8+cuUR7fRXDkAuUbd/I56Q9nXyONDKFYnAfOeaWj5E/qvgVPbCUvsUuswJfQRem6AocGHZActsJ1Dzok5Ja4uDIDViP9FdDDYZPdZTkG2kU3M008ks9IyxDUxyn5KNXCtDSyCZ4ynX8s9dYwXNTqr2UIQRmIuyXL5HLEI0VP6FDo0SE3q1feprnSIOprrtqd6BCWLGnQ+eEGrU+OcDKQvzUNaSCH1kUDaPTEpn54EAx0PkrTXKB31T1ZX5PFerxlKeP0VfGODLh5Z8xMvqktYtZq2l70xq4sOoXzm0uFbnw7HpsXepOMNvRFMQIgcbiNJtfn/rmOet7RtAOF+OCC/4LSdDIIBbNFPfeFkLu9fZOF/7B+EfXLBzV6NBcs1U8NtS0n85Lxin/+/RpbxpP7uvKKhJX2XzOZ3MN2xhR+8MfdVWQqjW96w+QY2+SKkkxeCLG9JzjgQMD/bbWfAEy705bDLxBw9GrNAbszbRmcA42Gjdd4vfX9aH4O7ogAtVg5WAemt8r/c4f31n6QjAWDLjqBBCo=
