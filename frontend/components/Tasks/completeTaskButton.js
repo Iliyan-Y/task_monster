@@ -2,11 +2,12 @@ import React from 'react';
 import { StyleSheet, Button } from 'react-native';
 import axios from 'axios';
 import { railsServer } from '../../serverAddress';
-const CompletedButton = ({taskId, user, setTaskList}) => {
+const CompletedButton = ({taskId, user, setTaskList, completed = true, score = 1}) => {
   function completeTask() {
       let body = {
         task: {
-          completed: true,
+          completed: completed,
+          score: score
         },
       };
       let headers = {

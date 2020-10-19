@@ -53,7 +53,7 @@ function TaskList({ navigation }) {
                     until={data.item.expiryTime}
                     //format to show
                     timetoShow={('H', 'M', 'S')}
-                    onFinish={() => completeTask(user, data.item.id, setTaskList)}
+                    onFinish={() => completeTask(user, data.item.id, setTaskList, true, -1)}
                     size={12}
                   />
                 </Text>

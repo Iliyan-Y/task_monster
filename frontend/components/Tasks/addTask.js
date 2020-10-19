@@ -32,6 +32,7 @@ function AddTask({ navigation }) {
           month: expiryMonth,
           hour: expiryHour,
         },
+        score: 0
       },
     };
     let headers = {
