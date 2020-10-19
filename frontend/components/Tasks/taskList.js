@@ -13,19 +13,13 @@ import { TasksContext } from '../../context'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import CompletedButton from './completeTaskButton'
 import DeleteButton from './deleteTaskButton'
+import { calculateExpTime, completeTask } from './taskHelpers';
+import CountDown from 'react-native-countdown-component';
 
 
 function TaskList({ navigation }) {
   let { taskList, setTaskList, user } = useContext(TasksContext);
   let [taskListView, setTaskListView] = useState([]);
-
-  function addTask() {
-    navigation.navigate('Add Task');
-  }
-
-  function completedTaskList() {
-    navigation.navigate('Completed Task List');
-  }
 
   //add time param in the db
   useEffect(() => {
@@ -51,20 +45,20 @@ function TaskList({ navigation }) {
               <Text>{data.item.title}</Text>
             </View>
           ) : (
-            <View style={styles.rowFront}>
-              <Text>
-                {data.item.title}
-                <CountDown
-                  //duration of countdown in seconds
-                  until={data.item.expiryTime}
-                  //formate to show
-                  timetoShow={('H', 'M', 'S')}
-                  onFinish={() => completeTask(user, data.item.id, setTaskList)}
-                  size={12}
-                />
-              </Text>
-            </View>
-          )
+              <View style={styles.rowFront}>
+                <Text>
+                  {data.item.title}
+                  <CountDown
+                    //duration of countdown in seconds
+                    until={data.item.expiryTime}
+                    //format to show
+                    timetoShow={('H', 'M', 'S')}
+                    onFinish={() => completeTask(user, data.item.id, setTaskList)}
+                    size={12}
+                  />
+                </Text>
+              </View>
+            )
         }
         renderHiddenItem={(data, rowMap) => (
           <View style={styles.rowBack}>
@@ -76,71 +70,69 @@ function TaskList({ navigation }) {
               />
 
             </View>
-          )}
-          renderHiddenItem={(data, rowMap) => (
-            <View style={styles.rowBack}>
-              <View style={[styles.backRightBtn, styles.backLeftBtn]}>
-                <CompletedButton
-                  user={user}
-                  taskId={data.item.id}
-                  setTaskList={setTaskList}
-                />
-              </View>
-              <View
-                style={[
-                  styles.backTextWhite,
-                  styles.backRightBtn,
-                  styles.backRightBtnLeft,
-                ]}
-              >
-                <Button
-                  style={
-                    (styles.backTextWhite,
-                    styles.backRightBtn,
-                    styles.backRightBtnLeft)
-                  }
-                  onPress={() =>
-                    navigation.navigate('Edit Task', {
-                      taskTitle: data.item.title,
-                      taskDescription: data.item.description,
-                      taskId: data.item.id,
-                    })
-                  }
-                  title="Edit"
-                />
-              </View>
-              <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
-                <DeleteButton
-                  user={user}
-                  taskId={data.item.id}
-                  setTaskList={setTaskList}
-                />
-              </View>
             </View>
           )}
+          renderHiddenItem={(data, rowMap) => (
+              <View style={styles.rowBack}>
+                <View style={[styles.backRightBtn, styles.backLeftBtn]}>
+                  <CompletedButton
+                    user={user}
+                    taskId={data.item.id}
+                    setTaskList={setTaskList}
+                  />
+                </View>
+                <View
+                  style={[
+                    styles.backTextWhite,
+                    styles.backRightBtn,
+                    styles.backRightBtnLeft,
+                  ]}
+                >
+                  <Button
+                    style={
+                      (styles.backTextWhite,
+                        styles.backRightBtn,
+                        styles.backRightBtnLeft)
+                    }
+                    onPress={() =>
+                      navigation.navigate('Edit Task', {
+                        taskTitle: data.item.title,
+                        taskDescription: data.item.description,
+                        taskId: data.item.id,
+                      })
+                    }
+                    title="Edit"
+                  />
+                </View>
+                <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
+                  <DeleteButton
+                    user={user}
+                    taskId={data.item.id}
+                    setTaskList={setTaskList}
+                  />
+                </View>
+              </View>
+            )}
           leftOpenValue={75}
           rightOpenValue={-150}
         />
 
-        {/* <Button onPress={() => addTask()} title="Add a new task" /> */}
-        <TouchableOpacity
-          style={styles.addBtn}
-          onPress={() => navigation.navigate('Add Task')}
-        >
-          <Text style={styles.inputText}>Add a new task</Text>
-        </TouchableOpacity>
-      </View>
-      {/* <Button onPress={() => completedTaskList()} title="Completed Tasks" /> */}
+            <TouchableOpacity
+              style={styles.addBtn}
+              onPress={() => navigation.navigate('Add Task')}
+            >
+              <Text style={styles.inputText}>Add a new task</Text>
+            </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.addBtn}
-        onPress={() => navigation.navigate('Completed Task List')}
-      >
-        <Text style={styles.inputText}>Completed Tasks</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
+            <TouchableOpacity
+              style={styles.addBtn}
+              onPress={() => navigation.navigate('Completed Task List')}
+            >
+              <Text style={styles.inputText}>Completed Tasks</Text>
+            </TouchableOpacity>
+          </View>
+        );
+                  }
 
 const styles = StyleSheet.create({
   container: {

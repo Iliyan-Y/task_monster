@@ -1,5 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { View, TextInput, Text, Button } from 'react-native';
+import {
+  TouchableOpacity,
+  StyleSheet,
+  View,
+  TextInput,
+  Text,
+  Button,
+} from 'react-native';
 import axios from 'axios';
 import { railsServer } from '../../serverAddress';
 import { TasksContext } from '../../context';
