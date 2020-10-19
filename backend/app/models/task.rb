@@ -4,7 +4,8 @@ class Task
   field :title, type: String
   field :description, type: String
   field :completed, type: Mongoid::Boolean
-  field :expiryTime, type: Hash
   field :score, type: Integer
+  field :expiryTime, type: String
+
   belongs_to :user
 end

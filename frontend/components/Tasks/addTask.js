@@ -10,16 +10,13 @@ import {
 import axios from 'axios';
 import { railsServer } from '../../serverAddress';
 import { TasksContext } from '../../context';
+import DatePicker from './datePicker';
 
 function AddTask({ navigation }) {
-
   let { setTaskList, user } = useContext(TasksContext);
   let [title, setTitle] = useState('');
   let [description, setDescription] = useState('');
-  let [expiryDay, setExpiryDay] = useState(0);
-  let [expiryMonth, setExpiryMonth] = useState(0);
-  let [expiryHour, setExpiryHour] = useState(0);
-
+  let [expiryTime, setExpiryTime] = useState(0);
 
   let submit = () => {
     let body = {
@@ -27,12 +24,9 @@ function AddTask({ navigation }) {
         title,
         description,
         completed: false,
-        expiryTime: {
-          day: expiryDay,
-          month: expiryMonth,
-          hour: expiryHour,
-        },
-        score: 0
+        score: 0,
+        expiryTime,
+
       },
     };
     let headers = {
@@ -75,28 +69,11 @@ function AddTask({ navigation }) {
           name="description"
           placeholderTextColor="#003f5c"
         />
-
-        <Text>Set Target Time in numbers</Text>
-        <TextInput
-          onChangeText={(e) => setExpiryDay(e)}
-          placeholder="Day"
-          name="Day"
-        />
-        <TextInput
-          onChangeText={(e) => setExpiryMonth(e)}
-          placeholder="Month"
-          name="month"
-        />
-        <TextInput
-          onChangeText={(e) => setExpiryHour(e)}
-          placeholder="Hour"
-          name="Hour"
-        />
-        <Button onPress={() => submit()} title="Add" />
-
       </View>
 
-      <TouchableOpacity style={styles.addBtn} onPress={() => submit('Add')}>
+      <DatePicker setExpiryTime={setExpiryTime} />
+
+      <TouchableOpacity style={styles.addBtn} onPress={() => submit()}>
         <Text style={styles.inputText}>ADD</Text>
       </TouchableOpacity>
     </View>
@@ -143,6 +120,5 @@ const styles = StyleSheet.create({
     color: '#fb5b5a',
     marginBottom: 40,
   },
-})
-export default AddTask
-
+});
+export default AddTask;

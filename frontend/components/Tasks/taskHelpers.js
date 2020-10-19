@@ -28,32 +28,41 @@ export function completeTask(user, taskId, setTaskList, completed = true, score 
     .catch((err) => console.log(err.message));
 }
 
-export let calculateExpTime = (userTime) => {
-  let finalTime;
-  let hour = userTime.hour;
-  let year = new Date().getFullYear();
-
-  if (userTime.month == 0 && userTime.day == 0) {
+export let calculateExpTime = (userInput) => {
+  if (userInput == 0) {
     return 0;
   }
+  let finalTime;
+  let userDate = userInput.split('T')[0];
+  let userTime = userInput.split('T')[1].split('.')[0];
+  let userHour = parseInt(userTime.split(':')[0]) + 1;
+  let userMins = parseInt(userTime.split(':')[1]);
+  let localMin = new Date().getMinutes();
+  let timeOffset = 0;
 
-  if (hour == 0) {
-    let currentHour = new Date().getHours();
-    hour = 24 - currentHour;
-    hour < 10 ? (hour = '0' + hour) : null;
-  } else if (hour != 0 && hour.length < 2) {
-    hour = '0' + hour;
+  let expiryTime;
+
+  if (userHour == new Date().getHours() && userMins - localMin > 3) {
+    expiryTime = userTime;
+    timeOffset = 1;
+  } else if (userHour != new Date().getHours()) {
+    expiryTime = userTime;
+    timeOffset = 1;
+  } else {
+    expiryTime = '23:59:59';
   }
 
-  let date = moment().format('YYYY-MM-DD hh:mm:ss');
+  let date = moment().format('YYYY-MM-DD HH:mm:ss');
+
   //Getting the current date-time with required formate and UTC
-  let expirydate = `${year}-${userTime.month}-${userTime.day} ${hour}:00:00`;
+  let expirydate = `${userDate} ${expiryTime}`;
   //difference of the expiry date-time given and current date-time
   let difference = moment.duration(moment(expirydate).diff(moment(date)));
+
   let hours = parseInt(difference.asHours());
   let minutes = parseInt(difference.minutes());
   let seconds = parseInt(difference.seconds());
-  finalTime = parseInt(hours + 11) * 60 * 60 + minutes * 60 + seconds;
+  finalTime = (hours + timeOffset) * 60 * 60 + minutes * 60 + seconds;
 
   return finalTime;
 };
