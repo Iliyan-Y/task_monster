@@ -44,7 +44,7 @@ export let calculateExpTime = (userTime) => {
     hour = '0' + hour;
   }
 
-  let date = moment().utcOffset(-120).format('YYYY-MM-DD hh:mm:ss');
+  let date = moment().format('YYYY-MM-DD hh:mm:ss');
   //Getting the current date-time with required formate and UTC
   let expirydate = `${year}-${userTime.month}-${userTime.day} ${hour}:00:00`;
   //difference of the expiry date-time given and current date-time
@@ -52,7 +52,7 @@ export let calculateExpTime = (userTime) => {
   let hours = parseInt(difference.asHours());
   let minutes = parseInt(difference.minutes());
   let seconds = parseInt(difference.seconds());
-  finalTime = parseInt(hours + 2) * 60 * 60 + minutes * 60 + seconds;
+  finalTime = parseInt(hours + 11) * 60 * 60 + minutes * 60 + seconds;
 
   return finalTime;
 };
