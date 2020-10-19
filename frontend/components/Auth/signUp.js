@@ -44,6 +44,7 @@ function SignUp({ navigation }) {
   return (
     <View style={styles.container}>
       <View>
+        <Text style={styles.logo}>Get organised with Task Monster!</Text>
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
@@ -117,6 +118,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 40,
     marginBottom: 10,
+  },
+  logo: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: '#fb5b5a',
+    marginBottom: 40,
   },
 })
 
