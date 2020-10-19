@@ -34,7 +34,7 @@ export let calculateExpTime = (userInput) => {
   let finalTime;
   let userDate = userInput.split('T')[0];
   let userTime = userInput.split('T')[1].split('.')[0];
-  let userHour = userTime.split(':')[0];
+  let userHour = parseInt(userTime.split(':')[0]) + 1;
   let userMins = parseInt(userTime.split(':')[1]);
   let localMin = new Date().getMinutes();
   let timeOffset = 0;
@@ -42,23 +42,19 @@ export let calculateExpTime = (userInput) => {
   let expiryTime;
 
   if (userHour == new Date().getHours() && userMins - localMin > 3) {
-    console.log('IF');
     expiryTime = userTime;
     timeOffset = 1;
   } else if (userHour != new Date().getHours()) {
-    console.log(' els IF');
     expiryTime = userTime;
     timeOffset = 1;
   } else {
-    console.log('Else');
     expiryTime = '23:59:59';
   }
-  console.log(expiryTime);
 
   let date = moment().format('YYYY-MM-DD HH:mm:ss');
 
   //Getting the current date-time with required formate and UTC
-  let expirydate = `${userDate} 23:59:59`;
+  let expirydate = `${userDate} ${expiryTime}`;
   //difference of the expiry date-time given and current date-time
   let difference = moment.duration(moment(expirydate).diff(moment(date)));
 
