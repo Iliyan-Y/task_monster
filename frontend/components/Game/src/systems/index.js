@@ -1,2 +1,3 @@
 import Physics from './physics';
-export default [Physics];
+import UpdateMonster from './monster';
+export default [Physics, UpdateMonster];

@@ -1,5 +1,7 @@
 import Monster from '../components/Monster';
 import Matter from 'matter-js';
+import Floor from '../components/Floor';
+import {height, width, heightRatio, widthRatio} from '../utils/styleSheet';
 
 Matter.Common.isElement = () => false; //-- Overriding this function because the original references HTMLElement
 
@@ -21,6 +23,12 @@ export default (restart) => {
       'pink',
       { x: 220, y: 400 },
       { height: boxSize, width: boxSize }
+    ),
+    Floor: Floor(
+      world,
+      'pink',
+      { x: width / 2, y: height - heightRatio * 40 },
+      { height: heightRatio * 90, width: width }
     ),
   };
 };

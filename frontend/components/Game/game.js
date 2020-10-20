@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
 import Entities from './src/entities';
 import { GameEngine } from 'react-native-game-engine';
-import Physics from './src/systems/index';
+import Systems from './src/systems';
 
 export default class Game extends PureComponent {
   constructor(props) {
@@ -14,6 +14,11 @@ export default class Game extends PureComponent {
     console.disableYellowBox = true;
   }
 
+  restart = () => {
+    this.setState({ running: true });
+    this.gameEngine.swap(Entities());
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -23,8 +28,8 @@ export default class Game extends PureComponent {
           }}
           style={styles.gameContainer}
           running={this.state.running}
-          systems={[Physics]}
-          entities={Entities}
+          systems={Systems}
+          entities={Entities()}
         >
           <StatusBar hidden={true} />
         </GameEngine>
