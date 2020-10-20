@@ -35,103 +35,106 @@ function TaskList({ navigation }) {
     )
   }, [taskList])
   return (
-    <View>
-      <Text>Task list</Text>
-      <SwipeListView
-        data={taskListView.filter((task) => task.completed == false)}
-        renderItem={(data, rowMap) =>
-          data.item.expiryTime == 0 ? (
-            <View style={styles.rowFront}>
-              <Text>{data.item.title}</Text>
-            </View>
-          ) : (
-            <View style={styles.rowFront}>
-              <Text>
-                {data.item.title}
-                <CountDown
-                  //duration of countdown in seconds
-                  until={data.item.expiryTime}
-                  //format to show
-                  timetoShow={('H', 'M', 'S')}
-                  onFinish={() =>
-                    completeTask(user, data.item.id, setTaskList, true, -1)
-                  }
-                  size={12}
+    <View style={styles.container}>
+      <View>
+        <SwipeListView
+          data={taskListView.filter((task) => task.completed == false)}
+          renderItem={(data, rowMap) =>
+            data.item.expiryTime == 0 ? (
+              <View style={styles.rowFront}>
+                <Text>{data.item.title}</Text>
+              </View>
+            ) : (
+              <View style={styles.rowFront}>
+                <Text>
+                  {data.item.title}
+                  <CountDown
+                    //duration of countdown in seconds
+                    until={data.item.expiryTime}
+                    //format to show
+                    timetoShow={('H', 'M', 'S')}
+                    onFinish={() =>
+                      completeTask(user, data.item.id, setTaskList, true, -1)
+                    }
+                    size={12}
+                  />
+                </Text>
+              </View>
+            )
+          }
+          renderHiddenItem={(data, rowMap) => (
+            <View style={styles.rowBack}>
+              <View style={[styles.backRightBtn, styles.backLeftBtn]}>
+                <CompletedButton
+                  user={user}
+                  taskId={data.item.id}
+                  setTaskList={setTaskList}
                 />
-              </Text>
+              </View>
             </View>
-          )
-        }
-        renderHiddenItem={(data, rowMap) => (
-          <View style={styles.rowBack}>
-            <View style={[styles.backRightBtn, styles.backLeftBtn]}>
-              <CompletedButton
-                user={user}
-                taskId={data.item.id}
-                setTaskList={setTaskList}
-              />
-            </View>
-          </View>
-        )}
-        renderHiddenItem={(data, rowMap) => (
-          <View style={styles.rowBack}>
-            <View style={[styles.backRightBtn, styles.backLeftBtn]}>
-              <CompletedButton
-                user={user}
-                taskId={data.item.id}
-                setTaskList={setTaskList}
-              />
-            </View>
-            <View
-              style={[
-                styles.backTextWhite,
-                styles.backRightBtn,
-                styles.backRightBtnLeft,
-              ]}
-            >
-              <Button
-                style={
-                  (styles.backTextWhite,
+          )}
+          renderHiddenItem={(data, rowMap) => (
+            <View style={styles.rowBack}>
+              <View style={[styles.backRightBtn, styles.backLeftBtn]}>
+                <CompletedButton
+                  user={user}
+                  taskId={data.item.id}
+                  setTaskList={setTaskList}
+                />
+              </View>
+              <View
+                style={[
+                  styles.backTextWhite,
                   styles.backRightBtn,
-                  styles.backRightBtnLeft)
-                }
-                onPress={() =>
-                  navigation.navigate('Edit Task', {
-                    taskTitle: data.item.title,
-                    taskDescription: data.item.description,
-                    taskId: data.item.id,
-                  })
-                }
-                title="Edit"
-              />
+                  styles.backRightBtnLeft,
+                ]}
+              >
+                <Button
+                  style={
+                    (styles.backTextWhite,
+                    styles.backRightBtn,
+                    styles.backRightBtnLeft)
+                  }
+                  onPress={() =>
+                    navigation.navigate('Edit Task', {
+                      taskTitle: data.item.title,
+                      taskDescription: data.item.description,
+                      taskId: data.item.id,
+                    })
+                  }
+                  title="Edit"
+                />
+              </View>
+              <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
+                <DeleteButton
+                  user={user}
+                  taskId={data.item.id}
+                  setTaskList={setTaskList}
+                />
+              </View>
             </View>
-            <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
-              <DeleteButton
-                user={user}
-                taskId={data.item.id}
-                setTaskList={setTaskList}
-              />
-            </View>
-          </View>
-        )}
-        leftOpenValue={75}
-        rightOpenValue={-150}
-      />
+          )}
+          leftOpenValue={75}
+          rightOpenValue={-150}
+        />
+        <View>
+          <TouchableOpacity
+            style={styles.addBtn}
+            onPress={() => navigation.navigate('Add Task')}
+          >
+            <Image source={require('../../assets/plus.png')} />
+            {/* <Text style={styles.inputText}>Add a new task</Text> */}
+          </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.plusBtn}
-        onPress={() => navigation.navigate('Add Task')}
-      >
-        <Image source={require('../../assets/plus.png')} />
-        {/* <Text style={styles.inputText}>Add a new task</Text> */}
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.addBtn}
-        onPress={() => navigation.navigate('Completed Task List')}
-      >
-        <Text style={styles.inputText}>Completed Tasks</Text>
-      </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.doneBtn}
+            onPress={() => navigation.navigate('Completed Task List')}
+          >
+            <Image source={require('../../assets/done.png')} />
+            {/* <Text style={styles.inputText}>Completed Tasks</Text> */}
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   )
 }
@@ -187,25 +190,43 @@ const styles = StyleSheet.create({
   },
 
   addBtn: {
-    width: '80%',
-    backgroundColor: '#fb5b5a',
-    borderRadius: 25,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 40,
-    marginBottom: 10,
+    // width: '80%',
+    // // backgroundColor: '#fb5b5a',
+    // // borderRadius: 25,
+    // height: 50,
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // marginTop: 40,
+    // marginBottom: 20,
+    // margin: 70,
+    left: 185,
+    bottom: -490,
   },
 
-  plusBtn: {
-    backgroundColor: '#859a9b',
-    borderRadius: 20,
-    padding: 10,
-    marginBottom: 20,
-    shadowColor: '#303838',
-    shadowOffset: { width: 0, height: 5 },
-    shadowRadius: 10,
-    shadowOpacity: 0.35,
+  // plusBtn: {
+  //   // borderRadius: 20,
+  //   // padding: 10,
+  //   // marginBottom: 20,
+  //   // left: 300,
+  //   // marginTop: 370,
+  //   // flexDirection: 'row',
+  //   margin: 70,
+  //   left: 115,
+  //   bottom: -370,
+  // },
+  doneBtn: {
+    // width: 300,
+    // height: 40,
+    // borderRadius: 200,
+    // padding: 10,
+    // marginBottom: 50,
+    left: 100,
+    // marginTop: 340,
+    // flexDirection: 'row',
+    // margin: 20,
+    flexDirection: 'row',
+    // justifyContent: 'space-between',
+    bottom: -370,
   },
 })
 
