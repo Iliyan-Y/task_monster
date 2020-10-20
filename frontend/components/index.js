@@ -18,13 +18,16 @@ const Index = () => {
     <TasksProvider>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Game" component={Game} />
           <Stack.Screen name="Log In" component={LogIn} />
+          <Stack.Screen name="Game" component={Game} />
           <Stack.Screen name="Sign Up" component={SignUp} />
           <Stack.Screen name="Add Task" component={AddTask} />
           <Stack.Screen name="Task List" component={TaskList} />
           <Stack.Screen name="Edit Task" component={EditTask} />
-          <Stack.Screen name="Completed Task List" component={CompletedTaskList} />
+          <Stack.Screen
+            name="Completed Task List"
+            component={CompletedTaskList}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </TasksProvider>

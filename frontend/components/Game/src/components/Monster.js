@@ -1,19 +1,22 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Image } from 'react-native';
 import { array, object, string } from 'prop-types';
 import Matter from 'matter-js';
+import { TasksContext } from '../../../../context';
 
 const monster = require('../../assets/monster.png');
 
 const Monster = (props) => {
+  let { score } = useContext(TasksContext);
   const width = props.size[0];
   const height = props.size[1];
   const x = props.body.position.x - width / 2;
-  const y = props.body.position.y - height / 2;
+  const y = props.body.position.y - height / 2;  
+
   return (
     <Image
       style={{
-        position: 'absolute',
+        position: 'relative',
         left: x,
         top: y,
         width: width,
@@ -45,5 +48,5 @@ export default (world, color, pos, size) => {
 Monster.propTypes = {
   size: array,
   body: object,
-  color: string,
+  color: string
 };

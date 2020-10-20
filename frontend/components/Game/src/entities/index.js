@@ -13,7 +13,7 @@ export default (restart) => {
 
   let engine = Matter.Engine.create({ enableSleeping: false });
   let world = engine.world;
-  world.gravity.y = 0.25;
+  world.gravity.y = 0.5;
   const boxSize = 50;
 
   return {
