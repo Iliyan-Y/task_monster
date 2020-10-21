@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { Image } from 'react-native';
 import { array, object, string } from 'prop-types';
 import Matter from 'matter-js';
@@ -11,16 +11,16 @@ const Monster = (props) => {
   const width = props.size[0];
   const height = props.size[1];
   const x = props.body.position.x - width / 2;
-  const y = props.body.position.y - height / 2;  
+  const y = props.body.position.y - height / 2;
 
   return (
     <Image
       style={{
         position: 'relative',
         left: x,
-        top: y,
-        width: width,
-        height: height,
+        top: y - score * 10,
+        width: width + score * 10,
+        height: height + score * 10,
       }}
       resizeMode="stretch"
       source={monster}
@@ -48,5 +48,5 @@ export default (world, color, pos, size) => {
 Monster.propTypes = {
   size: array,
   body: object,
-  color: string
+  color: string,
 };

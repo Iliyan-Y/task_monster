@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -6,21 +6,22 @@ import {
   Text,
   Button,
   TouchableOpacity,
-} from 'react-native'
-import axios from 'axios'
-import { railsServer } from '../../serverAddress'
-import { TasksContext } from '../../context'
-import { SwipeListView } from 'react-native-swipe-list-view'
-import UncompletedButton from './uncompleteTaskButton'
-import DeleteButton from './deleteTaskButton'
+} from 'react-native';
+import axios from 'axios';
+import { railsServer } from '../../serverAddress';
+import { TasksContext } from '../../context';
+import { SwipeListView } from 'react-native-swipe-list-view';
+import UncompletedButton from './uncompleteTaskButton';
+import DeleteButton from './deleteTaskButton';
 
 function CompletedTaskList({ navigation }) {
-  let { taskList, setTaskList, user } = useContext(TasksContext)
-  let [displayTask, setDisplayTask] = useState([])
-  let [taskListView, setTaskListView] = useState([])
+  let { taskList, setTaskList, user, setScore, score } = useContext(
+    TasksContext
+  );
+
+  let [taskListView, setTaskListView] = useState([]);
 
   useEffect(() => {
-    setDisplayTask(taskList)
     setTaskListView(
       taskList.map((task) => ({
         key: task.title,
@@ -28,10 +29,13 @@ function CompletedTaskList({ navigation }) {
         title: task.title,
         description: task.description,
         completed: task.completed,
-        score: task.score
-      })),
-    )
-  }, [taskList])
+        score: task.score,
+      }))
+    );
+    let count = score;
+    taskList.map((task) => (count = count + task.score));
+    setScore(count);
+  }, [taskList]);
   return (
     <View style={styles.container}>
       <View>
@@ -95,7 +99,7 @@ function CompletedTaskList({ navigation }) {
         </TouchableOpacity>
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -158,6 +162,6 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginBottom: 10,
   },
-})
+});
 
-export default CompletedTaskList
+export default CompletedTaskList;

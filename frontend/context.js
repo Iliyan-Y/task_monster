@@ -25,21 +25,16 @@ export const TasksProvider = (props) => {
         setTaskList(res.data);
       })
       .catch((err) => console.log(err.message));
-    
-    taskList.map((task) => 
-      (count = count + task.score)
-      
-  )
-    
+
+    taskList.map((task) => (count = count + task.score));
+
     setScore(count);
-    console.log("count")
-    console.log(count)
-    console.log('score');
-    console.log(score)
   }, [user]);
 
   return (
-    <TasksContext.Provider value={{ taskList, setTaskList, user, setUser, score, setScore }}>
+    <TasksContext.Provider
+      value={{ taskList, setTaskList, user, setUser, score, setScore }}
+    >
       {props.children}
     </TasksContext.Provider>
   );
