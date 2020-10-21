@@ -27,8 +27,6 @@ export const TasksProvider = (props) => {
       .catch((err) => console.log(err.message));
   }, [user]);
 
-  console.log(score);
-
   return (
     <TasksContext.Provider
       value={{ taskList, setTaskList, user, setUser, score, setScore }}
