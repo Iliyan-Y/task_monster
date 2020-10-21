@@ -46,9 +46,10 @@ function TaskList({ navigation }) {
               </View>
             ) : (
               <View style={styles.rowFront}>
-                <Text>
+                <Text style={styles.inputViewList}>
                   {data.item.title}
                   <CountDown
+                    style={styles.countdown}
                     //duration of countdown in seconds
                     until={data.item.expiryTime}
                     //format to show
@@ -56,7 +57,8 @@ function TaskList({ navigation }) {
                     onFinish={() =>
                       completeTask(user, data.item.id, setTaskList, true, -1)
                     }
-                    size={12}
+                    size={15}
+                    // color={'white'}
                   />
                 </Text>
               </View>
@@ -114,7 +116,7 @@ function TaskList({ navigation }) {
               </View>
             </View>
           )}
-          leftOpenValue={75}
+          leftOpenValue={250}
           rightOpenValue={-150}
         />
         <View>
@@ -123,7 +125,6 @@ function TaskList({ navigation }) {
             onPress={() => navigation.navigate('Add Task')}
           >
             <Image source={require('../../assets/plus.png')} />
-            {/* <Text style={styles.inputText}>Add a new task</Text> */}
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -131,7 +132,6 @@ function TaskList({ navigation }) {
             onPress={() => navigation.navigate('Completed Task List')}
           >
             <Image source={require('../../assets/done.png')} />
-            {/* <Text style={styles.inputText}>Completed Tasks</Text> */}
           </TouchableOpacity>
         </View>
       </View>
@@ -144,9 +144,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#003f5c',
     flex: 1,
   },
-  backTextWhite: {
-    color: '#FFF',
-  },
+  // backTextWhite: {
+  //   color: 'white',
+  // },
   rowFront: {
     alignItems: 'center',
     backgroundColor: '#465881',
@@ -201,6 +201,18 @@ const styles = StyleSheet.create({
     right: 50,
     flexDirection: 'row',
     bottom: -330,
+  },
+
+  inputViewList: {
+    height: 60,
+    color: 'white',
+    padding: -50,
+    left: 10,
+    right: 40,
+  },
+
+  countdown: {
+    color: 'white',
   },
 })
 

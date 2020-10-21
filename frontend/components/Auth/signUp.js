@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   inputView: {
-    width: '80%',
+    width: 300,
     backgroundColor: '#465881',
     borderRadius: 25,
     height: 50,
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
 
   signupBtn: {
-    width: '80%',
+    width: 300,
     backgroundColor: '#fb5b5a',
     borderRadius: 25,
     height: 50,
