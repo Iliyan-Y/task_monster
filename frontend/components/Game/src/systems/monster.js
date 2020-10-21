@@ -1,33 +1,33 @@
 import Matter from 'matter-js';
 import { Dimensions } from 'react-native';
+let leftValue = 0;
+let rightValue = 0;
 
 const UpdateMonster = (entities, { touches, time }) => {
   const engine = entities.physics.engine;
-  let i = 0
-  let z = 0
-  
-  
-  // if (i < 10 && z == 0) {
-  //   Matter.Body.setVelocity(entities.Monster.body, {
-  //     x: -1,
-  //     y: entities.Monster.body.velocity.y,
-  //   });
-  //   i++
-  //   console.log(i)
-  //   console.log(z);
-  // } else if (i == 10 && z < 10) {
-  //   Matter.Body.setVelocity(entities.Monster.body, {
-  //     x: +1,
-  //     y: entities.Monster.body.velocity.y,
-  //   });
-  //   z++
-  // } else if (i == 10 && z == 10) {
-  //   i = 0;
-  //   z = 0;
-  //   console.log('reset');
-  // }
 
-   touches
+  if (leftValue < 130 && rightValue == 0) {
+    Matter.Body.setVelocity(entities.Monster.body, {
+      x: -0.7,
+      y: entities.Monster.body.velocity.y,
+    });
+    leftValue++;
+  }
+
+  if (leftValue == 129 && rightValue < 130) {
+    Matter.Body.setVelocity(entities.Monster.body, {
+      x: +0.7,
+      y: entities.Monster.body.velocity.y,
+    });
+    rightValue++;
+  }
+
+  if (leftValue == 129 && rightValue == 129) {
+    leftValue = 0;
+    rightValue = 0;
+  }
+
+  touches
     .filter((t) => t.type === 'press')
     .forEach((t) => {
       Matter.Body.setVelocity(entities.Monster.body, {
@@ -35,7 +35,7 @@ const UpdateMonster = (entities, { touches, time }) => {
         y: -3,
       });
     });
-  
+
   Matter.Engine.update(engine, time.delta);
   return entities;
 };
