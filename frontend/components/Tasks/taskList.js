@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react'
 import {
   StyleSheet,
   View,
@@ -20,9 +20,11 @@ import { set } from 'react-native-reanimated';
 
 function TaskList({ navigation }) {
   let { taskList, setTaskList, user, score, setScore } = useContext(
+
     TasksContext
   );
   let [taskListView, setTaskListView] = useState([]);
+
 
   //add time param in the db
   useEffect(() => {
@@ -66,7 +68,10 @@ function TaskList({ navigation }) {
                         true,
                         -1,
                         score,
-                        setScore
+
+                        setScore,
+
+
                       )
                     }
                     size={15}
@@ -86,6 +91,8 @@ function TaskList({ navigation }) {
                   setScore={setScore}
                 />
 
+           
+   
                 <View
                   style={[
                     styles.backRightBtn,
@@ -108,7 +115,10 @@ function TaskList({ navigation }) {
                         true,
                         -1,
                         score,
-                        setScore
+
+                        setScore,
+               
+
                       )
                     }
                     title="Fail"
@@ -151,7 +161,13 @@ function TaskList({ navigation }) {
           leftOpenValue={150}
           rightOpenValue={-150}
         />
-        <View>
+        <View style={styles.buttons}>
+          <TouchableOpacity
+            style={styles.doneBtn}
+            onPress={() => navigation.navigate('Game')}
+          >
+            <Image source={require('../../assets/game.png')} />
+          </TouchableOpacity>
           <TouchableOpacity
             style={styles.addBtn}
             onPress={() => navigation.navigate('Add Task')}
@@ -165,13 +181,6 @@ function TaskList({ navigation }) {
           >
             <Image source={require('../../assets/done.png')} />
           </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.doneBtn}
-            onPress={() => navigation.navigate('Game')}
-          >
-            <Text>Game</Text>
-          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -183,6 +192,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#003f5c',
     flex: 1,
   },
+
+  buttons: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 0,
+    left: 90,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+
 
   rowFront: {
     alignItems: 'center',
@@ -231,19 +252,6 @@ const styles = StyleSheet.create({
     padding: 17,
   },
 
-  addBtn: {
-    alignSelf: 'center',
-    left: 50,
-    bottom: -390,
-  },
-
-  doneBtn: {
-    alignSelf: 'center',
-    right: 50,
-    flexDirection: 'row',
-    bottom: -330,
-  },
-
   inputViewList: {
     height: 60,
     color: 'white',
@@ -255,6 +263,6 @@ const styles = StyleSheet.create({
   countdown: {
     color: 'white',
   },
-});
+})
 
 export default TaskList;
