@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -6,21 +6,22 @@ import {
   Text,
   Button,
   TouchableOpacity,
-} from 'react-native'
-import axios from 'axios'
-import { railsServer } from '../../serverAddress'
-import { TasksContext } from '../../context'
-import { SwipeListView } from 'react-native-swipe-list-view'
-import UncompletedButton from './uncompleteTaskButton'
-import DeleteButton from './deleteTaskButton'
+} from 'react-native';
+import axios from 'axios';
+import { railsServer } from '../../serverAddress';
+import { TasksContext } from '../../context';
+import { SwipeListView } from 'react-native-swipe-list-view';
+import UncompletedButton from './uncompleteTaskButton';
+import DeleteButton from './deleteTaskButton';
 
 function CompletedTaskList({ navigation }) {
-  let { taskList, setTaskList, user } = useContext(TasksContext)
-  let [displayTask, setDisplayTask] = useState([])
-  let [taskListView, setTaskListView] = useState([])
+  let { taskList, setTaskList, user, setScore, score } = useContext(
+    TasksContext
+  );
+
+  let [taskListView, setTaskListView] = useState([]);
 
   useEffect(() => {
-    setDisplayTask(taskList)
     setTaskListView(
       taskList.map((task) => ({
         key: task.title,
@@ -28,17 +29,25 @@ function CompletedTaskList({ navigation }) {
         title: task.title,
         description: task.description,
         completed: task.completed,
-        score: task.score
-      })),
-    )
-  }, [taskList])
+        score: parseInt(task.score),
+      }))
+    );
+  }, [taskList]);
+
   return (
     <View style={styles.container}>
       <View>
         <SwipeListView
           data={taskListView.filter((task) => task.completed == true)}
           renderItem={(data, rowMap) => (
-            <View style={styles.rowFront}>
+            <View
+              style={[
+                styles.rowFront,
+                data.item.score > 0
+                  ? { backgroundColor: '#40b35f' }
+                  : { backgroundColor: '#f24646' },
+              ]}
+            >
               <Text>{data.item.title}</Text>
             </View>
           )}
@@ -95,13 +104,15 @@ function CompletedTaskList({ navigation }) {
         </TouchableOpacity>
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#003f5c',
     flex: 1,
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
   backTextWhite: {
     color: '#FFF',
@@ -109,6 +120,14 @@ const styles = StyleSheet.create({
   rowFront: {
     alignItems: 'center',
     backgroundColor: '#465881',
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+    justifyContent: 'center',
+    height: 50,
+  },
+  rowFrontNotCompleted: {
+    alignItems: 'center',
+    backgroundColor: 'red',
     borderBottomColor: 'black',
     borderBottomWidth: 1,
     justifyContent: 'center',
@@ -157,7 +176,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 40,
     marginBottom: 10,
+    alignSelf: 'center',
   },
-})
+});
 
-export default CompletedTaskList
+export default CompletedTaskList;

@@ -12,10 +12,12 @@ export default (restart) => {
     Matter.Engine.clear(restart.physics.engine)
   }
 
+
   let engine = Matter.Engine.create({ enableSleeping: false })
   let world = engine.world
   world.gravity.y = 0.25
   const boxSize = 50
+
 
   return {
     physics: { engine: engine, world: world },

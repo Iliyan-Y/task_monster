@@ -2,11 +2,19 @@ import axios from 'axios';
 import { railsServer } from '../../serverAddress';
 import moment from 'moment';
 
-export function completeTask(user, taskId, setTaskList, completed = true, score = 1) {
+export function completeTask(
+  user,
+  taskId,
+  setTaskList,
+  completed = true,
+  points = 1,
+  score,
+  setScore
+) {
   let body = {
     task: {
       completed: completed,
-      score: score
+      score: points,
     },
   };
   let headers = {
@@ -26,6 +34,10 @@ export function completeTask(user, taskId, setTaskList, completed = true, score 
       });
     })
     .catch((err) => console.log(err.message));
+
+  let count = score;
+  taskList.map((task) => (count = count + task.score));
+  setScore(count);
 }
 
 export let calculateExpTime = (userInput) => {
