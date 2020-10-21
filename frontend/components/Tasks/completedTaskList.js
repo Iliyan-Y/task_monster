@@ -15,7 +15,10 @@ import UncompletedButton from './uncompleteTaskButton';
 import DeleteButton from './deleteTaskButton';
 
 function CompletedTaskList({ navigation }) {
-  let { taskList, setTaskList, user, setScore } = useContext(TasksContext);
+  let { taskList, setTaskList, user, setScore, score } = useContext(
+    TasksContext
+  );
+
   let [taskListView, setTaskListView] = useState([]);
 
   useEffect(() => {
@@ -55,7 +58,6 @@ function CompletedTaskList({ navigation }) {
                   user={user}
                   taskId={data.item.id}
                   setTaskList={setTaskList}
-                  setScore={setScore}
                 />
               </View>
               <View
@@ -86,7 +88,6 @@ function CompletedTaskList({ navigation }) {
                   user={user}
                   taskId={data.item.id}
                   setTaskList={setTaskList}
-                  setScore={setScore}
                 />
               </View>
             </View>

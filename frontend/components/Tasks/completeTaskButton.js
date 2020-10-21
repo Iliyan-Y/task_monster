@@ -2,49 +2,40 @@ import React from 'react';
 import { StyleSheet, Button } from 'react-native';
 import axios from 'axios';
 import { railsServer } from '../../serverAddress';
-const CompletedButton = ({
-  taskId,
-  user,
-  setTaskList,
-  completed = true,
-  score = 1,
-  setScore,
-}) => {
+const CompletedButton = ({taskId, user, setTaskList, completed = true, score = 1}) => {
   function completeTask() {
-    let body = {
-      task: {
-        completed: completed,
-        score: score,
-      },
+      let body = {
+        task: {
+          completed: completed,
+          score: score
+        },
+      };
+      let headers = {
+        headers: {
+          email: user.email,
+          authentication_token: user.authentication_token,
+        },
+      };
+      axios
+        .patch(railsServer + '/tasks/' + taskId, body, headers)
+        .then((res) => {
+          console.log(res.status);
+        })
+        .then(() => {
+          axios.get(railsServer + '/tasks', headers).then((res) => {
+            setTaskList(res.data);
+          });
+        })
+        .catch((err) => console.log(err.message));
     };
-
-    let headers = {
-      headers: {
-        email: user.email,
-        authentication_token: user.authentication_token,
-      },
-    };
-
-    axios
-      .patch(railsServer + '/tasks/' + taskId, body, headers)
-      .then(() => {
-        axios.get(railsServer + '/tasks', headers).then(async (res) => {
-          await setTaskList(res.data);
-          let scoreArray = res.data.map((task) => task.score);
-          setScore(scoreArray.reduce((a, b) => a + b, 0));
-        });
-      })
-      .catch((err) => console.log(err.message));
-  }
-
   return (
     <Button
-      style={(styles.backTextWhite, styles.backRightBtn, styles.backLeftBtn)}
+      style={styles.backTextWhite, styles.backRightBtn, styles.backLeftBtn}
       onPress={() => completeTask()}
       title="Complete"
     />
   );
-};
+}
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
@@ -90,5 +81,7 @@ const styles = StyleSheet.create({
     right: 0,
   },
 });
-
+ 
 export default CompletedButton;
+
+
