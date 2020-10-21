@@ -61,6 +61,8 @@ function LogIn({ navigation }) {
           onChangeText={(password) => setPassword(password)}
           placeholder="Password..."
           name="password"
+          secureTextEntry={true}
+          password={true}
           autoCapitalize="none"
           autoCompleteType="password"
           placeholderTextColor="#003f5c"

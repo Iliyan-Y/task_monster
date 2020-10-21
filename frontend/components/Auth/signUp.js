@@ -63,6 +63,8 @@ function SignUp({ navigation }) {
             onChangeText={(password) => setPassword(password)}
             placeholder="Password..."
             name="password"
+            secureTextEntry={true}
+            password={true}
             autoCapitalize="none"
             autoCompleteType="password"
             placeholderTextColor="#003f5c"
@@ -76,6 +78,8 @@ function SignUp({ navigation }) {
             }
             placeholder="Password confirmation..."
             name="passwordConfirmation"
+            secureTextEntry={true}
+            password={true}
             autoCapitalize="none"
             autoCompleteType="passwordConfirmation"
             placeholderTextColor="#003f5c"
