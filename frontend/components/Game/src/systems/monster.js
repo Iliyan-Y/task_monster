@@ -1,30 +1,30 @@
 import Matter from 'matter-js';
 import { Dimensions } from 'react-native';
-let i = 0;
-let z = 0;
+let leftValue = 0;
+let rightValue = 0;
 
 const UpdateMonster = (entities, { touches, time }) => {
   const engine = entities.physics.engine;
 
-  if (i <= 130 && z == 0) {
+  if (leftValue < 130 && rightValue == 0) {
     Matter.Body.setVelocity(entities.Monster.body, {
       x: -0.7,
       y: entities.Monster.body.velocity.y,
     });
-    i++;
+    leftValue++;
   }
 
-  if (i == 129 && z < 130) {
+  if (leftValue == 129 && rightValue < 130) {
     Matter.Body.setVelocity(entities.Monster.body, {
       x: +0.7,
       y: entities.Monster.body.velocity.y,
     });
-    z++;
+    rightValue++;
   }
 
-  if (i == 129 && z == 129) {
-    i = 0;
-    z = 0;
+  if (leftValue == 129 && rightValue == 129) {
+    leftValue = 0;
+    rightValue = 0;
   }
 
   touches
