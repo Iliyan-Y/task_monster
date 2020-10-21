@@ -10,8 +10,6 @@ export const TasksProvider = (props) => {
   let [score, setScore] = useState();
 
   useEffect(() => {
-    let count = 0;
-
     let headers = {
       headers: {
         email: user.email,
@@ -21,14 +19,12 @@ export const TasksProvider = (props) => {
 
     axios
       .get(railsServer + '/tasks', headers)
-      .then((res) => {
-        setTaskList(res.data);
+      .then(async (res) => {
+        await setTaskList(res.data);
+        let scoreArray = res.data.map((task) => task.score);
+        setScore(scoreArray.reduce((a, b) => a + b, 0));
       })
       .catch((err) => console.log(err.message));
-
-    taskList.map((task) => (count = count + task.score));
-
-    setScore(count);
   }, [user]);
 
   return (
