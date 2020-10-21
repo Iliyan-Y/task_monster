@@ -94,13 +94,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   inputView: {
-    width: '80%',
+    width: 300,
     backgroundColor: '#465881',
     borderRadius: 25,
     height: 50,
     marginBottom: 20,
     justifyContent: 'center',
     padding: 20,
+    alignSelf: 'center',
   },
 
   inputText: {
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
   },
 
   signupBtn: {
-    width: '80%',
+    width: 300,
     backgroundColor: '#fb5b5a',
     borderRadius: 25,
     height: 50,
@@ -118,6 +119,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 40,
     marginBottom: 10,
+    alignSelf: 'center',
   },
   logo: {
     fontWeight: 'bold',

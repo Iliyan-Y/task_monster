@@ -29,20 +29,25 @@ function CompletedTaskList({ navigation }) {
         title: task.title,
         description: task.description,
         completed: task.completed,
-        score: task.score,
+        score: parseInt(task.score),
       }))
     );
-    let count = score;
-    taskList.map((task) => (count = count + task.score));
-    setScore(count);
   }, [taskList]);
+
   return (
     <View style={styles.container}>
       <View>
         <SwipeListView
           data={taskListView.filter((task) => task.completed == true)}
           renderItem={(data, rowMap) => (
-            <View style={styles.rowFront}>
+            <View
+              style={[
+                styles.rowFront,
+                data.item.score > 0
+                  ? { backgroundColor: '#40b35f' }
+                  : { backgroundColor: '#f24646' },
+              ]}
+            >
               <Text>{data.item.title}</Text>
             </View>
           )}
@@ -106,6 +111,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#003f5c',
     flex: 1,
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
   backTextWhite: {
     color: '#FFF',
@@ -113,6 +120,14 @@ const styles = StyleSheet.create({
   rowFront: {
     alignItems: 'center',
     backgroundColor: '#465881',
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+    justifyContent: 'center',
+    height: 50,
+  },
+  rowFrontNotCompleted: {
+    alignItems: 'center',
+    backgroundColor: 'red',
     borderBottomColor: 'black',
     borderBottomWidth: 1,
     justifyContent: 'center',
@@ -161,6 +176,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 40,
     marginBottom: 10,
+    alignSelf: 'center',
   },
 });
 

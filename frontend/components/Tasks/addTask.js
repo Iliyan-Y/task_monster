@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react'
 import {
   TouchableOpacity,
   StyleSheet,
@@ -6,17 +6,17 @@ import {
   TextInput,
   Text,
   Button,
-} from 'react-native';
-import axios from 'axios';
-import { railsServer } from '../../serverAddress';
-import { TasksContext } from '../../context';
-import DatePicker from './datePicker';
+} from 'react-native'
+import axios from 'axios'
+import { railsServer } from '../../serverAddress'
+import { TasksContext } from '../../context'
+import DatePicker from './datePicker'
 
 function AddTask({ navigation }) {
-  let { setTaskList, user } = useContext(TasksContext);
-  let [title, setTitle] = useState('');
-  let [description, setDescription] = useState('');
-  let [expiryTime, setExpiryTime] = useState(0);
+  let { setTaskList, user } = useContext(TasksContext)
+  let [title, setTitle] = useState('')
+  let [description, setDescription] = useState('')
+  let [expiryTime, setExpiryTime] = useState(0)
 
   let submit = () => {
     let body = {
@@ -26,26 +26,25 @@ function AddTask({ navigation }) {
         completed: false,
         score: 0,
         expiryTime,
-
       },
-    };
+    }
     let headers = {
       headers: {
         email: user.email,
         authentication_token: user.authentication_token,
       },
-    };
+    }
 
     axios
       .post(railsServer + '/tasks', body, headers)
       .then(() => {
         axios.get(railsServer + '/tasks', headers).then((res) => {
-          setTaskList(res.data);
-          navigation.navigate('Task List');
-        });
+          setTaskList(res.data)
+          navigation.navigate('Task List')
+        })
       })
-      .catch((err) => console.log(err.message));
-  };
+      .catch((err) => console.log(err.message))
+  }
 
   return (
     <View style={styles.container}>
@@ -71,20 +70,21 @@ function AddTask({ navigation }) {
         />
       </View>
 
-      <DatePicker setExpiryTime={setExpiryTime} />
+      <DatePicker setExpiryTime={setExpiryTime} textColor="white" />
 
       <TouchableOpacity style={styles.addBtn} onPress={() => submit()}>
         <Text style={styles.inputText}>ADD</Text>
       </TouchableOpacity>
     </View>
-  );
+  )
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#003f5c',
-    alignItems: 'center',
-    justifyContent: 'center',
+
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 
   inputView: {
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     justifyContent: 'center',
     padding: 20,
+    alignSelf: 'center',
   },
 
   inputText: {
@@ -110,15 +111,18 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 40,
+    marginTop: 20,
     marginBottom: 10,
+    alignSelf: 'center',
   },
 
   logo: {
+    marginTop: 10,
     fontWeight: 'bold',
     fontSize: 20,
     color: '#fb5b5a',
     marginBottom: 40,
+    alignSelf: 'center',
   },
-});
-export default AddTask;
+})
+export default AddTask
