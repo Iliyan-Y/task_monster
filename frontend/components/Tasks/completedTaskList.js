@@ -28,7 +28,7 @@ function CompletedTaskList({ navigation }) {
         title: task.title,
         description: task.description,
         completed: task.completed,
-        score: task.score
+        score: task.score,
       })),
     )
   }, [taskList])
@@ -102,6 +102,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#003f5c',
     flex: 1,
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
   backTextWhite: {
     color: '#FFF',
@@ -157,6 +159,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 40,
     marginBottom: 10,
+    alignSelf: 'center',
   },
 })
 

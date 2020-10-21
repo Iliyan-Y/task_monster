@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     justifyContent: 'center',
     padding: 20,
+    alignSelf: 'center',
   },
 
   inputText: {
@@ -118,6 +119,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 40,
     marginBottom: 10,
+    alignSelf: 'center',
   },
   logo: {
     fontWeight: 'bold',

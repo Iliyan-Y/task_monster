@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     justifyContent: 'center',
     padding: 20,
+    alignSelf: 'center',
   },
 
   inputText: {
@@ -110,15 +111,18 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 40,
+    marginTop: 20,
     marginBottom: 10,
+    alignSelf: 'center',
   },
 
   logo: {
+    marginTop: 10,
     fontWeight: 'bold',
     fontSize: 20,
     color: '#fb5b5a',
     marginBottom: 40,
+    alignSelf: 'center',
   },
 })
 export default AddTask
