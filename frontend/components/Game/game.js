@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { StatusBar, StyleSheet, View } from 'react-native';
+import { StatusBar, StyleSheet, View, Alert } from 'react-native';
 import Entities from './src/entities';
 import { GameEngine } from 'react-native-game-engine';
 import Systems from './src/systems';
@@ -11,7 +11,6 @@ export default class Game extends PureComponent {
       running: true,
     };
     this.gameEngine = null;
-    console.disableYellowBox = true;
   }
 
   restart = () => {
