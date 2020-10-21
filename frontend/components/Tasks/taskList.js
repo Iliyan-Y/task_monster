@@ -60,7 +60,7 @@ function TaskList({ navigation }) {
                     //format to show
                     timetoShow={('H', 'M', 'S')}
                     onFinish={() =>
-                      completeTask(user, data.item.id, setTaskList, true, -1)
+                      completeTask(user, data.item.id, taskList, setTaskList, true, -1, score, setScore)
                     }
                     size={15}
                     // color={'white'}
@@ -93,7 +93,7 @@ function TaskList({ navigation }) {
             <View style={[styles.backRightBtn, styles.backLeftBtn2]}>
               <Button
                 onPress={() =>
-                  completeTask(user, data.item.id, setTaskList, true, -1)
+                  completeTask(user, data.item.id, taskList, setTaskList, true, -1, score, setScore)
                 }
                 title="Fail"
               />
@@ -149,6 +149,13 @@ function TaskList({ navigation }) {
             onPress={() => navigation.navigate('Completed Task List')}
           >
             <Image source={require('../../assets/done.png')} />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.doneBtn}
+            onPress={() => navigation.navigate('Game')}
+          >
+            <Text>Game</Text>
           </TouchableOpacity>
         </View>
       </View>
