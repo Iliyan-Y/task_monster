@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -6,6 +6,7 @@ import {
   Text,
   Button,
   TouchableOpacity,
+
   Image,
 } from 'react-native'
 import axios from 'axios'
@@ -16,6 +17,7 @@ import CompletedButton from './completeTaskButton'
 import DeleteButton from './deleteTaskButton'
 import { calculateExpTime, completeTask } from './taskHelpers'
 import CountDown from 'react-native-countdown-component'
+
 
 function TaskList({ navigation }) {
   let { taskList, setTaskList, user } = useContext(TasksContext)
@@ -35,6 +37,7 @@ function TaskList({ navigation }) {
     )
   }, [taskList])
   return (
+
     <View style={styles.container}>
       <View>
         <SwipeListView
@@ -83,6 +86,18 @@ function TaskList({ navigation }) {
                   taskId={data.item.id}
                   setTaskList={setTaskList}
                 />
+                    
+
+            <View style={[styles.backRightBtn, styles.backLeftBtn2]}>
+              <Button
+                onPress={() =>
+                  completeTask(user, data.item.id, setTaskList, true, -1)
+                }
+                title="Fail"
+              />
+            </View>
+
+
               </View>
               <View
                 style={[
@@ -116,7 +131,7 @@ function TaskList({ navigation }) {
               </View>
             </View>
           )}
-          leftOpenValue={250}
+          leftOpenValue={150}
           rightOpenValue={-150}
         />
         <View>
@@ -137,6 +152,7 @@ function TaskList({ navigation }) {
       </View>
     </View>
   )
+
 }
 
 const styles = StyleSheet.create({
@@ -144,9 +160,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#003f5c',
     flex: 1,
   },
-  // backTextWhite: {
-  //   color: 'white',
-  // },
+ 
   rowFront: {
     alignItems: 'center',
     backgroundColor: '#465881',
@@ -172,9 +186,13 @@ const styles = StyleSheet.create({
     width: 75,
   },
   backLeftBtn: {
-    width: 250,
+    width: 75,
     backgroundColor: 'green',
     left: 0,
+  },
+  backLeftBtn2: {
+    backgroundColor: 'yellow',
+    left: 75,
   },
   backRightBtnLeft: {
     backgroundColor: 'blue',
@@ -214,6 +232,6 @@ const styles = StyleSheet.create({
   countdown: {
     color: 'white',
   },
-})
+});
 
 export default TaskList
