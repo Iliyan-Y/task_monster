@@ -108,11 +108,7 @@ function TaskList({ navigation }) {
                         setTaskList,
                         true,
                         -1,
-<<<<<<< HEAD
                         setScore
-=======
-                        setScore,
->>>>>>> c008a1af16447a92d2748a131e444798431acc35
                       )
                     }
                     title="Fail"
@@ -187,7 +183,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   text: {
-    padding: 30
+    padding: 30,
   },
 
   buttons: {
