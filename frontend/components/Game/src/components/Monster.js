@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Image } from 'react-native';
 import { array, object, string } from 'prop-types';
 import Matter from 'matter-js';

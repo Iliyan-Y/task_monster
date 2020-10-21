@@ -1,18 +1,18 @@
-import 'react-native-gesture-handler'
-import React, {PureComponent} from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import SignUp from './Auth/signUp'
-import LogIn from './Auth/logIn'
-import AddTask from './Tasks/addTask'
+import 'react-native-gesture-handler';
+import React, { PureComponent } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import SignUp from './Auth/signUp';
+import LogIn from './Auth/logIn';
+import AddTask from './Tasks/addTask';
 import EditTask from './Tasks/editTask';
-import { TasksProvider } from '../context'
-import { NavigationContainer, StackActions } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import TaskList from './Tasks/taskList'
+import { TasksProvider } from '../context';
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import TaskList from './Tasks/taskList';
 import CompletedTaskList from './Tasks/completedTaskList';
 import Game from './Game/game';
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 const Index = () => {
   return (
     <TasksProvider>
@@ -32,7 +32,7 @@ const Index = () => {
       </NavigationContainer>
     </TasksProvider>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -41,6 +41,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-})
+});
 
-export default Index
+export default Index;
