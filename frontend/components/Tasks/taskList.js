@@ -257,18 +257,6 @@ const styles = StyleSheet.create({
   // flexDirection: 'row',
   // bottom: 55,
   // },
-
-  inputViewList: {
-    height: 60,
-    color: 'white',
-    padding: -50,
-    left: 10,
-    right: 40,
-  },
-
-  countdown: {
-    color: 'white',
-  },
 })
 
 export default TaskList
