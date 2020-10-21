@@ -48,6 +48,9 @@ function LogIn({ navigation }) {
           onChangeText={(email) => setEmail(email)}
           placeholder="Email..."
           name="email"
+          autoCorrect={true}
+          autoCapitalize="none"
+          autoCompleteType="email"
           placeholderTextColor="#003f5c"
         />
       </View>
@@ -58,6 +61,10 @@ function LogIn({ navigation }) {
           onChangeText={(password) => setPassword(password)}
           placeholder="Password..."
           name="password"
+          secureTextEntry={true}
+          password={true}
+          autoCapitalize="none"
+          autoCompleteType="password"
           placeholderTextColor="#003f5c"
         />
       </View>
