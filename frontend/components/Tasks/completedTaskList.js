@@ -15,7 +15,10 @@ import UncompletedButton from './uncompleteTaskButton';
 import DeleteButton from './deleteTaskButton';
 
 function CompletedTaskList({ navigation }) {
-  let { taskList, setTaskList, user } = useContext(TasksContext);
+  let { taskList, setTaskList, user, setScore, score } = useContext(
+    TasksContext
+  );
+
   let [taskListView, setTaskListView] = useState([]);
 
   useEffect(() => {
@@ -26,7 +29,6 @@ function CompletedTaskList({ navigation }) {
         title: task.title,
         description: task.description,
         completed: task.completed,
-
         score: parseInt(task.score),
       }))
     );

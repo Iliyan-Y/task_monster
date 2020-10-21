@@ -6,7 +6,6 @@ import {
   Text,
   Button,
   TouchableOpacity,
-
   Image,
 } from 'react-native'
 import axios from 'axios'
@@ -18,10 +17,13 @@ import DeleteButton from './deleteTaskButton'
 import { calculateExpTime, completeTask } from './taskHelpers'
 import CountDown from 'react-native-countdown-component'
 
-
 function TaskList({ navigation }) {
-  let { taskList, setTaskList, user } = useContext(TasksContext)
-  let [taskListView, setTaskListView] = useState([])
+
+  let { taskList, setTaskList, user, score, setScore } = useContext(
+    TasksContext
+  );
+  let [taskListView, setTaskListView] = useState([]);
+
 
   //add time param in the db
   useEffect(() => {
@@ -152,7 +154,6 @@ function TaskList({ navigation }) {
       </View>
     </View>
   )
-
 }
 
 const styles = StyleSheet.create({
