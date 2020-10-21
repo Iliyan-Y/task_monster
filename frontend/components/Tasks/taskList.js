@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -20,11 +20,9 @@ import { set } from 'react-native-reanimated';
 
 function TaskList({ navigation }) {
   let { taskList, setTaskList, user, score, setScore } = useContext(
-
     TasksContext
   );
   let [taskListView, setTaskListView] = useState([]);
-
 
   //add time param in the db
   useEffect(() => {
@@ -69,9 +67,7 @@ function TaskList({ navigation }) {
                         -1,
                         score,
 
-                        setScore,
-
-
+                        setScore
                       )
                     }
                     size={15}
@@ -91,8 +87,6 @@ function TaskList({ navigation }) {
                   setScore={setScore}
                 />
 
-           
-   
                 <View
                   style={[
                     styles.backRightBtn,
@@ -114,11 +108,7 @@ function TaskList({ navigation }) {
                         setTaskList,
                         true,
                         -1,
-                        score,
-
-                        setScore,
-               
-
+                        setScore
                       )
                     }
                     title="Fail"
@@ -161,6 +151,7 @@ function TaskList({ navigation }) {
           leftOpenValue={150}
           rightOpenValue={-150}
         />
+
         <View style={styles.buttons}>
           <TouchableOpacity
             style={styles.doneBtn}
@@ -193,17 +184,20 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  text: {
+    padding: 20,
+  },
+
   buttons: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    bottom: 0,
-    left: 90,
+    top: 550,
+    left: 105,
     justifyContent: 'space-between',
     flexDirection: 'row',
   },
-
 
   rowFront: {
     alignItems: 'center',
@@ -263,6 +257,6 @@ const styles = StyleSheet.create({
   countdown: {
     color: 'white',
   },
-})
+});
 
 export default TaskList;
