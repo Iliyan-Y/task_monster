@@ -86,8 +86,19 @@ function TaskList({ navigation }) {
                   setScore={setScore}
                 />
 
-                <View style={[styles.backRightBtn, styles.backLeftBtn2]}>
+                <View
+                  style={[
+                    styles.backRightBtn,
+                    styles.backLeftBtn2,
+                    styles.backTextWhite,
+                  ]}
+                >
                   <Button
+                    style={
+                      (styles.backTextWhite,
+                      styles.backRightBtn,
+                      styles.backLeftBtn2)
+                    }
                     onPress={() =>
                       completeTask(
                         user,
