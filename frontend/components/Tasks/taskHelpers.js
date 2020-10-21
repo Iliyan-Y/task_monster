@@ -9,7 +9,6 @@ export function completeTask(
   setTaskList,
   completed = true,
   points = 1,
-  score,
   setScore
 ) {
   let body = {
@@ -26,19 +25,14 @@ export function completeTask(
   };
   axios
     .patch(railsServer + '/tasks/' + taskId, body, headers)
-    .then((res) => {
-      console.log(res.status);
-    })
     .then(() => {
       axios.get(railsServer + '/tasks', headers).then((res) => {
         setTaskList(res.data);
+        let scoreArray = res.data.map((task) => task.score);
+        setScore(scoreArray.reduce((a, b) => a + b, 0));
       });
     })
     .catch((err) => console.log(err.message));
-
-  let count = score;
-  taskList.map((task) => (count = count + task.score));
-  setScore(count);
 }
 
 export let calculateExpTime = (userInput) => {
