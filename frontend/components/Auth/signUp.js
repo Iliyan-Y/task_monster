@@ -51,6 +51,9 @@ function SignUp({ navigation }) {
             onChangeText={(email) => setEmail(email)}
             placeholder="Email..."
             name="email"
+            autoCorrect={true}
+            autoCapitalize="none"
+            autoCompleteType="email"
             placeholderTextColor="#003f5c"
           />
         </View>
@@ -60,6 +63,8 @@ function SignUp({ navigation }) {
             onChangeText={(password) => setPassword(password)}
             placeholder="Password..."
             name="password"
+            autoCapitalize="none"
+            autoCompleteType="password"
             placeholderTextColor="#003f5c"
           />
         </View>
@@ -71,6 +76,8 @@ function SignUp({ navigation }) {
             }
             placeholder="Password confirmation..."
             name="passwordConfirmation"
+            autoCapitalize="none"
+            autoCompleteType="passwordConfirmation"
             placeholderTextColor="#003f5c"
           />
         </View>
