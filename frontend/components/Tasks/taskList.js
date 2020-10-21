@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -18,10 +18,12 @@ import { calculateExpTime, completeTask } from './taskHelpers'
 import CountDown from 'react-native-countdown-component'
 
 function TaskList({ navigation }) {
+
   let { taskList, setTaskList, user, score, setScore } = useContext(
-    TasksContext,
-  )
-  let [taskListView, setTaskListView] = useState([])
+    TasksContext
+  );
+  let [taskListView, setTaskListView] = useState([]);
+
 
   //add time param in the db
   useEffect(() => {
@@ -37,6 +39,7 @@ function TaskList({ navigation }) {
     )
   }, [taskList])
   return (
+
     <View style={styles.container}>
       <View>
         <SwipeListView
@@ -57,16 +60,7 @@ function TaskList({ navigation }) {
                     //format to show
                     timetoShow={('H', 'M', 'S')}
                     onFinish={() =>
-                      completeTask(
-                        user,
-                        data.item.id,
-                        taskList,
-                        setTaskList,
-                        true,
-                        -1,
-                        score,
-                        setScore,
-                      )
+                      completeTask(user, data.item.id, taskList, setTaskList, true, -1, score, setScore)
                     }
                     size={15}
                     // color={'white'}
@@ -94,24 +88,18 @@ function TaskList({ navigation }) {
                   taskId={data.item.id}
                   setTaskList={setTaskList}
                 />
+                    
 
-                <View style={[styles.backRightBtn, styles.backLeftBtn2]}>
-                  <Button
-                    onPress={() =>
-                      completeTask(
-                        user,
-                        data.item.id,
-                        taskList,
-                        setTaskList,
-                        true,
-                        -1,
-                        score,
-                        setScore,
-                      )
-                    }
-                    title="Fail"
-                  />
-                </View>
+            <View style={[styles.backRightBtn, styles.backLeftBtn2]}>
+              <Button
+                onPress={() =>
+                  completeTask(user, data.item.id, taskList, setTaskList, true, -1, score, setScore)
+                }
+                title="Fail"
+              />
+            </View>
+
+
               </View>
               <View
                 style={[
@@ -148,8 +136,7 @@ function TaskList({ navigation }) {
           leftOpenValue={150}
           rightOpenValue={-150}
         />
-
-        <View style={styles.buttons}>
+        <View>
           <TouchableOpacity
             style={styles.addBtn}
             onPress={() => navigation.navigate('Add Task')}
@@ -158,16 +145,17 @@ function TaskList({ navigation }) {
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.gameBtn}
-            onPress={() => navigation.navigate('Game')}
-          >
-            <Image source={require('../../assets/game.png')} />
-          </TouchableOpacity>
-          <TouchableOpacity
             style={styles.doneBtn}
             onPress={() => navigation.navigate('Completed Task List')}
           >
             <Image source={require('../../assets/done.png')} />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.doneBtn}
+            onPress={() => navigation.navigate('Game')}
+          >
+            <Text>Game</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -180,17 +168,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#003f5c',
     flex: 1,
   },
-  buttons: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    bottom: 0,
-    left: 90,
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-  },
-
+ 
   rowFront: {
     alignItems: 'center',
     backgroundColor: '#465881',
@@ -238,25 +216,30 @@ const styles = StyleSheet.create({
     padding: 17,
   },
 
-  // addBtn: {
-  //   flex: 1,
-  //   alignSelf: 'center',
-  //   // left: 50,
-  //   // top: 5,
-  // },
+  addBtn: {
+    alignSelf: 'center',
+    left: 50,
+    bottom: -390,
+  },
 
-  // doneBtn: {
-  //   alignSelf: 'center',
-  //   // right: 50,
-  //   // flexDirection: 'row',
-  //   // bottom: -330,
-  // },
-  // gameBtn: {
-  //   alignSelf: 'center',
-  // right: 50,
-  // flexDirection: 'row',
-  // bottom: 55,
-  // },
-})
+  doneBtn: {
+    alignSelf: 'center',
+    right: 50,
+    flexDirection: 'row',
+    bottom: -330,
+  },
+
+  inputViewList: {
+    height: 60,
+    color: 'white',
+    padding: -50,
+    left: 10,
+    right: 40,
+  },
+
+  countdown: {
+    color: 'white',
+  },
+});
 
 export default TaskList
