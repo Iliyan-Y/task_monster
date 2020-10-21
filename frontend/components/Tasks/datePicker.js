@@ -28,6 +28,7 @@ const DatePicker = ({ setExpiryTime }) => {
   };
   return (
     <>
+      <Button onPress={() => console.log(date)} title="Save Changes" />
       <View>
         <Button onPress={showDatepicker} title="Set expiry date" />
       </View>

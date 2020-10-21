@@ -7,22 +7,21 @@ import {
   Button,
   TouchableOpacity,
   Image,
-} from 'react-native';
-import axios from 'axios';
-import { railsServer } from '../../serverAddress';
-import { TasksContext } from '../../context';
-import { SwipeListView } from 'react-native-swipe-list-view';
-import CompletedButton from './completeTaskButton';
-import DeleteButton from './deleteTaskButton';
-import { calculateExpTime, completeTask } from './taskHelpers';
-import CountDown from 'react-native-countdown-component';
+} from 'react-native'
+import axios from 'axios'
+import { railsServer } from '../../serverAddress'
+import { TasksContext } from '../../context'
+import { SwipeListView } from 'react-native-swipe-list-view'
+import CompletedButton from './completeTaskButton'
+import DeleteButton from './deleteTaskButton'
+import { calculateExpTime, completeTask } from './taskHelpers'
+import CountDown from 'react-native-countdown-component'
 
 function TaskList({ navigation }) {
   let { taskList, setTaskList, user, score, setScore } = useContext(
-    TasksContext
-  );
-  let [taskListView, setTaskListView] = useState([]);
-
+    TasksContext,
+  )
+  let [taskListView, setTaskListView] = useState([])
 
   //add time param in the db
   useEffect(() => {
@@ -34,9 +33,9 @@ function TaskList({ navigation }) {
         description: task.description,
         completed: task.completed,
         expiryTime: calculateExpTime(task.expiryTime),
-      }))
-    );
-  }, [taskList]);
+      })),
+    )
+  }, [taskList])
   return (
     <View style={styles.container}>
       <View>
@@ -94,7 +93,6 @@ function TaskList({ navigation }) {
                   user={user}
                   taskId={data.item.id}
                   setTaskList={setTaskList}
-                  setScore={setScore}
                 />
 
                 <View style={[styles.backRightBtn, styles.backLeftBtn2]}>
@@ -143,7 +141,6 @@ function TaskList({ navigation }) {
                   user={user}
                   taskId={data.item.id}
                   setTaskList={setTaskList}
-                  setScore={setScore}
                 />
               </View>
             </View>
@@ -175,7 +172,7 @@ function TaskList({ navigation }) {
         </View>
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -183,7 +180,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#003f5c',
     flex: 1,
   },
-
   buttons: {
     flex: 1,
     justifyContent: 'center',
@@ -194,6 +190,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
   },
+
   rowFront: {
     alignItems: 'center',
     backgroundColor: '#465881',
@@ -240,6 +237,26 @@ const styles = StyleSheet.create({
     color: 'white',
     padding: 17,
   },
+
+  // addBtn: {
+  //   flex: 1,
+  //   alignSelf: 'center',
+  //   // left: 50,
+  //   // top: 5,
+  // },
+
+  // doneBtn: {
+  //   alignSelf: 'center',
+  //   // right: 50,
+  //   // flexDirection: 'row',
+  //   // bottom: -330,
+  // },
+  // gameBtn: {
+  //   alignSelf: 'center',
+  // right: 50,
+  // flexDirection: 'row',
+  // bottom: 55,
+  // },
 })
 
-export default TaskList;
+export default TaskList

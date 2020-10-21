@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Button } from 'react-native';
 import axios from 'axios';
 import { railsServer } from '../../serverAddress';
-const UncompletedButton = ({ taskId, user, setTaskList, setScore }) => {
+const UncompletedButton = ({ taskId, user, setTaskList }) => {
   function uncompleteTask() {
     let body = {
       task: {
@@ -17,11 +17,12 @@ const UncompletedButton = ({ taskId, user, setTaskList, setScore }) => {
     };
     axios
       .patch(railsServer + '/tasks/' + taskId, body, headers)
+      .then((res) => {
+        console.log(res.status);
+      })
       .then(() => {
-        axios.get(railsServer + '/tasks', headers).then(async (res) => {
-          await setTaskList(res.data);
-          let scoreArray = res.data.map((task) => task.score);
-          setScore(scoreArray.reduce((a, b) => a + b, 0));
+        axios.get(railsServer + '/tasks', headers).then((res) => {
+          setTaskList(res.data);
         });
       })
       .catch((err) => console.log(err.message));
