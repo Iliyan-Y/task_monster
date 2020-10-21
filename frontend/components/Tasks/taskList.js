@@ -108,7 +108,11 @@ function TaskList({ navigation }) {
                         setTaskList,
                         true,
                         -1,
+<<<<<<< HEAD
                         setScore
+=======
+                        setScore,
+>>>>>>> c008a1af16447a92d2748a131e444798431acc35
                       )
                     }
                     title="Fail"
@@ -151,7 +155,6 @@ function TaskList({ navigation }) {
           leftOpenValue={150}
           rightOpenValue={-150}
         />
-
         <View style={styles.buttons}>
           <TouchableOpacity
             style={styles.doneBtn}
@@ -183,9 +186,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#003f5c',
     flex: 1,
   },
-
   text: {
-    padding: 20,
+    padding: 30
   },
 
   buttons: {
