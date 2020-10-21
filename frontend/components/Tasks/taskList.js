@@ -7,23 +7,21 @@ import {
   Button,
   TouchableOpacity,
   Image,
-} from 'react-native'
-import axios from 'axios'
-import { railsServer } from '../../serverAddress'
-import { TasksContext } from '../../context'
-import { SwipeListView } from 'react-native-swipe-list-view'
-import CompletedButton from './completeTaskButton'
-import DeleteButton from './deleteTaskButton'
-import { calculateExpTime, completeTask } from './taskHelpers'
-import CountDown from 'react-native-countdown-component'
+} from 'react-native';
+import axios from 'axios';
+import { railsServer } from '../../serverAddress';
+import { TasksContext } from '../../context';
+import { SwipeListView } from 'react-native-swipe-list-view';
+import CompletedButton from './completeTaskButton';
+import DeleteButton from './deleteTaskButton';
+import { calculateExpTime, completeTask } from './taskHelpers';
+import CountDown from 'react-native-countdown-component';
 
 function TaskList({ navigation }) {
-
   let { taskList, setTaskList, user, score, setScore } = useContext(
     TasksContext
   );
   let [taskListView, setTaskListView] = useState([]);
-
 
   //add time param in the db
   useEffect(() => {
@@ -35,11 +33,10 @@ function TaskList({ navigation }) {
         description: task.description,
         completed: task.completed,
         expiryTime: calculateExpTime(task.expiryTime),
-      })),
-    )
-  }, [taskList])
+      }))
+    );
+  }, [taskList]);
   return (
-
     <View style={styles.container}>
       <View>
         <SwipeListView
@@ -60,7 +57,16 @@ function TaskList({ navigation }) {
                     //format to show
                     timetoShow={('H', 'M', 'S')}
                     onFinish={() =>
-                      completeTask(user, data.item.id, taskList, setTaskList, true, -1, score, setScore)
+                      completeTask(
+                        user,
+                        data.item.id,
+                        taskList,
+                        setTaskList,
+                        true,
+                        -1,
+                        score,
+                        setScore
+                      )
                     }
                     size={15}
                     // color={'white'}
@@ -87,19 +93,26 @@ function TaskList({ navigation }) {
                   user={user}
                   taskId={data.item.id}
                   setTaskList={setTaskList}
+                  setScore={setScore}
                 />
-                    
 
-            <View style={[styles.backRightBtn, styles.backLeftBtn2]}>
-              <Button
-                onPress={() =>
-                  completeTask(user, data.item.id, taskList, setTaskList, true, -1, score, setScore)
-                }
-                title="Fail"
-              />
-            </View>
-
-
+                <View style={[styles.backRightBtn, styles.backLeftBtn2]}>
+                  <Button
+                    onPress={() =>
+                      completeTask(
+                        user,
+                        data.item.id,
+                        taskList,
+                        setTaskList,
+                        true,
+                        -1,
+                        score,
+                        setScore
+                      )
+                    }
+                    title="Fail"
+                  />
+                </View>
               </View>
               <View
                 style={[
@@ -129,6 +142,7 @@ function TaskList({ navigation }) {
                   user={user}
                   taskId={data.item.id}
                   setTaskList={setTaskList}
+                  setScore={setScore}
                 />
               </View>
             </View>
@@ -160,7 +174,7 @@ function TaskList({ navigation }) {
         </View>
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -168,7 +182,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#003f5c',
     flex: 1,
   },
- 
+
   rowFront: {
     alignItems: 'center',
     backgroundColor: '#465881',
@@ -242,4 +256,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TaskList
+export default TaskList;

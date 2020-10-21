@@ -2,23 +2,22 @@ import React from 'react';
 import { StyleSheet, Button } from 'react-native';
 import axios from 'axios';
 import { railsServer } from '../../serverAddress';
-const DeleteButton = ({ taskId, user, setTaskList }) => {
+const DeleteButton = ({ taskId, user, setTaskList, setScore }) => {
   function deleteTask() {
-    
     let headers = {
       headers: {
         email: user.email,
         authentication_token: user.authentication_token,
       },
     };
+
     axios
       .delete(railsServer + '/tasks/' + taskId, headers)
-      .then((res) => {
-        console.log(res.status);
-      })
       .then(() => {
-        axios.get(railsServer + '/tasks', headers).then((res) => {
-          setTaskList(res.data);
+        axios.get(railsServer + '/tasks', headers).then(async (res) => {
+          await setTaskList(res.data);
+          let scoreArray = res.data.map((task) => task.score);
+          setScore(scoreArray.reduce((a, b) => a + b, 0));
         });
       })
       .catch((err) => console.log(err.message));
