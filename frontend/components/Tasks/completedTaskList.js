@@ -6,6 +6,7 @@ import {
   Text,
   Button,
   TouchableOpacity,
+  Image,
 } from 'react-native'
 import axios from 'axios'
 import { railsServer } from '../../serverAddress'
@@ -42,11 +43,11 @@ function CompletedTaskList({ navigation }) {
               style={[
                 styles.rowFront,
                 data.item.score > 0
-                  ? { backgroundColor: '#00663C' }
-                  : { backgroundColor: '#790000' },
+                  ? { backgroundColor: '#52B788' }
+                  : { backgroundColor: '#fb5b5a' },
               ]}
             >
-              <Text>{data.item.title}</Text>
+              <Text style={styles.taskview}>{data.item.title}</Text>
             </View>
           )}
           renderHiddenItem={(data, rowMap) => (
@@ -78,8 +79,9 @@ function CompletedTaskList({ navigation }) {
                       taskId: data.item.id,
                     })
                   }
-                  title="Edit"
+                  title=""
                 />
+                <Image source={require('../../assets/edit.png')} />
               </View>
               <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
                 <DeleteButton
@@ -94,13 +96,6 @@ function CompletedTaskList({ navigation }) {
           leftOpenValue={75}
           rightOpenValue={-150}
         />
-
-        <TouchableOpacity
-          style={styles.uncomBtn}
-          onPress={() => navigation.navigate('Task List')}
-        >
-          <Text style={styles.inputText}>Uncompleted Tasks</Text>
-        </TouchableOpacity>
       </View>
     </View>
   )
@@ -110,8 +105,11 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#003f5c',
     flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center',
+  },
+  taskview: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
   backTextWhite: {
     color: '#FFF',
@@ -149,7 +147,7 @@ const styles = StyleSheet.create({
     width: 75,
   },
   backLeftBtn: {
-    backgroundColor: '#52B788',
+    backgroundColor: 'yellow',
     left: 75,
     left: 0,
   },
@@ -165,18 +163,6 @@ const styles = StyleSheet.create({
     height: 50,
     color: 'white',
     padding: 17,
-  },
-
-  uncomBtn: {
-    width: '80%',
-    backgroundColor: '#fb5b5a',
-    borderRadius: 25,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 40,
-    marginBottom: 10,
-    alignSelf: 'center',
   },
 })
 

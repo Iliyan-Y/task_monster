@@ -71,7 +71,6 @@ function TaskList({ navigation }) {
                       )
                     }
                     size={15}
-                    // color={'white'}
                   />
                 </Text>
               </View>
@@ -79,7 +78,13 @@ function TaskList({ navigation }) {
           }
           renderHiddenItem={(data, rowMap) => (
             <View style={styles.rowBack}>
-              <View style={[styles.backRightBtn, styles.backLeftBtn]}>
+              <View
+                style={[
+                  styles.backRightBtn,
+                  styles.backLeftBtn,
+                  styles.backBtnView,
+                ]}
+              >
                 <CompletedButton
                   user={user}
                   taskId={data.item.id}
@@ -111,8 +116,9 @@ function TaskList({ navigation }) {
                       setScore,
                     )
                   }
-                  title="Fail"
+                  title=""
                 />
+                <Image source={require('../../assets/fail.png')} />
               </View>
               <View
                 style={[
@@ -134,8 +140,9 @@ function TaskList({ navigation }) {
                       taskId: data.item.id,
                     })
                   }
-                  title="Edit"
+                  title=""
                 />
+                <Image source={require('../../assets/edit.png')} />
               </View>
 
               <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
@@ -145,7 +152,6 @@ function TaskList({ navigation }) {
                   setTaskList={setTaskList}
                   setScore={setScore}
                 />
-                <Image source={require('../../assets/delete.png')} />
               </View>
             </View>
           )}
@@ -187,7 +193,7 @@ const styles = StyleSheet.create({
     color: 'white',
     right: '40%',
     fontWeight: 'bold',
-    // fontSize: 20,
+
     fontFamily: 'sans-serif-medium',
   },
 
@@ -258,6 +264,9 @@ const styles = StyleSheet.create({
   },
 
   countdown: {
+    color: 'white',
+  },
+  backBtnView: {
     color: 'white',
   },
 })

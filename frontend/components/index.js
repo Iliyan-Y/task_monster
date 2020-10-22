@@ -28,7 +28,8 @@ const Index = () => {
                 },
                 headerTintColor: '#fff',
                 headerTitleStyle: {
-                  fontWeight: 'bold',
+                  fontSize: 12,
+                  top: '15%',
                 },
               }}
             />
@@ -41,7 +42,8 @@ const Index = () => {
                 },
                 headerTintColor: '#fff',
                 headerTitleStyle: {
-                  fontWeight: 'bold',
+                  fontSize: 12,
+                  top: '15%',
                 },
               }}
             />
@@ -54,7 +56,8 @@ const Index = () => {
                 },
                 headerTintColor: '#fff',
                 headerTitleStyle: {
-                  fontWeight: 'bold',
+                  fontSize: 12,
+                  top: '15%',
                 },
               }}
             />
@@ -67,7 +70,8 @@ const Index = () => {
                 },
                 headerTintColor: '#fff',
                 headerTitleStyle: {
-                  fontWeight: 'bold',
+                  fontSize: 12,
+                  top: '15%',
                 },
               }}
             />
@@ -80,7 +84,8 @@ const Index = () => {
                 },
                 headerTintColor: '#fff',
                 headerTitleStyle: {
-                  fontWeight: 'bold',
+                  fontSize: 12,
+                  top: '15%',
                 },
               }}
             />
@@ -93,13 +98,24 @@ const Index = () => {
                 },
                 headerTintColor: '#fff',
                 headerTitleStyle: {
-                  fontWeight: 'bold',
+                  fontSize: 12,
+                  top: '15%',
                 },
               }}
             />
             <Stack.Screen
               name="Completed Task List"
               component={CompletedTaskList}
+              options={{
+                headerStyle: {
+                  backgroundColor: '#fb5b5a',
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                  fontSize: 12,
+                  top: '15%',
+                },
+              }}
             />
           </Stack.Navigator>
         </NavigationContainer>
