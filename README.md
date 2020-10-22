@@ -7,7 +7,7 @@ A task manager app for people who want keep track of what they need to do, be re
 Completing tasks will grow and evolve your pet, failing to do so will shrink and eventually kill it. Laziness and procrastination now has consequences!
 
 ## Technologies Used
-
+* Expo - Front End
 * React Native - Front End
 * Ruby on Rails - Back End
 * MongoDB - Database
@@ -18,10 +18,31 @@ Completing tasks will grow and evolve your pet, failing to do so will shrink and
 * Jest - React Native unit tests
 * Detox - React Native feature tests
 
+## How to Run the App
+
+* First Fork/Clone this repo.
+
+### Backend
+
+1. In terminal
+
+
+
 ## User Stories
 
 
 ### MVP
+```
+As a User,
+So I only see my tasks,
+I would like to be able to create an account.
+```
+
+```
+As a User,
+So Only I can see my tasks,
+I would like to have to log in to see my task list.
+```
 
 ```
 As a User,
@@ -57,14 +78,14 @@ I would like to be able to delete tasks.
 
 ```
 As a User,
-So i can keep my tasks organised,
-I would like to be ablle to have multiple lists.
+So I can keep my tasks organised,
+I would like to be able to have multiple lists.
 ```
 
 ```
 As a User,
 So I can stay motivated,
-I would like my completed tasks to grow my creature
+I would like my completed tasks to grow my creature.
 ```
 
 ```
@@ -107,13 +128,13 @@ I would like to set a deadline for my tasks to be completed by.
 
 ```
 As a User,
-So I can have control over my creature,
+So I can have more control over my creature,
 I would like my completed tasks to award money I can spend on it.
 ```
 
 ```
 As a User,
-So i can personalise my creature,
+So I can personalise my creature,
 I would like to have a number of option for items to spend my money on.
 ```
 
