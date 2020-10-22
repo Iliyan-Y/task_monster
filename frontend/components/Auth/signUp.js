@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
   View,
@@ -6,18 +6,16 @@ import {
   Text,
   Button,
   TouchableOpacity,
-} from 'react-native'
-import axios from 'axios'
-import { railsServer } from '../../serverAddress'
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import { TasksContext } from '../../context'
+} from 'react-native';
+import axios from 'axios';
+import { railsServer } from '../../serverAddress';
+import { TasksContext } from '../../context';
 
 function SignUp({ navigation }) {
-  let { user, setUser } = useContext(TasksContext)
-  let [email, setEmail] = useState('')
-  let [password, setPassword] = useState('')
-  let [password_confirmation, setPasswordConfirmation] = useState('')
+  let { setUser } = useContext(TasksContext);
+  let [email, setEmail] = useState('');
+  let [password, setPassword] = useState('');
+  let [password_confirmation, setPasswordConfirmation] = useState('');
 
   let submit = () => {
     let body = {
@@ -26,20 +24,20 @@ function SignUp({ navigation }) {
         password,
         password_confirmation,
       },
-    }
+    };
 
     axios
       .post(railsServer + '/users', body)
       .then((res) => {
-        console.log(res.status)
+        console.log(res.status);
         setUser({
           email: res.data.data.user.email,
           authentication_token: res.data.data.user.authentication_token,
-        })
-        navigation.navigate('Add Task')
+        });
+        navigation.navigate('Add Task');
       })
-      .catch((err) => console.log(err.message))
-  }
+      .catch((err) => console.log(err.message));
+  };
 
   return (
     <View style={styles.container}>
@@ -81,7 +79,6 @@ function SignUp({ navigation }) {
             secureTextEntry={true}
             password={true}
             autoCapitalize="none"
-            autoCompleteType="passwordConfirmation"
             placeholderTextColor="#003f5c"
           />
         </View>
@@ -94,7 +91,7 @@ function SignUp({ navigation }) {
         </TouchableOpacity>
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -138,6 +135,6 @@ const styles = StyleSheet.create({
     color: '#fb5b5a',
     marginBottom: 40,
   },
-})
+});
 
-export default SignUp
+export default SignUp;

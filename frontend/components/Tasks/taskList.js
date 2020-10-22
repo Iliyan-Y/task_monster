@@ -86,34 +86,33 @@ function TaskList({ navigation }) {
                   setTaskList={setTaskList}
                   setScore={setScore}
                 />
-
-                <View
-                  style={[
+              </View>
+              <View
+                style={[
+                  styles.backRightBtn,
+                  styles.backLeftBtn2,
+                  styles.backTextWhite,
+                ]}
+              >
+                <Button
+                  style={
+                    (styles.backTextWhite,
                     styles.backRightBtn,
-                    styles.backLeftBtn2,
-                    styles.backTextWhite,
-                  ]}
-                >
-                  <Button
-                    style={
-                      (styles.backTextWhite,
-                      styles.backRightBtn,
-                      styles.backLeftBtn2)
-                    }
-                    onPress={() =>
-                      completeTask(
-                        user,
-                        data.item.id,
-                        taskList,
-                        setTaskList,
-                        true,
-                        -1,
-                        setScore
-                      )
-                    }
-                    title="Fail"
-                  />
-                </View>
+                    styles.backLeftBtn2)
+                  }
+                  onPress={() =>
+                    completeTask(
+                      user,
+                      data.item.id,
+                      taskList,
+                      setTaskList,
+                      true,
+                      -1,
+                      setScore
+                    )
+                  }
+                  title="Fail"
+                />
               </View>
               <View
                 style={[

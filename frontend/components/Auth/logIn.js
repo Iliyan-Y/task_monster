@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
   View,
@@ -7,15 +7,15 @@ import {
   Button,
   TouchableOpacity,
   TouchableWithoutFeedback,
-} from 'react-native'
-import axios from 'axios'
-import { railsServer } from '../../serverAddress'
-import { TasksContext } from '../../context'
+} from 'react-native';
+import axios from 'axios';
+import { railsServer } from '../../serverAddress';
+import { TasksContext } from '../../context';
 
 function LogIn({ navigation }) {
-  let { user, setUser } = useContext(TasksContext)
-  let [email, setEmail] = useState('')
-  let [password, setPassword] = useState('')
+  let { user, setUser } = useContext(TasksContext);
+  let [email, setEmail] = useState('');
+  let [password, setPassword] = useState('');
 
   let submit = () => {
     let body = {
@@ -23,20 +23,20 @@ function LogIn({ navigation }) {
         email,
         password,
       },
-    }
+    };
 
     axios
       .post(railsServer + '/users/sign_in', body)
       .then((res) => {
-        console.log(res.status)
+        console.log(res.status);
         setUser({
           email: res.data.data.user.email,
           authentication_token: res.data.data.user.authentication_token,
-        })
-        navigation.navigate('Task List')
+        });
+        navigation.navigate('Task List');
       })
-      .catch((err) => console.log(err.message))
-  }
+      .catch((err) => console.log(err.message));
+  };
 
   return (
     <View style={styles.container}>
@@ -69,10 +69,6 @@ function LogIn({ navigation }) {
         />
       </View>
 
-      <TouchableOpacity style={styles.loginText} onPress={() => submit()}>
-        <Text style={styles.inputText}>Forgot Password?</Text>
-      </TouchableOpacity>
-
       <TouchableOpacity
         style={styles.loginBtn}
         onPress={() => submit('Log In')}
@@ -81,13 +77,13 @@ function LogIn({ navigation }) {
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={styles.loginText}
+        style={styles.loginBtn}
         onPress={() => navigation.navigate('Sign Up')}
       >
-        <Text style={styles.inputText}>Sign up</Text>
+        <Text style={styles.inputText}>SIGN UP</Text>
       </TouchableOpacity>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -136,6 +132,6 @@ const styles = StyleSheet.create({
     color: '#fb5b5a',
     marginBottom: 40,
   },
-})
+});
 
-export default LogIn
+export default LogIn;
