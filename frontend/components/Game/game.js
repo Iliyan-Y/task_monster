@@ -4,6 +4,7 @@ import Entities from './src/entities';
 import { GameEngine } from 'react-native-game-engine';
 import Systems from './src/systems';
 import { Audio } from 'expo-av';
+const background = require('./assets/background.png');
 
 export default class Game extends PureComponent {
   constructor(props) {
@@ -39,6 +40,7 @@ export default class Game extends PureComponent {
   render() {
     return (
       <View style={styles.container}>
+        <Image source={background} />
         <GameEngine
           ref={(ref) => {
             this.gameEngine = ref;
