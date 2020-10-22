@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react'
 import {
   StyleSheet,
   View,
@@ -18,11 +18,12 @@ function TaskList({ navigation }) {
   let { taskList, setTaskList, user, setScore } = useContext(TasksContext);
   let [taskListView, setTaskListView] = useState([]);
 
+
   //add time param in the db
   useEffect(() => {
     setTaskListView(
       taskList.map((task) => ({
-        key: task.title,
+        key: task._id.$oid,
         id: task._id.$oid,
         title: task.title,
         description: task.description,
@@ -32,6 +33,7 @@ function TaskList({ navigation }) {
     );
   }, [taskList]);
 
+
   return (
     <View style={styles.container}>
       <View>
@@ -40,7 +42,7 @@ function TaskList({ navigation }) {
           renderItem={(data, rowMap) =>
             data.item.expiryTime == 0 ? (
               <View style={styles.rowFront}>
-                <Text>{data.item.title}</Text>
+                <Text style={styles.taskview}>{data.item.title}</Text>
               </View>
             ) : (
               <CountDownView
@@ -52,7 +54,13 @@ function TaskList({ navigation }) {
           }
           renderHiddenItem={(data, rowMap) => (
             <View style={styles.rowBack}>
-              <View style={[styles.backRightBtn, styles.backLeftBtn]}>
+              <View
+                style={[
+                  styles.backRightBtn,
+                  styles.backLeftBtn,
+                  styles.backBtnView,
+                ]}
+              >
                 <CompletedButton
                   user={user}
                   taskId={data.item.id}
@@ -67,7 +75,8 @@ function TaskList({ navigation }) {
                   styles.backTextWhite,
                 ]}
               >
-                <Button
+
+                <TouchableOpacity
                   onPress={() =>
                     completeTask(
                       user,
@@ -75,11 +84,13 @@ function TaskList({ navigation }) {
                       setTaskList,
                       true,
                       -1,
-                      setScore
+                      setScore,
                     )
                   }
-                  title="Fail"
-                />
+                  title=""
+                >
+                  <Image source={require('../../assets/fail.png')} />
+                </TouchableOpacity>
               </View>
               <View
                 style={[
@@ -88,12 +99,7 @@ function TaskList({ navigation }) {
                   styles.backRightBtnLeft,
                 ]}
               >
-                <Button
-                  style={
-                    (styles.backTextWhite,
-                    styles.backRightBtn,
-                    styles.backRightBtnLeft)
-                  }
+                <TouchableOpacity
                   onPress={() =>
                     navigation.navigate('Edit Task', {
                       taskTitle: data.item.title,
@@ -101,9 +107,12 @@ function TaskList({ navigation }) {
                       taskId: data.item.id,
                     })
                   }
-                  title="Edit"
-                />
+                  title=""
+                >
+                  <Image source={require('../../assets/edit.png')} />
+                </TouchableOpacity>
               </View>
+
               <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
                 <DeleteButton
                   user={user}
@@ -140,7 +149,7 @@ function TaskList({ navigation }) {
         </View>
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -148,8 +157,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#003f5c',
     flex: 1,
   },
-  text: {
-    padding: 30,
+
+  // countdown: {
+  //   position: 'absolute',
+  // },
+  taskview: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
 
   buttons: {
@@ -189,7 +204,7 @@ const styles = StyleSheet.create({
   },
   backLeftBtn: {
     width: 75,
-    backgroundColor: 'green',
+    backgroundColor: '#52B788',
     left: 0,
   },
   backLeftBtn2: {
@@ -197,11 +212,11 @@ const styles = StyleSheet.create({
     left: 75,
   },
   backRightBtnLeft: {
-    backgroundColor: 'blue',
+    backgroundColor: '#003f5c',
     right: 75,
   },
   backRightBtnRight: {
-    backgroundColor: 'red',
+    backgroundColor: '#fb5b5a',
     right: 0,
   },
   inputText: {
@@ -209,6 +224,10 @@ const styles = StyleSheet.create({
     color: 'white',
     padding: 17,
   },
-});
+  backBtnView: {
+    color: 'white',
+  },
+})
 
-export default TaskList;
+
+export default TaskList

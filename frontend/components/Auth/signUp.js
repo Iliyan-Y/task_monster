@@ -35,7 +35,13 @@ function SignUp({ navigation }) {
         });
         navigation.navigate('Add Task');
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) =>
+        alert(
+          'This email is registered or the password is less than 6 characters' +
+            '\nError : ' +
+            err.message
+        )
+      );
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react'
 import {
   TouchableOpacity,
   StyleSheet,
@@ -11,11 +11,12 @@ import { railsServer } from '../../serverAddress';
 import { TasksContext } from '../../context';
 import DatePicker from './datePicker';
 
+
 function AddTask({ navigation }) {
-  let { setTaskList, user } = useContext(TasksContext);
-  let [title, setTitle] = useState('');
-  let [description, setDescription] = useState('');
-  let [expiryTime, setExpiryTime] = useState(0);
+  let { setTaskList, user } = useContext(TasksContext)
+  let [title, setTitle] = useState('')
+  let [description, setDescription] = useState('')
+  let [expiryTime, setExpiryTime] = useState(0)
 
   let submit = () => {
     let body = {
@@ -26,24 +27,24 @@ function AddTask({ navigation }) {
         score: 0,
         expiryTime,
       },
-    };
+    }
     let headers = {
       headers: {
         email: user.email,
         authentication_token: user.authentication_token,
       },
-    };
+    }
 
     axios
       .post(railsServer + '/tasks', body, headers)
       .then(() => {
         axios.get(railsServer + '/tasks', headers).then((res) => {
-          setTaskList(res.data);
-          navigation.navigate('Task List');
-        });
+          setTaskList(res.data)
+          navigation.navigate('Task List')
+        })
       })
-      .catch((err) => console.log(err.message));
-  };
+      .catch((err) => console.log(err.message))
+  }
 
   return (
     <View style={styles.container}>
@@ -75,7 +76,7 @@ function AddTask({ navigation }) {
         <Text style={styles.inputText}>ADD</Text>
       </TouchableOpacity>
     </View>
-  );
+  )
 }
 const styles = StyleSheet.create({
   container: {
@@ -110,6 +111,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 10,
     alignSelf: 'center',
+    position: 'absolute',
+    top: 460,
+    left: 45,
   },
 
   logo: {
@@ -120,5 +124,5 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     alignSelf: 'center',
   },
-});
-export default AddTask;
+})
+export default AddTask

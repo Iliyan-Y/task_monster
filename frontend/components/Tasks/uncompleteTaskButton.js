@@ -1,37 +1,40 @@
-import React from 'react';
-import { StyleSheet, Button } from 'react-native';
-import axios from 'axios';
-import { railsServer } from '../../serverAddress';
+import React from 'react'
+import { StyleSheet, Button, Image, TouchableOpacity } from 'react-native'
+import axios from 'axios'
+import { railsServer } from '../../serverAddress'
+
 const UncompletedButton = ({ taskId, user, setTaskList, setScore }) => {
   function uncompleteTask() {
     let body = {
       task: {
         completed: false,
       },
-    };
+    }
     let headers = {
       headers: {
         email: user.email,
         authentication_token: user.authentication_token,
       },
-    };
+    }
     axios
       .patch(railsServer + '/tasks/' + taskId, body, headers)
       .then(() => {
         axios.get(railsServer + '/tasks', headers).then((res) => {
-          setTaskList(res.data);
-        });
+          setTaskList(res.data)
+        })
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => console.log(err.message))
   }
   return (
-    <Button
+    <TouchableOpacity
       style={(styles.backTextWhite, styles.backRightBtn, styles.backLeftBtn)}
       onPress={() => uncompleteTask()}
-      title="Not Complete"
-    />
-  );
-};
+      title=""
+    >
+      <Image source={require('../../assets/compl.png')} />
+    </TouchableOpacity>
+  )
+}
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
@@ -65,7 +68,7 @@ const styles = StyleSheet.create({
     width: 75,
   },
   backLeftBtn: {
-    backgroundColor: 'green',
+    // backgroundColor: 'green',
     left: 0,
   },
   backRightBtnLeft: {
@@ -76,6 +79,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     right: 0,
   },
-});
+})
 
-export default UncompletedButton;
+export default UncompletedButton

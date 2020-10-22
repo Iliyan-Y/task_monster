@@ -53,7 +53,7 @@ function EditTask({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.logo}>Edit Task!</Text>
+      <Text style={styles.logo}>Edit this Task</Text>
       <View>
         <View style={styles.inputView}>
           <TextInput
@@ -117,6 +117,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 10,
     alignSelf: 'center',
+    position: 'absolute',
+    top: 400,
+    left: 45,
   },
   logo: {
     marginTop: 10,
