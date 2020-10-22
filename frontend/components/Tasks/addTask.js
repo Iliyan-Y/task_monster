@@ -5,7 +5,6 @@ import {
   View,
   TextInput,
   Text,
-  Button,
 } from 'react-native';
 import axios from 'axios';
 import { railsServer } from '../../serverAddress';
@@ -82,9 +81,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#003f5c',
-
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
 
   inputView: {

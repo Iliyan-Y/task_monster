@@ -2,21 +2,17 @@ import React, { useState, useContext, useEffect } from 'react';
 import {
   StyleSheet,
   View,
-  TextInput,
   Text,
   Button,
   TouchableOpacity,
   Image,
 } from 'react-native';
-import axios from 'axios';
-import { railsServer } from '../../serverAddress';
 import { TasksContext } from '../../context';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import CompletedButton from './completeTaskButton';
 import DeleteButton from './deleteTaskButton';
 import { calculateExpTime, completeTask } from './taskHelpers';
 import CountDown from 'react-native-countdown-component';
-import { set } from 'react-native-reanimated';
 
 function TaskList({ navigation }) {
   let { taskList, setTaskList, user, score, setScore } = useContext(
@@ -37,6 +33,7 @@ function TaskList({ navigation }) {
       }))
     );
   }, [taskList]);
+
   return (
     <View style={styles.container}>
       <View>
@@ -61,17 +58,13 @@ function TaskList({ navigation }) {
                       completeTask(
                         user,
                         data.item.id,
-                        taskList,
                         setTaskList,
                         true,
                         -1,
-                        score,
-
                         setScore
                       )
                     }
                     size={15}
-                    // color={'white'}
                   />
                 </Text>
               </View>
@@ -95,16 +88,10 @@ function TaskList({ navigation }) {
                 ]}
               >
                 <Button
-                  style={
-                    (styles.backTextWhite,
-                    styles.backRightBtn,
-                    styles.backLeftBtn2)
-                  }
                   onPress={() =>
                     completeTask(
                       user,
                       data.item.id,
-                      taskList,
                       setTaskList,
                       true,
                       -1,

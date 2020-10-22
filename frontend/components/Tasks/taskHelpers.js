@@ -5,7 +5,6 @@ import moment from 'moment';
 export function completeTask(
   user,
   taskId,
-  taskList,
   setTaskList,
   completed = true,
   points = 1,
