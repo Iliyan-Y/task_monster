@@ -38,28 +38,33 @@ export let calculateExpTime = (userInput) => {
   if (userInput == 0) {
     return 0;
   }
-  let finalTime;
+
+  let expiryTime;
+  let timeOffset = 0;
   let userDate = userInput.split('T')[0];
   let userTime = userInput.split('T')[1].split('.')[0];
   let userHour = parseInt(userTime.split(':')[0]) + 1;
   let userMins = parseInt(userTime.split(':')[1]);
   let localMin = new Date().getMinutes();
-  let timeOffset = 0;
+  let localHour = new Date().getHours();
 
-  let expiryTime;
-
-  if (userHour == new Date().getHours() && userMins - localMin > 2) {
+  if (userHour == localHour && userMins != localMin) {
     expiryTime = userTime;
     timeOffset = 1;
-  } else if (userHour != new Date().getHours()) {
+  } else if (userHour != localHour) {
     expiryTime = userTime;
     timeOffset = 1;
   } else {
     expiryTime = '23:59:59';
   }
 
-  let date = moment().format('YYYY-MM-DD HH:mm:ss');
+  return calculateFinalTime(userDate, expiryTime, timeOffset);
+};
 
+function calculateFinalTime(userDate, expiryTime, timeOffset) {
+  let finalTime;
+
+  let date = moment().format('YYYY-MM-DD HH:mm:ss');
   //Getting the current date-time with required formate and UTC
   let expirydate = `${userDate} ${expiryTime}`;
   //difference of the expiry date-time given and current date-time
@@ -71,4 +76,4 @@ export let calculateExpTime = (userInput) => {
   finalTime = (hours + timeOffset) * 60 * 60 + minutes * 60 + seconds;
 
   return finalTime;
-};
+}
