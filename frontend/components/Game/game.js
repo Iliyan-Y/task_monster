@@ -32,6 +32,10 @@ export default class Game extends PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    this.backgroundSound.stopAsync()
+  }
+
   render() {
     return (
       <View style={styles.container}>
