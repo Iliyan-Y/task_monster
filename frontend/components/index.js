@@ -1,20 +1,22 @@
-import 'react-native-gesture-handler'
-import React, { PureComponent } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import SignUp from './Auth/signUp'
-import LogIn from './Auth/logIn'
-import AddTask from './Tasks/addTask'
-import EditTask from './Tasks/editTask'
-import { TasksProvider } from '../context'
-import { NavigationContainer, StackActions } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import TaskList from './Tasks/taskList'
-import CompletedTaskList from './Tasks/completedTaskList'
-import Game from './Game/game'
+
+import React, { PureComponent } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import SignUp from './Auth/signUp';
+import LogIn from './Auth/logIn';
+import AddTask from './Tasks/addTask';
+import EditTask from './Tasks/editTask';
+import { TasksProvider } from '../context';
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import TaskList from './Tasks/taskList';
+import CompletedTaskList from './Tasks/completedTaskList';
+import Game from './Game/game';
+
 
 const Stack = createStackNavigator()
 const Index = () => {
   return (
+
     <View style={styles.container}>
       <TasksProvider>
         <NavigationContainer>
@@ -123,6 +125,7 @@ const Index = () => {
     </View>
   )
 }
+
 
 const styles = StyleSheet.create({
   container: {

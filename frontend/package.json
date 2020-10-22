@@ -15,6 +15,7 @@
     "axios": "^0.20.0",
     "dotenv": "^8.2.0",
     "expo": "^39.0.3",
+    "expo-av": "~8.6.0",
     "expo-status-bar": "~1.0.2",
     "matter-js": "^0.14.2",
     "moment": "^2.29.1",
