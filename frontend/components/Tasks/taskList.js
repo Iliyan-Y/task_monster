@@ -192,10 +192,8 @@ const styles = StyleSheet.create({
   },
   taskview: {
     color: 'white',
-    right: '40%',
+    textAlign: 'center',
     fontWeight: 'bold',
-
-    fontFamily: 'sans-serif-medium',
   },
 
   buttons: {
