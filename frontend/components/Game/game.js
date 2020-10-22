@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
-import { StatusBar, StyleSheet, View, Alert } from 'react-native';
+import { StatusBar, StyleSheet, View, Alert, Image } from 'react-native';
 import Entities from './src/entities';
 import { GameEngine } from 'react-native-game-engine';
 import Systems from './src/systems';
+const background = require('./assets/background.png');
 
 export default class Game extends PureComponent {
   constructor(props) {
@@ -21,6 +22,7 @@ export default class Game extends PureComponent {
   render() {
     return (
       <View style={styles.container}>
+        <Image source={background} />
         <GameEngine
           ref={(ref) => {
             this.gameEngine = ref;
