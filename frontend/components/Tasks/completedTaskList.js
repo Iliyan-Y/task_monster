@@ -1,14 +1,21 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, View, Text, Button, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import { TasksContext } from '../../context';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import UncompletedButton from './uncompleteTaskButton';
 import DeleteButton from './deleteTaskButton';
 
 function CompletedTaskList({ navigation }) {
-  let { taskList, setTaskList, user, setScore } = useContext(TasksContext)
+  let { taskList, setTaskList, user, setScore } = useContext(TasksContext);
 
-  let [taskListView, setTaskListView] = useState([])
+  let [taskListView, setTaskListView] = useState([]);
 
   useEffect(() => {
     setTaskListView(
@@ -19,9 +26,9 @@ function CompletedTaskList({ navigation }) {
         description: task.description,
         completed: task.completed,
         score: parseInt(task.score),
-      })),
-    )
-  }, [taskList])
+      }))
+    );
+  }, [taskList]);
 
   return (
     <View style={styles.container}>
@@ -84,7 +91,7 @@ function CompletedTaskList({ navigation }) {
         />
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -150,6 +157,6 @@ const styles = StyleSheet.create({
     color: 'white',
     padding: 17,
   },
-})
+});
 
-export default CompletedTaskList
+export default CompletedTaskList;

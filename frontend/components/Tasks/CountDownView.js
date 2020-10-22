@@ -12,13 +12,15 @@ const CountDownView = ({ title, expiryTime, id }) => {
       <Text style={styles.inputViewList}>
         {title}
         <CountDown
+          digitStyle={{ backgroundColor: '#003f5c' }}
+          digitTxtStyle={{ color: '#fb5b5a' }}
           style={styles.countdown}
           until={expiryTime}
           timetoShow={('H', 'M', 'S')}
           onFinish={() =>
             completeTask(user, id, setTaskList, true, -1, setScore)
           }
-          size={15}
+          size={12}
         />
       </Text>
     </View>
