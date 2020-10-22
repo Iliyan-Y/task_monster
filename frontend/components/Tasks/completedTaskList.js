@@ -1,19 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react'
-import {
-  StyleSheet,
-  View,
-  TextInput,
-  Text,
-  Button,
-  TouchableOpacity,
-  Image,
-} from 'react-native'
-import axios from 'axios'
-import { railsServer } from '../../serverAddress'
-import { TasksContext } from '../../context'
-import { SwipeListView } from 'react-native-swipe-list-view'
-import UncompletedButton from './uncompleteTaskButton'
-import DeleteButton from './deleteTaskButton'
+import React, { useState, useContext, useEffect } from 'react';
+import { StyleSheet, View, Text, Button, TouchableOpacity } from 'react-native';
+import { TasksContext } from '../../context';
+import { SwipeListView } from 'react-native-swipe-list-view';
+import UncompletedButton from './uncompleteTaskButton';
+import DeleteButton from './deleteTaskButton';
 
 function CompletedTaskList({ navigation }) {
   let { taskList, setTaskList, user, setScore } = useContext(TasksContext)

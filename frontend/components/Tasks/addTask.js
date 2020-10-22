@@ -5,12 +5,12 @@ import {
   View,
   TextInput,
   Text,
-  Button,
-} from 'react-native'
-import axios from 'axios'
-import { railsServer } from '../../serverAddress'
-import { TasksContext } from '../../context'
-import DatePicker from './datePicker'
+} from 'react-native';
+import axios from 'axios';
+import { railsServer } from '../../serverAddress';
+import { TasksContext } from '../../context';
+import DatePicker from './datePicker';
+
 
 function AddTask({ navigation }) {
   let { setTaskList, user } = useContext(TasksContext)

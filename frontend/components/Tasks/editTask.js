@@ -1,26 +1,22 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext } from 'react';
 import {
   View,
   TextInput,
   Text,
-  Button,
   StyleSheet,
   TouchableOpacity,
-} from 'react-native'
-import axios from 'axios'
-import { railsServer } from '../../serverAddress'
-import { TasksContext } from '../../context'
-import DatePicker from './datePicker'
+} from 'react-native';
+import axios from 'axios';
+import { railsServer } from '../../serverAddress';
+import { TasksContext } from '../../context';
+import DatePicker from './datePicker';
 
 function EditTask({ route, navigation }) {
-  const { taskTitle, taskDescription, taskId } = route.params
-  let { setTaskList, user } = useContext(TasksContext)
-  let [title, setTitle] = useState(taskTitle)
-  let [description, setDescription] = useState(taskDescription)
-  // let [expiryDay, setExpiryDay] = useState(0)
-  // let [expiryMonth, setExpiryMonth] = useState(0)
-  // let [expiryHour, setExpiryHour] = useState(0)
-  let [expiryTime, setExpiryTime] = useState(0)
+  const { taskTitle, taskDescription, taskId } = route.params;
+  let { setTaskList, user } = useContext(TasksContext);
+  let [title, setTitle] = useState(taskTitle);
+  let [description, setDescription] = useState(taskDescription);
+  let [expiryTime, setExpiryTime] = useState(0);
 
   let submit = () => {
     let body = {
@@ -28,35 +24,32 @@ function EditTask({ route, navigation }) {
         title,
         description,
         expiryTime: {
-          // day: expiryDay,
-          // month: expiryMonth,
-          // hour: expiryHour,
           completed: false,
           score: 0,
           expiryTime,
         },
       },
-    }
+    };
     let headers = {
       headers: {
         email: user.email,
         authentication_token: user.authentication_token,
       },
-    }
+    };
 
     axios
       .patch(railsServer + '/tasks/' + taskId, body, headers)
       .then((res) => {
-        console.log(res.status)
+        console.log(res.status);
       })
       .then(() => {
         axios.get(railsServer + '/tasks', headers).then((res) => {
-          setTaskList(res.data)
-          navigation.navigate('Task List')
-        })
+          setTaskList(res.data);
+          navigation.navigate('Task List');
+        });
       })
-      .catch((err) => console.log(err.message))
-  }
+      .catch((err) => console.log(err.message));
+  };
 
   return (
     <View style={styles.container}>
@@ -89,7 +82,7 @@ function EditTask({ route, navigation }) {
         </TouchableOpacity>
       </View>
     </View>
-  )
+  );
 }
 const styles = StyleSheet.create({
   container: {
@@ -136,5 +129,5 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     alignSelf: 'center',
   },
-})
-export default EditTask
+});
+export default EditTask;
