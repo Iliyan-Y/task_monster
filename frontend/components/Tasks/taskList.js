@@ -52,9 +52,10 @@ function TaskList({ navigation }) {
                 <Text style={styles.inputViewList}>
                   {data.item.title}
                   <CountDown
-                    style={styles.countdown}
                     //duration of countdown in seconds
                     until={data.item.expiryTime}
+                    digitStyle={{ backgroundColor: '#003f5c' }}
+                    digitTxtStyle={{ color: '#fb5b5a' }}
                     //format to show
                     timetoShow={('H', 'M', 'S')}
                     onFinish={() =>
