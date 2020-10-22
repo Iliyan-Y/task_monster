@@ -1,4 +1,3 @@
-import 'react-native-gesture-handler';
 import React, { PureComponent } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import SignUp from './Auth/signUp';
@@ -19,7 +18,11 @@ const Index = () => {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Log In" component={LogIn} />
-          <Stack.Screen name="Game" component={Game} />
+          <Stack.Screen
+            name="Game"
+            component={Game}
+            options={{ unmountInactiveRoutes: true }}
+          />
           <Stack.Screen name="Sign Up" component={SignUp} />
           <Stack.Screen name="Add Task" component={AddTask} />
           <Stack.Screen name="Task List" component={TaskList} />
