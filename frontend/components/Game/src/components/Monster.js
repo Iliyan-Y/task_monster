@@ -34,21 +34,21 @@ const Monster = (props) => {
     if (monsterSprite == monster0) {
       return width + 50
     } else {
-      return width + score * 10
+      return width + 10 + score * 10
     }
   }
   function getHeight() {
     if (monsterSprite == monster0) {
       return height + 50;
     } else {
-      return height + score * 10;
+      return height + 10 + score * 10;
     }
   }
   function getTop() {
     if (monsterSprite == monster0) {
       return y - 30;
     } else {
-      return y - score * 10;
+      return y - 10 - score * 10;
     }
   }
 const monsterAnimation = () => {
