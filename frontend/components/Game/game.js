@@ -24,7 +24,7 @@ export default class Game extends PureComponent {
     try {
       this.backgroundSound = new Audio.Sound();
       await this.backgroundSound.loadAsync(
-        require('./assets/backgroundmusic.wav')
+        require('./assets/backgroundmusic.mp3')
       );
       await this.backgroundSound.setIsLoopingAsync(true);
       await this.backgroundSound.playAsync();
@@ -34,7 +34,7 @@ export default class Game extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.backgroundSound.stopAsync()
+    this.backgroundSound.stopAsync();
   }
 
   render() {
