@@ -22,7 +22,7 @@ function CompletedTaskList({ navigation }) {
   useEffect(() => {
     setTaskListView(
       taskList.map((task) => ({
-        key: task.title,
+        key: task._id.$oid,
         id: task._id.$oid,
         title: task.title,
         description: task.description,
