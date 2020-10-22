@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react'
 import {
   StyleSheet,
   View,
@@ -7,22 +7,22 @@ import {
   Button,
   TouchableOpacity,
   Image,
-} from 'react-native';
-import axios from 'axios';
-import { railsServer } from '../../serverAddress';
-import { TasksContext } from '../../context';
-import { SwipeListView } from 'react-native-swipe-list-view';
-import CompletedButton from './completeTaskButton';
-import DeleteButton from './deleteTaskButton';
-import { calculateExpTime, completeTask } from './taskHelpers';
-import CountDown from 'react-native-countdown-component';
-import { set } from 'react-native-reanimated';
+} from 'react-native'
+import axios from 'axios'
+import { railsServer } from '../../serverAddress'
+import { TasksContext } from '../../context'
+import { SwipeListView } from 'react-native-swipe-list-view'
+import CompletedButton from './completeTaskButton'
+import DeleteButton from './deleteTaskButton'
+import { calculateExpTime, completeTask } from './taskHelpers'
+import CountDown from 'react-native-countdown-component'
+import { set } from 'react-native-reanimated'
 
 function TaskList({ navigation }) {
   let { taskList, setTaskList, user, score, setScore } = useContext(
-    TasksContext
-  );
-  let [taskListView, setTaskListView] = useState([]);
+    TasksContext,
+  )
+  let [taskListView, setTaskListView] = useState([])
 
   //add time param in the db
   useEffect(() => {
@@ -34,9 +34,9 @@ function TaskList({ navigation }) {
         description: task.description,
         completed: task.completed,
         expiryTime: calculateExpTime(task.expiryTime),
-      }))
-    );
-  }, [taskList]);
+      })),
+    )
+  }, [taskList])
   return (
     <View style={styles.container}>
       <View>
@@ -45,16 +45,17 @@ function TaskList({ navigation }) {
           renderItem={(data, rowMap) =>
             data.item.expiryTime == 0 ? (
               <View style={styles.rowFront}>
-                <Text>{data.item.title}</Text>
+                <Text style={styles.taskview}>{data.item.title}</Text>
               </View>
             ) : (
               <View style={styles.rowFront}>
                 <Text style={styles.inputViewList}>
                   {data.item.title}
                   <CountDown
-                    style={styles.countdown}
                     //duration of countdown in seconds
                     until={data.item.expiryTime}
+                    digitStyle={{ backgroundColor: '#003f5c' }}
+                    digitTxtStyle={{ color: '#fb5b5a' }}
                     //format to show
                     timetoShow={('H', 'M', 'S')}
                     onFinish={() =>
@@ -67,11 +68,10 @@ function TaskList({ navigation }) {
                         -1,
                         score,
 
-                        setScore
+                        setScore,
                       )
                     }
                     size={15}
-                    // color={'white'}
                   />
                 </Text>
               </View>
@@ -79,7 +79,13 @@ function TaskList({ navigation }) {
           }
           renderHiddenItem={(data, rowMap) => (
             <View style={styles.rowBack}>
-              <View style={[styles.backRightBtn, styles.backLeftBtn]}>
+              <View
+                style={[
+                  styles.backRightBtn,
+                  styles.backLeftBtn,
+                  styles.backBtnView,
+                ]}
+              >
                 <CompletedButton
                   user={user}
                   taskId={data.item.id}
@@ -108,11 +114,12 @@ function TaskList({ navigation }) {
                       setTaskList,
                       true,
                       -1,
-                      setScore
+                      setScore,
                     )
                   }
-                  title="Fail"
+                  title=""
                 />
+                <Image source={require('../../assets/fail.png')} />
               </View>
               <View
                 style={[
@@ -134,9 +141,11 @@ function TaskList({ navigation }) {
                       taskId: data.item.id,
                     })
                   }
-                  title="Edit"
+                  title=""
                 />
+                <Image source={require('../../assets/edit.png')} />
               </View>
+
               <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
                 <DeleteButton
                   user={user}
@@ -173,7 +182,7 @@ function TaskList({ navigation }) {
         </View>
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -181,8 +190,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#003f5c',
     flex: 1,
   },
-  text: {
-    padding: 30,
+  taskview: {
+    color: 'white',
+    right: '40%',
+    fontWeight: 'bold',
+
+    fontFamily: 'sans-serif-medium',
   },
 
   buttons: {
@@ -222,7 +235,7 @@ const styles = StyleSheet.create({
   },
   backLeftBtn: {
     width: 75,
-    backgroundColor: 'green',
+    backgroundColor: '#52B788',
     left: 0,
   },
   backLeftBtn2: {
@@ -230,11 +243,11 @@ const styles = StyleSheet.create({
     left: 75,
   },
   backRightBtnLeft: {
-    backgroundColor: 'blue',
+    backgroundColor: '#003f5c',
     right: 75,
   },
   backRightBtnRight: {
-    backgroundColor: 'red',
+    backgroundColor: '#fb5b5a',
     right: 0,
   },
   inputText: {
@@ -254,6 +267,9 @@ const styles = StyleSheet.create({
   countdown: {
     color: 'white',
   },
-});
+  backBtnView: {
+    color: 'white',
+  },
+})
 
-export default TaskList;
+export default TaskList

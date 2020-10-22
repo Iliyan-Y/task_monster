@@ -1,7 +1,7 @@
-import React from 'react';
-import { StyleSheet, Button } from 'react-native';
-import axios from 'axios';
-import { railsServer } from '../../serverAddress';
+import React from 'react'
+import { StyleSheet, Button, TouchableOpacity, Image } from 'react-native'
+import axios from 'axios'
+import { railsServer } from '../../serverAddress'
 const DeleteButton = ({ taskId, user, setTaskList, setScore }) => {
   function deleteTask() {
     let headers = {
@@ -9,36 +9,39 @@ const DeleteButton = ({ taskId, user, setTaskList, setScore }) => {
         email: user.email,
         authentication_token: user.authentication_token,
       },
-    };
+    }
 
     axios
       .delete(railsServer + '/tasks/' + taskId, headers)
       .then(() => {
         axios.get(railsServer + '/tasks', headers).then((res) => {
-          setTaskList(res.data);
-          let scoreArray = res.data.map((task) => task.score);
-          setScore(scoreArray.reduce((a, b) => a + b, 0));
-        });
+          setTaskList(res.data)
+          let scoreArray = res.data.map((task) => task.score)
+          setScore(scoreArray.reduce((a, b) => a + b, 0))
+        })
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => console.log(err.message))
   }
   return (
-    <Button
+    <TouchableOpacity
       style={
         (styles.backTextWhite, styles.backRightBtn, styles.backRightBtnRight)
       }
       onPress={() => deleteTask()}
-      title="Delete"
-    />
-  );
-};
+      title=""
+    >
+      <Image source={require('../../assets/delete.png')} />
+    </TouchableOpacity>
+  )
+}
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flex: 1,
   },
   backTextWhite: {
-    color: '#FFF',
+    color: 'white',
   },
   rowFront: {
     alignItems: 'center',
@@ -73,9 +76,9 @@ const styles = StyleSheet.create({
     right: 75,
   },
   backRightBtnRight: {
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
     right: 0,
   },
-});
+})
 
-export default DeleteButton;
+export default DeleteButton

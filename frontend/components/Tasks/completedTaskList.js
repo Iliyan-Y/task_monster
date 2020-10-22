@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react'
 import {
   StyleSheet,
   View,
@@ -6,18 +6,19 @@ import {
   Text,
   Button,
   TouchableOpacity,
-} from 'react-native';
-import axios from 'axios';
-import { railsServer } from '../../serverAddress';
-import { TasksContext } from '../../context';
-import { SwipeListView } from 'react-native-swipe-list-view';
-import UncompletedButton from './uncompleteTaskButton';
-import DeleteButton from './deleteTaskButton';
+  Image,
+} from 'react-native'
+import axios from 'axios'
+import { railsServer } from '../../serverAddress'
+import { TasksContext } from '../../context'
+import { SwipeListView } from 'react-native-swipe-list-view'
+import UncompletedButton from './uncompleteTaskButton'
+import DeleteButton from './deleteTaskButton'
 
 function CompletedTaskList({ navigation }) {
-  let { taskList, setTaskList, user, setScore } = useContext(TasksContext);
+  let { taskList, setTaskList, user, setScore } = useContext(TasksContext)
 
-  let [taskListView, setTaskListView] = useState([]);
+  let [taskListView, setTaskListView] = useState([])
 
   useEffect(() => {
     setTaskListView(
@@ -28,9 +29,9 @@ function CompletedTaskList({ navigation }) {
         description: task.description,
         completed: task.completed,
         score: parseInt(task.score),
-      }))
-    );
-  }, [taskList]);
+      })),
+    )
+  }, [taskList])
 
   return (
     <View style={styles.container}>
@@ -42,11 +43,11 @@ function CompletedTaskList({ navigation }) {
               style={[
                 styles.rowFront,
                 data.item.score > 0
-                  ? { backgroundColor: '#40b35f' }
-                  : { backgroundColor: '#f24646' },
+                  ? { backgroundColor: '#52B788' }
+                  : { backgroundColor: '#fb5b5a' },
               ]}
             >
-              <Text>{data.item.title}</Text>
+              <Text style={styles.taskview}>{data.item.title}</Text>
             </View>
           )}
           renderHiddenItem={(data, rowMap) => (
@@ -78,8 +79,9 @@ function CompletedTaskList({ navigation }) {
                       taskId: data.item.id,
                     })
                   }
-                  title="Edit"
+                  title=""
                 />
+                <Image source={require('../../assets/edit.png')} />
               </View>
               <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
                 <DeleteButton
@@ -94,24 +96,20 @@ function CompletedTaskList({ navigation }) {
           leftOpenValue={75}
           rightOpenValue={-150}
         />
-
-        <TouchableOpacity
-          style={styles.uncomBtn}
-          onPress={() => navigation.navigate('Task List')}
-        >
-          <Text style={styles.inputText}>Uncompleted Tasks</Text>
-        </TouchableOpacity>
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#003f5c',
     flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center',
+  },
+  taskview: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
   backTextWhite: {
     color: '#FFF',
@@ -119,18 +117,18 @@ const styles = StyleSheet.create({
   rowFront: {
     alignItems: 'center',
     backgroundColor: '#465881',
-    borderBottomColor: 'black',
+    borderBottomColor: '#003f5c',
     borderBottomWidth: 1,
     justifyContent: 'center',
-    height: 50,
+    height: 75,
   },
   rowFrontNotCompleted: {
     alignItems: 'center',
     backgroundColor: 'red',
-    borderBottomColor: 'black',
+    borderBottomColor: '#003f5c',
     borderBottomWidth: 1,
     justifyContent: 'center',
-    height: 50,
+    height: 75,
   },
   rowBack: {
     alignItems: 'center',
@@ -149,15 +147,16 @@ const styles = StyleSheet.create({
     width: 75,
   },
   backLeftBtn: {
-    backgroundColor: 'green',
+    backgroundColor: 'yellow',
+    left: 75,
     left: 0,
   },
   backRightBtnLeft: {
-    backgroundColor: 'blue',
+    backgroundColor: '#003f5c',
     right: 75,
   },
   backRightBtnRight: {
-    backgroundColor: 'red',
+    backgroundColor: '#fb5b5a',
     right: 0,
   },
   inputText: {
@@ -165,18 +164,6 @@ const styles = StyleSheet.create({
     color: 'white',
     padding: 17,
   },
+})
 
-  uncomBtn: {
-    width: '80%',
-    backgroundColor: '#fb5b5a',
-    borderRadius: 25,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 40,
-    marginBottom: 10,
-    alignSelf: 'center',
-  },
-});
-
-export default CompletedTaskList;
+export default CompletedTaskList

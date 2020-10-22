@@ -1,7 +1,7 @@
-import React from 'react';
-import { StyleSheet, Button } from 'react-native';
-import axios from 'axios';
-import { railsServer } from '../../serverAddress';
+import React from 'react'
+import { StyleSheet, Button, TouchableOpacity, Image } from 'react-native'
+import axios from 'axios'
+import { railsServer } from '../../serverAddress'
 const CompletedButton = ({
   taskId,
   user,
@@ -16,32 +16,38 @@ const CompletedButton = ({
         completed: completed,
         score: score,
       },
-    };
+    }
     let headers = {
       headers: {
         email: user.email,
         authentication_token: user.authentication_token,
       },
-    };
+    }
     axios
       .patch(railsServer + '/tasks/' + taskId, body, headers)
       .then(() => {
         axios.get(railsServer + '/tasks', headers).then(async (res) => {
-          await setTaskList(res.data);
-          let scoreArray = res.data.map((task) => task.score);
-          setScore(scoreArray.reduce((a, b) => a + b, 0));
-        });
+          await setTaskList(res.data)
+          let scoreArray = res.data.map((task) => task.score)
+          setScore(scoreArray.reduce((a, b) => a + b, 0))
+        })
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => console.log(err.message))
   }
+
+  {
+  }
+
   return (
-    <Button
+    <TouchableOpacity
       style={(styles.backTextWhite, styles.backRightBtn, styles.backLeftBtn)}
       onPress={() => completeTask()}
-      title="Complete"
-    />
-  );
-};
+      title=""
+    >
+      <Image source={require('../../assets/compl.png')} />
+    </TouchableOpacity>
+  )
+}
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
@@ -75,7 +81,7 @@ const styles = StyleSheet.create({
     width: 75,
   },
   backLeftBtn: {
-    backgroundColor: 'green',
+    // backgroundColor: 'green',
     left: 0,
   },
   backRightBtnLeft: {
@@ -86,6 +92,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     right: 0,
   },
-});
+})
 
-export default CompletedButton;
+export default CompletedButton
