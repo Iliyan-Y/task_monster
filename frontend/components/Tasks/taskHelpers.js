@@ -48,7 +48,7 @@ export let calculateExpTime = (userInput) => {
 
   let expiryTime;
 
-  if (userHour == new Date().getHours() && userMins - localMin > 3) {
+  if (userHour == new Date().getHours() && userMins - localMin > 2) {
     expiryTime = userTime;
     timeOffset = 1;
   } else if (userHour != new Date().getHours()) {

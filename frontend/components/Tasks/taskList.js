@@ -12,12 +12,10 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 import CompletedButton from './completeTaskButton';
 import DeleteButton from './deleteTaskButton';
 import { calculateExpTime, completeTask } from './taskHelpers';
-import CountDown from 'react-native-countdown-component';
+import CountDownView from './CountDownView';
 
 function TaskList({ navigation }) {
-  let { taskList, setTaskList, user, score, setScore } = useContext(
-    TasksContext
-  );
+  let { taskList, setTaskList, user, setScore } = useContext(TasksContext);
   let [taskListView, setTaskListView] = useState([]);
 
   //add time param in the db
@@ -45,29 +43,11 @@ function TaskList({ navigation }) {
                 <Text>{data.item.title}</Text>
               </View>
             ) : (
-              <View style={styles.rowFront}>
-                <Text style={styles.inputViewList}>
-                  {data.item.title}
-                  <CountDown
-                    style={styles.countdown}
-                    //duration of countdown in seconds
-                    until={data.item.expiryTime}
-                    //format to show
-                    timetoShow={('H', 'M', 'S')}
-                    onFinish={() =>
-                      completeTask(
-                        user,
-                        data.item.id,
-                        setTaskList,
-                        true,
-                        -1,
-                        setScore
-                      )
-                    }
-                    size={15}
-                  />
-                </Text>
-              </View>
+              <CountDownView
+                title={data.item.title}
+                expiryTime={data.item.expiryTime}
+                id={data.item.id}
+              />
             )
           }
           renderHiddenItem={(data, rowMap) => (
@@ -228,18 +208,6 @@ const styles = StyleSheet.create({
     height: 50,
     color: 'white',
     padding: 17,
-  },
-
-  inputViewList: {
-    height: 60,
-    color: 'white',
-    padding: -50,
-    left: 10,
-    right: 40,
-  },
-
-  countdown: {
-    color: 'white',
   },
 });
 
