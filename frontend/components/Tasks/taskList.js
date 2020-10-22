@@ -52,6 +52,7 @@ function TaskList({ navigation }) {
                 <Text style={styles.inputViewList}>
                   {data.item.title}
                   <CountDown
+                    style={styles.countdown}
                     //duration of countdown in seconds
                     until={data.item.expiryTime}
                     digitStyle={{ backgroundColor: '#003f5c' }}
@@ -71,7 +72,7 @@ function TaskList({ navigation }) {
                         setScore,
                       )
                     }
-                    size={15}
+                    size={12}
                   />
                 </Text>
               </View>
@@ -100,12 +101,7 @@ function TaskList({ navigation }) {
                   styles.backTextWhite,
                 ]}
               >
-                <Button
-                  style={
-                    (styles.backTextWhite,
-                    styles.backRightBtn,
-                    styles.backLeftBtn2)
-                  }
+                <TouchableOpacity
                   onPress={() =>
                     completeTask(
                       user,
@@ -118,8 +114,9 @@ function TaskList({ navigation }) {
                     )
                   }
                   title=""
-                />
-                <Image source={require('../../assets/fail.png')} />
+                >
+                  <Image source={require('../../assets/fail.png')} />
+                </TouchableOpacity>
               </View>
               <View
                 style={[
@@ -128,12 +125,7 @@ function TaskList({ navigation }) {
                   styles.backRightBtnLeft,
                 ]}
               >
-                <Button
-                  style={
-                    (styles.backTextWhite,
-                    styles.backRightBtn,
-                    styles.backRightBtnLeft)
-                  }
+                <TouchableOpacity
                   onPress={() =>
                     navigation.navigate('Edit Task', {
                       taskTitle: data.item.title,
@@ -142,8 +134,9 @@ function TaskList({ navigation }) {
                     })
                   }
                   title=""
-                />
-                <Image source={require('../../assets/edit.png')} />
+                >
+                  <Image source={require('../../assets/edit.png')} />
+                </TouchableOpacity>
               </View>
 
               <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
@@ -190,6 +183,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#003f5c',
     flex: 1,
   },
+
+  // countdown: {
+  //   position: 'absolute',
+  // },
   taskview: {
     color: 'white',
     textAlign: 'center',

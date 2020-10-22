@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Button, Image, TouchableOpacity } from 'react-native'
 import axios from 'axios'
 import { railsServer } from '../../serverAddress'
+
 const UncompletedButton = ({ taskId, user, setTaskList, setScore }) => {
   function uncompleteTask() {
     let body = {
@@ -30,7 +31,7 @@ const UncompletedButton = ({ taskId, user, setTaskList, setScore }) => {
       onPress={() => uncompleteTask()}
       title=""
     >
-      <Image source={require('../../assets/fail.png')} />
+      <Image source={require('../../assets/compl.png')} />
     </TouchableOpacity>
   )
 }

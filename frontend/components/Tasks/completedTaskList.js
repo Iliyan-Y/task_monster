@@ -66,12 +66,7 @@ function CompletedTaskList({ navigation }) {
                   styles.backRightBtnLeft,
                 ]}
               >
-                <Button
-                  style={
-                    (styles.backTextWhite,
-                    styles.backRightBtn,
-                    styles.backRightBtnLeft)
-                  }
+                <TouchableOpacity
                   onPress={() =>
                     navigation.navigate('Edit Task', {
                       taskTitle: data.item.title,
@@ -80,8 +75,9 @@ function CompletedTaskList({ navigation }) {
                     })
                   }
                   title=""
-                />
-                <Image source={require('../../assets/edit.png')} />
+                >
+                  <Image source={require('../../assets/edit.png')} />
+                </TouchableOpacity>
               </View>
               <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
                 <DeleteButton
