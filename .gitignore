@@ -38,7 +38,5 @@
 /frontend/*.orig.*
 /frontend/web-build/
 
-/frontend/serverAddress.js
-
 # macOS
 .DS_Store
