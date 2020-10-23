@@ -6,17 +6,40 @@ A task manager app for people who want keep track of what they need to do, be re
 
 Completing tasks will grow and evolve your pet, failing to do so will shrink and eventually kill it. Laziness and procrastination now has consequences!
 
+## App Demo
+
+![Sign up](./assets/Sign_up.gif)
+
+![Create task](./assets/Create_task.gif)
+
+![Task Options](./assets/Complete_fail_edit_delete.gif)
+
+![Monster1](./assets/Egg.gif)
+
+![Monster2](./assets/Swirl.gif)
+
+![Monster3](./assets/Small_monster.gif)
+
+![Monster4](./assets/Large_monster.gif)
+
+![Ghost](./assets/Ghost.gif)
+
+![Jumping](./assets/Jumping.gif)
+
 ## Technologies Used
 * Expo - Front End
 * React Native - Front End
+* React Native Game Engine - Front End
+* Matter.js - Front End
 * Ruby on Rails - Back End
 * MongoDB - Database
 
-## Testing Frameworks
+## The team
+[Fraser Brookhouse](https://github.com/fraserbrookhouse)
 
-* Rspec - Ruby on Rails
-* Jest - React Native unit tests
-* Detox - React Native feature tests
+[Iliyan Yankov](https://github.com/Iliyan-Y)
+
+[Kristyna Cervenkova](https://github.com/kristycer)
 
 ## How to Run the App
 
@@ -24,7 +47,7 @@ Completing tasks will grow and evolve your pet, failing to do so will shrink and
 
 ### Backend
 
-1. In terminal
+Our backend is currently hosted at 
 
 
 
