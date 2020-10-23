@@ -45,5 +45,8 @@ Our backend is currently hosted at
 
 ## Diagrams
 
+#### App Overview Sequence Diagram
 ![App Overview Sequence Diagram](./assets/Interaction_Diagram.png)
+
+#### Token Authentication Sequence Diagram
 ![Token Authentication Sequence Diagram](./assets/Token_diagram.png)
