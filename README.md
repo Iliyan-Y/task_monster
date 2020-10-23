@@ -43,6 +43,24 @@ Completing tasks will grow and evolve your pet, failing to do so will shrink and
 
 Our backend is currently hosted [here](https://task-monster-backend.herokuapp.com).
 
+### Frontend
+
+In your terminal, navigate to the repo.
+
+Once there 'cd frontend'.
+
+In the front end folder run these commands in order:
+
+```
+'npm install' //to install the node packages.
+
+'expo install' //to install the yarn packages.
+
+'expo start' //to run the app.
+```
+
+This will open a browser window where you can choose to run in either an ios or android simulator.
+
 ## Diagrams
 
 #### App Overview Sequence Diagram
