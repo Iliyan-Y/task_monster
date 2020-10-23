@@ -17,6 +17,7 @@ Completing tasks will grow and evolve your pet, failing to do so will shrink and
 </div>
 
 ## Technologies Used
+
 * Expo - Front End
 * React Native - Front End
 * React Native Game Engine - Front End
