@@ -9,14 +9,10 @@ Completing tasks will grow and evolve your pet, failing to do so will shrink and
 ## App Demo
 
 <div class="gifs">
-<img align="left" src="./assets/Sign_up.gif" alt="Sign up" width="400" hspace="20"/>
-<img align="right" src="./assets/Create_task.gif" alt="Create task" width="400" hspace="20"/>
-<img align="left" src="./assets/Complete_fail_edit_delete.gif" alt="Task Options" width="400" hspace="20"/>
-<img align="right" src="./assets/Egg.gif" alt="Monster1" width="400" hspace="20"/>
-<img align="left" src="./assets/Swirl.gif" alt="Monster2" width="400" hspace="20"/>
-<img align="right" src="./assets/Small_monster.gif" alt="Monster3" width="400" hspace="20"/>
-<img align="left" src="./assets/Large_monster.gif" alt="Monster4" width="400" hspace="20"/>
-<img align="right" src="./assets/Ghost.gif" alt="Ghost" width="400" hspace="20"/>
+<img align="left" src="./assets/Sign_up.gif" alt="Sign up" width="400" hspace="20"/><img align="right" src="./assets/Create_task.gif" alt="Create task" width="400" hspace="20"/>
+<img align="left" src="./assets/Complete_fail_edit_delete.gif" alt="Task Options" width="400" hspace="20"/><img align="right" src="./assets/Egg.gif" alt="Monster1" width="400" hspace="20"/>
+<img align="left" src="./assets/Swirl.gif" alt="Monster2" width="400" hspace="20"/><img align="right" src="./assets/Small_monster.gif" alt="Monster3" width="400" hspace="20"/>
+<img align="left" src="./assets/Large_monster.gif" alt="Monster4" width="400" hspace="20"/><img align="right" src="./assets/Ghost.gif" alt="Ghost" width="400" hspace="20"/>
 <img align="left" src="./assets/Jumping.gif" alt="Jumping" width="400" hspace="20"/>
 </div>
 
