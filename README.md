@@ -10,12 +10,13 @@ Completing tasks will grow and evolve your pet, failing to do so will shrink and
 
 <img align="left" src="./assets/Sign_up.gif" alt="Sign up" width="400" hspace="20"/>
 <img align="left" src="./assets/Create_task.gif" alt="Create task" width="400" hspace="20"/>
-
-![Task Options](./assets/Complete_fail_edit_delete.gif)
-
-![Monster1](./assets/Egg.gif) ![Monster2](./assets/Swirl.gif) ![Monster3](./assets/Small_monster.gif)
-
-![Monster4](./assets/Large_monster.gif) ![Ghost](./assets/Ghost.gif) ![Jumping](./assets/Jumping.gif)
+<img align="left" src="./assets/Complete_fail_edit_delete.gif" alt="Task Options" width="400" hspace="20"/>
+<img align="left" src="./assets/Egg.gif" alt="Monster1" width="400" hspace="20"/>
+<img align="left" src="./assets/Swirl.gif" alt="Monster2" width="400" hspace="20"/>
+<img align="left" src="./assets/Small_monster.gif" alt="Monster3" width="400" hspace="20"/>
+<img align="left" src="./assets/Large_monster.gif" alt="Monster4" width="400" hspace="20"/>
+<img align="left" src="./assets/Ghost.gif" alt="Ghost" width="400" hspace="20"/>
+<img align="left" src="./assets/Jumping.gif" alt="Jumping" width="400" hspace="20"/>
 
 ## Technologies Used
 * Expo - Front End
