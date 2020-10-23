@@ -163,4 +163,5 @@ I would like to have a number of option for items to spend my money on.
 
 ## Diagrams
 
-![Sequence Diagram](./assets/Interaction_Diagram.png)
+![App Overview Sequence Diagram](./assets/Interaction_Diagram.png)
+![Token Authentication Sequence Diagram](./assets/Token_diagram.png)
