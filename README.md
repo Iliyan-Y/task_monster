@@ -13,7 +13,7 @@ Completing tasks will grow and evolve your pet, failing to do so will shrink and
 <img align="left" src="./assets/Complete_fail_edit_delete.gif" alt="Task Options" width="350" hspace="20"/><img align="left" src="./assets/Egg.gif" alt="Monster1" width="350" hspace="20"/>
 <img align="left" src="./assets/Swirl.gif" alt="Monster2" width="350" hspace="20"/><img align="left" src="./assets/Small_monster.gif" alt="Monster3" width="350" hspace="20"/>
 <img align="left" src="./assets/Large_monster.gif" alt="Monster4" width="350" hspace="20"/><img align="left" src="./assets/Ghost.gif" alt="Ghost" width="350" hspace="20"/>
-<img align="left" src="./assets/Jumping.gif" alt="Jumping" width="350" hspace="20"/>
+<img align="center" src="./assets/Jumping.gif" alt="Jumping" width="350" hspace="20"/>
 </div>
 
 ## Technologies Used
