@@ -8,23 +8,13 @@ Completing tasks will grow and evolve your pet, failing to do so will shrink and
 
 ## App Demo
 
-![Sign up](./assets/Sign_up.gif)
-
-![Create task](./assets/Create_task.gif)
+![Sign up](./assets/Sign_up.gif) ![Create task](./assets/Create_task.gif)
 
 ![Task Options](./assets/Complete_fail_edit_delete.gif)
 
-![Monster1](./assets/Egg.gif)
+![Monster1](./assets/Egg.gif) ![Monster2](./assets/Swirl.gif) ![Monster3](./assets/Small_monster.gif)
 
-![Monster2](./assets/Swirl.gif)
-
-![Monster3](./assets/Small_monster.gif)
-
-![Monster4](./assets/Large_monster.gif)
-
-![Ghost](./assets/Ghost.gif)
-
-![Jumping](./assets/Jumping.gif)
+![Monster4](./assets/Large_monster.gif) ![Ghost](./assets/Ghost.gif) ![Jumping](./assets/Jumping.gif)
 
 ## Technologies Used
 * Expo - Front End
