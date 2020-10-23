@@ -8,7 +8,8 @@ Completing tasks will grow and evolve your pet, failing to do so will shrink and
 
 ## App Demo
 
-![Sign up](./assets/Sign_up.gif) ![Create task](./assets/Create_task.gif)
+<img align="left" src="./assets/Sign_up.gif" alt="Sign up" hspace="20"/>
+<img align="left" src="./assets/Create_task.gif" alt="Create task" hspace="20"/>
 
 ![Task Options](./assets/Complete_fail_edit_delete.gif)
 
