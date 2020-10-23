@@ -41,7 +41,7 @@ Completing tasks will grow and evolve your pet, failing to do so will shrink and
 
 ### Backend
 
-Our backend is currently hosted at 
+Our backend is currently hosted [here](https://task-monster-backend.herokuapp.com).
 
 ## Diagrams
 
